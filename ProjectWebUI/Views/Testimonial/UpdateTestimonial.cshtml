@@ -1,0 +1,49 @@
+﻿@model UpdateTestimonialVM
+@{
+    ViewData["Title"] = "UpdateTestimonial";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Yorum İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Yorum Güncelle</div>
+                        </div>
+                        <div class="card-body">
+                            <input type="hidden" asp-for="TestimonialId"/>
+                            <div class="form-group">
+                                <label for="Comment">Yorum</label>
+                                <input type="text" class="form-control" asp-for="Comment" id="Comment">
+                            </div>
+                            <div class="form-group">
+                                <label for="TestimonialName">Adı</label>
+                                <input type="text" class="form-control" asp-for="TestimonialName" id="TestimonialName">
+                            </div>
+                            <div class="form-group">
+                                <label for="TestimonialTitle">Başlık</label>
+                                <input type="text" class="form-control" asp-for="TestimonialTitle" id="TestimonialTitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="TestimonialImageURL">Görsel Linki</label>
+                                <input type="text" class="form-control" asp-for="TestimonialImageURL" id="TestimonialImageURL">
+                            </div>
+                            <div class="form-group">
+                                <label for="TestimonialStatus">Durum</label>
+                                <input type="text" class="form-control" asp-for="TestimonialStatus" id="TestimonialStatus">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button class="btn btn-success">Yorum Güncelle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

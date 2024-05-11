@@ -1,0 +1,48 @@
+﻿@model UpdateBookingVM
+@{
+    ViewData["Title"] = "UpdateBooking";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Rezervasyon İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Rezervasyon Güncelle</div>
+                        </div>
+                        <div class="card-body">
+                            <input type="hidden" asp-for="BookingId" />
+                            <div class="form-group">
+                                <label for="bookingName">Adı</label>
+                                <input type="text" class="form-control" asp-for="BookingName" id="bookingName">
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingEmail">Email Adresi</label>
+                                <input type="email" class="form-control" asp-for="BookingEmail" id="bookingEmail">
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingPhone">Telefon Numarası</label>
+                                <input type="text" class="form-control" asp-for="BookingPhone" id="bookingPhone">
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingDate">Tarihi</label>
+                                <input type="date" min="{DateTime.Now}" class="form-control" asp-for="BookingDate" id="bookingDate">
+                            </div><div class="form-group">
+                                <label for="bookingPersonCount">Kişi Sayısı</label>
+                                <input type="number" class="form-control" asp-for="PersonCount" id="bookingPersonCount">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button class="btn btn-success">Rezervasyon Güncelle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

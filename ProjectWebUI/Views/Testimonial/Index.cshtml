@@ -1,0 +1,55 @@
+﻿@model List<ResultTestimonialVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+	<div class="container-fluid">
+		<h4 class="page-title">Yorum işlemleri</h4>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Yorum Listesi</div>
+					</div>
+					<div class="card-body">
+						<div class="card-sub">
+							Yorumlarla ilgili işlemi buradan yapabilirsiniz :
+						</div>
+						<table class="table mt-3">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Yorum</th>
+									<th scope="col">Adı</th>
+									<th scope="col">Başlık</th>
+									<th scope="col">Görsel Linki</th>
+									<th scope="col">Durumu</th>
+									<th scope="col">Sil</th>
+									<th scope="col">Güncelle</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model)
+								{
+									<tr>
+										<td>@item.TestimonialId</td>
+										<td>@item.Comment</td>
+										<td>@item.TestimonialName</td>
+										<td>@item.TestimonialTitle</td>
+										<td>@item.TestimonialImageURL</td>
+										<td>@item.TestimonialStatus</td>
+										<td><a href="/Testimonial/DeleteTestimonial/@item.TestimonialId" class="btn btn-outline-danger btn-border btn-round">Sil</a></td>
+										<td><a href="/Testimonial/UpdateTestimonial/@item.TestimonialId" class="btn btn-outline-secondary btn-border btn-round">Güncelle</a></td>
+									</tr>
+								}
+							</tbody>
+						</table>
+						<a href="/Testimonial/CreateTestimonial/" class="btn btn-outline-primary">Yeni Yorum Ekle</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
