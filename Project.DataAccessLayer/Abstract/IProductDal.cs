@@ -4,7 +4,13 @@ namespace Project.DataAccess.Abstract
 {
     public interface IProductDal : IGenericDal<Product>
     {
-        List<Product> GetProductsByCategory();
-
-    }
+		List<Product> GetProductsByCategory();
+        int GetProductCount();
+        int GetProductCountByCategoryNameHamburger();
+        int GetProductCountByCategoryNameDesert();
+        decimal ProductPriceAvg();
+        string ProductNameByMinPrice();
+        string ProductNameByMaxPrice();
+        decimal ProductAvgPriceByHamburger();
+	}
 }

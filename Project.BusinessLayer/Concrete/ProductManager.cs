@@ -13,7 +13,12 @@ namespace Project.Business.Concrete
             _productDal = productDal;
         }
 
-        public void TAdd(Product entity)
+		public int TGetProductCount()
+		{
+			return _productDal.GetProductCount();
+		}
+
+		public void TAdd(Product entity)
         {
             _productDal.Add(entity);
         }
@@ -42,5 +47,35 @@ namespace Project.Business.Concrete
         {
             _productDal.Update(entity);
         }
-    }
+
+		public int TGetProductCountByCategoryNameHamburger()
+		{
+			return _productDal.GetProductCountByCategoryNameHamburger();
+		}
+
+		public int TGetProductCountByCategoryNameDesert()
+		{
+			return _productDal.GetProductCountByCategoryNameDesert();
+		}
+
+		public decimal TProductPriceAvg()
+		{
+			return _productDal.ProductPriceAvg();
+		}
+
+		public string TProductNameByMinPrice()
+		{
+			return _productDal.ProductNameByMinPrice();
+		}
+
+		public string TProductNameByMaxPrice()
+		{
+			return _productDal.ProductNameByMaxPrice();
+		}
+
+		public decimal TProductAvgPriceByHamburger()
+		{
+			return _productDal.ProductAvgPriceByHamburger();
+		}
+	}
 }

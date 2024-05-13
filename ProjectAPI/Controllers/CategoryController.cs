@@ -27,7 +27,28 @@ namespace ProjectAPI.Controllers
             return Ok(categoryList);
         }
 
-        [HttpPost]
+        [HttpGet("GET_CATEGORY_COUNT")]
+        public IActionResult GetCategoryCount()
+        {
+			var categoryCount = _categoryService.TGetCategoryCount();
+			return Ok(categoryCount);
+		}
+
+		[HttpGet("ACTIVE_CATEGORY_COUNT")]
+		public IActionResult ActiveCategoryCount()
+		{
+			var activeCategoryCount = _categoryService.TActiveCategoryCount();
+			return Ok(activeCategoryCount);
+		}
+
+		[HttpGet("PASSIVE_CATEGORY_COUNT")]
+		public IActionResult PassiveCategoryCount()
+		{
+			var passiveCategoryCount = _categoryService.TPassiveCategoryCount();
+			return Ok(passiveCategoryCount);
+		}
+
+		[HttpPost]
         public IActionResult CreateCategory(CreateCategoryDTO createCategoryDTO)
         {
             _categoryService.TAdd(new Category
