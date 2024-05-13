@@ -39,6 +39,11 @@ namespace Project.Business.Concrete
 			throw new NotImplementedException();
 		}
 
+		public decimal TGetTodayTotalPrice()
+		{
+			return _orderDal.GetTodayTotalPrice();
+		}
+
 		public decimal TLastOrderPrice()
 		{
 			return _orderDal.LastOrderPrice();

@@ -7,5 +7,6 @@ namespace Project.Business.Abstract
 		int TTotalOrderCount();
 		public int TActiveOrderCount();
 		public decimal TLastOrderPrice();
+		decimal TGetTodayTotalPrice();
 	}
 }

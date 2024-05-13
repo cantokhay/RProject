@@ -34,5 +34,12 @@ namespace ProjectAPI.Controllers
 			var lastOrderPrice = _orderService.TLastOrderPrice();
 			return Ok(lastOrderPrice);
 		}
+
+		[HttpGet("GET_TODAY_TOTAL_PRICE")]
+		public IActionResult GetTodayTotalPrice()
+		{
+			var todayTotalPrice = _orderService.TGetTodayTotalPrice();
+			return Ok(todayTotalPrice);
+		}
 	}
 }

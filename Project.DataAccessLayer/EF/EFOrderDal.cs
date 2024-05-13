@@ -23,6 +23,12 @@ namespace Project.DataAccess.EF
 			return context.Orders.OrderByDescending(o => o.OrderId).Take(1).Select(o => o.TotalPrice).FirstOrDefault();
 		}
 
+		public decimal GetTodayTotalPrice()
+		{
+			using var context = new SignalRContext();
+			return context.Orders.Where(o => o.OrderDate == DateTime.Parse(DateTime.Today.ToShortDateString())).Sum(o => o.TotalPrice);
+		}
+
 		public int TotalOrderCount()
 		{
 			using var context = new SignalRContext();

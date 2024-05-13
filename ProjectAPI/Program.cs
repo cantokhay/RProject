@@ -34,11 +34,17 @@ builder.Services.AddScoped<ICategoryDal, EFCategoryDal>();
 builder.Services.AddScoped<IContactService, ContactManager>();
 builder.Services.AddScoped<IContactDal, EFContactDal>();
 
+builder.Services.AddScoped<ICustomerService, CustomerManager>();
+builder.Services.AddScoped<ICustomerDal, EFCustomerDal>();
+
 builder.Services.AddScoped<IDiscountService, DiscountManager>();
 builder.Services.AddScoped<IDiscountDal, EFDiscountDal>();
 
 builder.Services.AddScoped<IFeatureService, FeatureManager>();
 builder.Services.AddScoped<IFeatureDal, EFFeatureDal>();
+
+builder.Services.AddScoped<IMoneyCaseService, MoneyCaseManager>();
+builder.Services.AddScoped<IMoneyCaseDal, EFMoneyCaseDal>();
 
 builder.Services.AddScoped<IOrderService, OrderManager>();
 builder.Services.AddScoped<IOrderDal, EFOrderDal>();

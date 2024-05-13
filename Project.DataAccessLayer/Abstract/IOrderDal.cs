@@ -7,5 +7,6 @@ namespace Project.DataAccess.Abstract
 		int TotalOrderCount();
 		int ActiveOrderCount();
 		decimal LastOrderPrice();
+		decimal GetTodayTotalPrice();
 	}
 }

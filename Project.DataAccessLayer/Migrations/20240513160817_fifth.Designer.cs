@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project.DataAccess.Concrete;
 
@@ -11,9 +12,10 @@ using Project.DataAccess.Concrete;
 namespace Project.DataAccess.Migrations
 {
     [DbContext(typeof(SignalRContext))]
-    partial class SignalRContextModelSnapshot : ModelSnapshot
+    [Migration("20240513160817_fifth")]
+    partial class fifth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,26 +129,6 @@ namespace Project.DataAccess.Migrations
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("Project.Data.Entities.Customer", b =>
-                {
-                    b.Property<int>("CustomerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"), 1L, 1);
-
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("CustomerStatus")
-                        .HasColumnType("bit");
-
-                    b.HasKey("CustomerId");
-
-                    b.ToTable("Customers");
-                });
-
             modelBuilder.Entity("Project.Data.Entities.Discount", b =>
                 {
                     b.Property<int>("DiscountId")
@@ -214,16 +196,16 @@ namespace Project.DataAccess.Migrations
 
             modelBuilder.Entity("Project.Data.Entities.MoneyCase", b =>
                 {
-                    b.Property<int>("MoneyCaseId")
+                    b.Property<int>("MoneyCaseID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MoneyCaseId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MoneyCaseID"), 1L, 1);
 
                     b.Property<decimal>("TotalMoneyInCase")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("MoneyCaseId");
+                    b.HasKey("MoneyCaseID");
 
                     b.ToTable("MoneyCases");
                 });
@@ -241,7 +223,7 @@ namespace Project.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderDate")
-                        .HasColumnType("Date");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("OrderDescription")
                         .IsRequired()
