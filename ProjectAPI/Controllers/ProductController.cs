@@ -29,7 +29,28 @@ namespace ProjectAPI.Controllers
             return Ok(productList);
         }
 
-        [HttpGet("PRODUCT_LIST_WITH_CATEGORY")]
+        [HttpGet("GET_PRODUCT_COUNT")]
+        public IActionResult GetProductCount()
+        {
+			var productCount = _productService.TGetProductCount();
+			return Ok(productCount);
+		}
+
+		[HttpGet("GET_PRODUCT_COUNT_BY_HAMBURGER")]
+		public IActionResult GetProductCountByHamburger()
+		{
+			var hamburgerProductCount = _productService.TGetProductCountByCategoryNameHamburger();
+			return Ok(hamburgerProductCount);
+		}
+
+		[HttpGet("GET_PRODUCT_COUNT_BY_DESERT")]
+		public IActionResult GetProductCountByDesert()
+		{
+			var desertProductCount = _productService.TGetProductCountByCategoryNameDesert();
+			return Ok(desertProductCount);
+		}
+
+		[HttpGet("PRODUCT_LIST_WITH_CATEGORY")]
         public IActionResult ProductListWithCategory()
         {
             var context = new SignalRContext();
@@ -49,7 +70,35 @@ namespace ProjectAPI.Controllers
             return Ok(productListByCategory.ToList());
         }
 
-        [HttpPost]
+		[HttpGet("AVERAGE_PRODUCT_PRICE")]
+		public IActionResult AverageProductPrice()
+		{
+			var avgPrice = _productService.TProductPriceAvg();
+			return Ok(avgPrice);
+		}
+
+		[HttpGet("AVERAGE_PRODUCT_PRICE_BY_HAMBURGER")]
+		public IActionResult ProductAvgPriceByHamburger()
+		{
+			var avgPricebyHamburger = _productService.TProductAvgPriceByHamburger();
+			return Ok(avgPricebyHamburger);
+		}
+
+		[HttpGet("PRODUCT_NAME_BY_MIN_PRICE")]
+        public IActionResult ProductNameByMinPrice()
+        {
+			var minPriceProductName = _productService.TProductNameByMinPrice();
+			return Ok(minPriceProductName);
+		}
+
+        [HttpGet("PRODUCT_NAME_BY_MAX_PRICE")]
+        public IActionResult ProductNameByMaxPrice()
+        {
+            var maxPriceProductName = _productService.TProductNameByMaxPrice();
+            return Ok(maxPriceProductName);
+        }
+
+		[HttpPost]
         public IActionResult CreateProduct(CreateProductDTO createProductDTO)
         {
             _productService.TAdd(new Product()
