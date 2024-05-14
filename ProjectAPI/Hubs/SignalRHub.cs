@@ -73,5 +73,17 @@ namespace ProjectAPI.Hubs
 
         }
 
+        public async Task SendProgress()
+        {
+            var totalMoney = _moneyCaseService.TGetTotalMoneyInCase();
+            await Clients.All.SendAsync("ReceiveTotalMoneyInCase", totalMoney.ToString("0.00") + "₺");
+
+            var activeCategoryCount = _categoryService.TActiveCategoryCount();
+            await Clients.All.SendAsync("ReceiveActiveCategoryCount", activeCategoryCount);
+
+            var totalCustomerCount = _customerService.TCustomerCount();
+            await Clients.All.SendAsync("ReceiveCustomerCount", totalCustomerCount);
+        }
+
     }
 }
