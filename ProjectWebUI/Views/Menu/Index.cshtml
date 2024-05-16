@@ -120,16 +120,32 @@
     @await Component.InvokeAsync("_UILayoutScriptPartialComponent")
 
     <script>
+        // function showProductId(productId) {
+        //     var id = productId;
+        //     $.ajax({
+        //         type: "POST",
+        //         data: { item: id },
+        //         contentType: 'json',
+        //         success: function () {
+        //             Swal.fire({
+        //                 title: "Seçilen Ürün No : " + id,
+        //                 text: "Başarıyla Seçildi!",
+        //                 icon: "success"
+        //             });
+        //         }
+        //     });
+        // }
         function showProductId(productId) {
             var id = productId;
             $.ajax({
                 type: "POST",
                 data: { item: id },
+                url: "/Menu/AddBasket/" + id,
                 contentType: 'json',
                 success: function () {
                     Swal.fire({
                         title: "Seçilen Ürün No : " + id,
-                        text: "Başarıyla Seçildi!",
+                        text: "Sepetinize Eklendi!",
                         icon: "success"
                     });
                 }

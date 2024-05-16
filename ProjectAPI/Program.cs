@@ -5,6 +5,7 @@ using Project.DataAccess.Concrete;
 using Project.DataAccess.EF;
 using ProjectAPI.Hubs;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,9 @@ builder.Services.AddScoped<IAboutDal, EFAboutDal>();
 
 builder.Services.AddScoped<IBookingService, BookingManager>();
 builder.Services.AddScoped<IBookingDal, EFBookingDal>();
+
+builder.Services.AddScoped<IBasketService, BasketManager>();
+builder.Services.AddScoped<IBasketDal, EFBasketDal>();
 
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 builder.Services.AddScoped<ICategoryDal, EFCategoryDal>();
@@ -63,6 +67,9 @@ builder.Services.AddScoped<ISocialMediaDal, EFSocialMediaDal>();
 
 builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
 builder.Services.AddScoped<ITestimonialDal, EFTestimonialDal>();
+
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
