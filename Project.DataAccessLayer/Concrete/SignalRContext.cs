@@ -24,5 +24,6 @@ namespace Project.DataAccess.Concrete
         public DbSet<MoneyCase> MoneyCases { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Slider> Sliders { get; set; }
-	}
+        public DbSet<Basket> Baskets { get; set; }
+    }
 }
