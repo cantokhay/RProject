@@ -2,57 +2,88 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
-	var count = 0;
+    var count = 0;
 }
 
+<script src="~/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@* SignalR Scripts *@
+
 <div class="content">
-	<div class="container-fluid">
-		<h4 class="page-title">Rezervasyon işlemleri</h4>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-header">
-						<div class="card-title">Rezervasyon Listesi</div>
-					</div>
-					<div class="card-body">
-						<div class="card-sub">
-							Rezervasyon ile ilgili işlemleri buradan yapabilirsiniz
-						</div>
-						<table class="table mt-3">
-							<thead>
-								<tr>
-									<th scope="col">#</th>
-									<th scope="col">Adı</th>
-									<th scope="col">Telefon Numarası</th>
-									<th scope="col">Tarih</th>
-									<th scope="col">Kişi Sayısı</th>
-									<th scope="col">Rezervasyon Durumu</th>
-									<th scope="col">Sil</th>
-									<th scope="col">Güncelle</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach (var item in Model)
-								{
-									count++;
-									<tr>
-										<td>@count</td>
-										<td>@item.BookingName</td>
-										<td>@item.BookingPhone</td>
-										<td>@item.BookingDate.ToShortDateString()</td>
-										<td>@item.PersonCount</td>
-										<td>Rezervasyon Alındı</td>
-										<td><a href="/Booking/DeleteBooking/@item.BookingId" class="btn btn-outline-danger btn-border btn-round">Sil</a></td>
-										<td><a href="/Booking/UpdateBooking/@item.BookingId" class="btn btn-outline-secondary btn-border btn-round">Güncelle</a></td>
-									</tr>
-								}
-							</tbody>
-						</table>
-						<a href="/Booking/CreateBooking/" class="btn btn-outline-primary">Yeni Rezervasyon Ekle</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container-fluid">
+
+        <script type="text/javascript">
+            $(document).ready(() => {
+                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7271/SignalRHub").build();
+
+                $("#connstatus").text(connection.state);
+
+                connection.start().then(() => {
+                    $("#connstatus").text(connection.state);
+                    setInterval(() => {
+                        connection.invoke("GetBookingList");
+                    }, 5000);
+                }).catch((err) => {
+                    console.error(err);
+                });
+
+                connection.on("ReceiveBookingList", (values) => {
+                    console.log(values);
+                    let tablehtml = `<table class="table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Adı</th>
+                                    <th scope="col">Telefon Numarası</th>
+                                    <th scope="col">Tarih</th>
+                                    <th scope="col">Kişi Sayısı</th>
+                                    <th scope="col">Rezervasyon Durumu</th>
+                                    <th scope="col">Sil</th>
+                                    <th scope="col">Güncelle</th>
+                                </tr>
+                            </thead>
+                            <tbody>`;
+
+                    $.each(values, (index, item) => {
+                        tablehtml += `<tr>
+                                        <td>${index + 1}</td>
+                                        <td>${item.bookingName}</td>
+                                        <td>${item.bookingPhone}</td>
+                                        <td>${new Date(item.bookingDate).toLocaleDateString()}</td>
+                                        <td>${item.personCount}</td>
+                                        <td>Rezervasyon Alındı</td>
+                                        <td><a href="/Booking/DeleteBooking/${item.bookingId}" class="btn btn-outline-danger btn-border btn-round">Sil</a></td>
+                                        <td><a href="/Booking/UpdateBooking/${item.bookingId}" class="btn btn-outline-secondary btn-border btn-round">Güncelle</a></td>
+                                    </tr>`;
+                    });
+
+                    tablehtml += `</tbody></table>`;
+                    $("#bookingList").html(tablehtml);
+                });
+            });
+        </script>
+
+
+        <h4 class="page-title">Rezervasyon işlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Rezervasyon Listesi</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-sub">
+                            Rezervasyon ile ilgili işlemleri buradan yapabilirsiniz
+                        </div>
+                        <div id="bookingList">
+                        </div>
+                        <a href="/Booking/CreateBooking/" class="btn btn-outline-primary">Yeni Rezervasyon Ekle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 

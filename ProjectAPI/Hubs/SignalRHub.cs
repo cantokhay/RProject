@@ -11,14 +11,16 @@ namespace ProjectAPI.Hubs
         private readonly IOrderService _orderService;
         private readonly IMoneyCaseService _moneyCaseService;
         private readonly ICustomerService _customerService;
+        private readonly IBookingService _bookingService;
 
-        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, IMoneyCaseService moneyCaseService, ICustomerService customerService)
+        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, IMoneyCaseService moneyCaseService, ICustomerService customerService, IBookingService bookingService)
         {
             _categoryService = categoryService;
             _productService = productService;
             _orderService = orderService;
             _moneyCaseService = moneyCaseService;
             _customerService = customerService;
+            _bookingService = bookingService;
         }
 
         public async Task SendStatistics()
@@ -85,5 +87,10 @@ namespace ProjectAPI.Hubs
             await Clients.All.SendAsync("ReceiveCustomerCount", totalCustomerCount);
         }
 
+        public async Task GetBookingList()
+        {
+            var bookingList = _bookingService.TGetAll();
+            await Clients.All.SendAsync("ReceiveBookingList", bookingList);
+        }
     }
 }
