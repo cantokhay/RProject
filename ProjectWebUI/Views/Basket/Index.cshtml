@@ -47,8 +47,6 @@
                     @foreach (var item in Model)
                     {
                         totalBasketPrice = Model.Sum(x => x.TotalProductPrice);
-                        taxOfBasket = totalBasketPrice * tax;
-                        totalBasketPriceWithTax += taxOfBasket;
                         count++;
                         <tbody class="align-middle">
                             <tr>
@@ -60,6 +58,10 @@
                                 <td class="align-middle btn-delete"><a class="btn btn-sm btn-danger" href="/Basket/DeleteBasket/@item.BasketId"><i class="fa fa-times"></i></a></td>
                             </tr>
                         </tbody>
+                    }
+                    @{
+                        taxOfBasket = totalBasketPrice * tax;
+                        totalBasketPriceWithTax = totalBasketPrice + taxOfBasket;
                     }
                 </table>
             </div>

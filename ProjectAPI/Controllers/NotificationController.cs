@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Business.Abstract;
+using Project.Data.Entities;
+using Project.DTO.NotificationDTO;
 
 namespace ProjectAPI.Controllers
 {
@@ -34,6 +36,53 @@ namespace ProjectAPI.Controllers
         {
             var notificationList = _notificationService.TGetAllNotificationByFalse();
             return Ok(notificationList);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateNotification(UpdateNotificationDTO updateNotificationDTO)
+        {
+            Notification notification = new Notification()
+            {
+                NotificationId = updateNotificationDTO.NotificationId,
+                Message = updateNotificationDTO.Message,
+                NotificationStatus = updateNotificationDTO.NotificationStatus,
+                Type = updateNotificationDTO.Type,
+                Icon = updateNotificationDTO.Icon,
+                NotificationDate = updateNotificationDTO.NotificationDate
+            };
+
+            _notificationService.TUpdate(notification);
+            return Ok("Bildirim Güncellendi!");
+        }
+
+        [HttpPost]
+        public IActionResult CreateNotification(CreateNotificationDTO createNotificationDto)
+        {
+            Notification notification = new Notification()
+            {
+                Message = createNotificationDto.Message,
+                Icon = createNotificationDto.Icon,
+                NotificationStatus = false,
+                Type = createNotificationDto.Type,
+                NotificationDate = Convert.ToDateTime(DateTime.Now.ToShortDateString())
+            };
+            _notificationService.TAdd(notification);
+            return Ok("Ekleme işlemi başarıyla yapıldı");
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteNotification(int id)
+        {
+            var value = _notificationService.TGetById(id);
+            _notificationService.TDelete(value);
+            return Ok("Bildirim Silindi");
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetNotification(int id)
+        {
+            var value = _notificationService.TGetById(id);
+            return Ok(value);
         }
     }
 }

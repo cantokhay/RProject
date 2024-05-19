@@ -25,19 +25,18 @@
 				$("#notificationCount").text(notificationCount);
 			});
 
-			connection.on("ReceiveNotificationListByFalse", (value) => {
-				console.log(value);
-				$("#notilist").empty();
-				for (var i = 0; i < value.length; i++) {
-					$("#notilist").append(`<a href="#">
-							<div class="${value[i].type}"><i class="${value[i].icon}"></i></div>
-							<div class="notif-content">
-							<span class="block">
-							${value[i].message}
-							</span>
-							<span class="time">${value[i].notificationDate}</span>
-							</div>
-							</a>
+			connection.on("ReceiveNotificationListByFalse", (notificationListByFalse) => {
+				$("#notiList").empty();
+				for (var i = 0; i < notificationListByFalse.length; i++) {
+					$("#notiList").append(`	<a href="#">
+												<div class="${notificationListByFalse[i].type}"><i class="${notificationListByFalse[i].icon}"></i></div>
+												<div class="notif-content">
+												<span class="block">
+													${notificationListByFalse[i].message}
+												</span>
+													<span class="time">${notificationListByFalse[i].notificationDate}</span>
+												</div>
+											</a>
 					`)
 				};
 			});
@@ -88,7 +87,9 @@
 							<div class="dropdown-title">Yeni bildirimler var</div>
 						</li>
 						<li>
-							<div id="notilist"></div>
+							<div class="notif-center" id="notiList">
+
+							</div>
 						</li>
 						<li>
 							<a class="see-all" href="javascript:void(0);"> <strong>See all notifications</strong> <i class="la la-angle-right"></i> </a>
