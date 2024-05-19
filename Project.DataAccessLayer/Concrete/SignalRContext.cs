@@ -25,5 +25,6 @@ namespace Project.DataAccess.Concrete
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Basket> Baskets { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
     }
 }
