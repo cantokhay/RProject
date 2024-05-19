@@ -103,5 +103,11 @@ namespace ProjectAPI.Hubs
             var notificationListByFalse = _notificationService.TGetAllNotificationByFalse();
             await Clients.All.SendAsync("ReceiveNotificationListByFalse", notificationListByFalse);
         }
+
+        public async Task SendCustomerStatus()
+        {
+            var customerStatus = _customerService.TGetAll();
+            await Clients.All.SendAsync("ReceiveCustomerStatus", customerStatus);
+        }
     }
 }

@@ -1,0 +1,74 @@
+﻿@model List<ResultCustomerVM>
+@{
+    ViewData["Title"] = "CustomerListByStatus";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    
+}
+
+<script src="~/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@* SignalR Scripts *@
+
+<div class="content">
+    <div class="container-fluid">
+
+        <script type="text/javascript">
+            $(document).ready(() => {
+                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7271/SignalRHub").build();
+                $("#connstatus").text(connection.state);
+
+                connection.start().then(() => {
+                    $("#connstatus").text(connection.state);
+                    setInterval(() => {
+                        connection.invoke("SendCustomerStatus");
+                    }, 1000);
+                }).catch((err) => {
+                    console.error(err);
+                });
+
+                connection.on("ReceiveCustomerStatus", (customerStatus) => {
+                    console.log(customerStatus);
+                    let tablehtml = `<div class="row">`;
+                    var classByStatus, status, icon = "";
+                    $.each(customerStatus, (index, item) => {
+                        if (item.customerStatus == true) {
+                            classByStatus = "card card-stats card-success";
+                            status = "Siparişi Var";
+                            icon = "la la-check"
+                        } else if (item.customerStatus == false) {
+                            classByStatus = "card card-stats card-danger";
+                            status = "Siparişi Yok";
+                            icon = "la la-close"
+                        }
+                        tablehtml += `
+                                                        <div class="col-md-3">
+                                                            <div class="${classByStatus}">
+                                                                <div class="card-body">
+                                                                    <div class="row">
+                                                                        <div class="col-5">
+                                                                            <div class="icon-big text-center">
+                                                                                <i class="${icon}"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-7 d-flex align-items-center">
+                                                                            <div class="numbers">
+                                                                                <p class="card-category">${item.customerName}</p>
+                                                                                <h4 class="card-title">${status}</h4>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>`;
+                    });
+                    tablehtml += "</div>";
+                    $("#customerListByStatus").html(tablehtml);
+                });
+            });
+        </script>
+        <h4 class="page-title">Anlık Müşteri Durumları Sayfası</h4>
+        <div id="customerListByStatus"></div>
+    </div>
+</div>

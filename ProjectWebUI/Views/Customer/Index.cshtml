@@ -1,0 +1,50 @@
+﻿@model List<ResultCustomerVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+	var count = 1;
+}
+<div class="content">
+	<div class="container-fluid">
+		<h4 class="page-title">Müşteri işlemleri</h4>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Müşteri Listesi</div>
+					</div>
+					<div class="card-body">
+						<div class="card-sub">
+							Müşterilerle ilgili işlemi buradan yapabilirsiniz :
+						</div>
+						<table class="table mt-3">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Müşteri Adı</th>
+									<th scope="col">Durum</th>
+									<th scope="col">Sil</th>
+									<th scope="col">Güncelle</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model)
+								{
+									<tr>
+										<td>@count</td>
+										<td>@item.CustomerName</td>
+										<td>@item.CustomerStatus</td>
+										<td><a href="/Customer/DeleteCustomer/@item.CustomerId" class="btn btn-outline-danger btn-border btn-round">Sil</a></td>
+										<td><a href="/Customer/UpdateCustomer/@item.CustomerId" class="btn btn-outline-secondary btn-border btn-round">Güncelle</a></td>
+									</tr>
+									count++;
+								}
+							</tbody>
+						</table>
+						<a href="/Customer/CreateCustomer/" class="btn btn-outline-primary">Yeni Müşteri Ekle</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

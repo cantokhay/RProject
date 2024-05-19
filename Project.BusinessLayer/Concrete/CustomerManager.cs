@@ -15,7 +15,7 @@ namespace Project.Business.Concrete
 
 		public void TAdd(Customer entity)
 		{
-			throw new NotImplementedException();
+			_customerDal.Add(entity);
 		}
 
 		public int TCustomerCount()
@@ -26,22 +26,22 @@ namespace Project.Business.Concrete
 
 		public void TDelete(Customer entity)
 		{
-			throw new NotImplementedException();
+			_customerDal.Delete(entity);
 		}
 
 		public List<Customer> TGetAll()
 		{
-			throw new NotImplementedException();
+			return _customerDal.GetAll();
 		}
 
 		public Customer TGetById(int id)
 		{
-			throw new NotImplementedException();
+			return _customerDal.GetById(id);
 		}
 
 		public void TUpdate(Customer entity)
 		{
-			throw new NotImplementedException();
+			_customerDal.Update(entity);
 		}
 	}
 }
