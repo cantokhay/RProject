@@ -43,6 +43,16 @@ namespace Project.Business.Concrete
             return _notificationDal.NotificationCountByStatusFalse();
         }
 
+        public void TNotificationStatusChangeToTrue(int id)
+        {
+            _notificationDal.NotificationStatusChangeToTrue(id);
+        }
+
+        public void TNotificationStatusChangeToFalse(int id)
+        {
+            _notificationDal.NotificationStatusChangeToFalse(id);
+        }
+
         public void TUpdate(Notification entity)
         {
             _notificationDal.Update(entity);

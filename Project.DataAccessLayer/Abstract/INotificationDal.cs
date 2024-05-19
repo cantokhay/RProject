@@ -6,5 +6,7 @@ namespace Project.DataAccess.Abstract
     {
         int NotificationCountByStatusFalse();
         List<Notification> GetAllNotificationByFalse();
+        void NotificationStatusChangeToFalse(int id);
+        void NotificationStatusChangeToTrue(int id);
     }
 }

@@ -7,8 +7,8 @@ namespace Project.DataAccess.Concrete
     {
         override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer("Server=CAN-TOKHAY-MASA\\CANTOKHAY;initial Catalog=SignalRDB; integrated Security=true");
-            optionsBuilder.UseSqlServer("Server=DESKTOP-OHO9G30\\SQLEXPRESS;initial Catalog=SignalRDB; integrated Security=true");
+            optionsBuilder.UseSqlServer("Server=CAN-TOKHAY-MASA\\CANTOKHAY;initial Catalog=SignalRDB; integrated Security=true");
+            //optionsBuilder.UseSqlServer("Server=DESKTOP-OHO9G30\\SQLEXPRESS;initial Catalog=SignalRDB; integrated Security=true");
         }
 
         public DbSet<About> Abouts { get; set; }

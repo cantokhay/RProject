@@ -84,5 +84,19 @@ namespace ProjectAPI.Controllers
             var value = _notificationService.TGetById(id);
             return Ok(value);
         }
+
+        [HttpGet("CHANGE_STATUS_FALSE/{id}")]
+        public IActionResult NotificationStatusChangeToFalse(int id)
+        {
+            _notificationService.TNotificationStatusChangeToFalse(id);
+            return Ok("Bildirim Durumu Okunmadı Yapıldı");
+        }
+
+        [HttpGet("CHANGE_STATUS_TRUE/{id}")]
+        public IActionResult NotificationStatusChangeToTrue(int id)
+        {
+            _notificationService.TNotificationStatusChangeToTrue(id);
+            return Ok("Bildirim Durumu Okundu Yapıldı");
+        }
     }
 }

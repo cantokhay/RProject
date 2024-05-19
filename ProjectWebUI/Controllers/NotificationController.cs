@@ -28,7 +28,7 @@ namespace ProjectWebUI.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateAbout()
+        public IActionResult CreateNotification()
         {
             return View();
         }
@@ -73,7 +73,7 @@ namespace ProjectWebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateAbout(UpdateNotificationVM updateNotificationVM)
+        public async Task<IActionResult> UpdateNotification(UpdateNotificationVM updateNotificationVM)
         {
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateNotificationVM);
@@ -84,6 +84,20 @@ namespace ProjectWebUI.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        public async Task<IActionResult> UpdateNotificationStatusChangeToTrue(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            await client.GetAsync($"https://localhost:7271/api/Notification/CHANGE_STATUS_TRUE/{id}");
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> UpdateNotificationStatusChangeToFalse(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            await client.GetAsync($"https://localhost:7271/api/Notification/CHANGE_STATUS_FALSE/{id}");
+            return RedirectToAction("Index");
         }
     }
 }

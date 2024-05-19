@@ -22,5 +22,21 @@ namespace Project.DataAccess.EF
             using var context = new SignalRContext();
             return context.Notifications.Where(x => x.NotificationStatus == false).Count();
         }
+
+        public void NotificationStatusChangeToFalse(int id)
+        {
+            using var context = new SignalRContext();
+            var notification = context.Notifications.Find(id);
+            notification.NotificationStatus = false;
+            context.SaveChanges();
+        }
+
+        public void NotificationStatusChangeToTrue(int id)
+        {
+            using var context = new SignalRContext();
+            var notification = context.Notifications.Find(id);
+            notification.NotificationStatus = true;
+            context.SaveChanges();
+        }
     }
 }

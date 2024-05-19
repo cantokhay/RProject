@@ -26,6 +26,8 @@
 									<th scope="col">Bildirim Zamanı</th>
 									<th scope="col">Sil</th>
 									<th scope="col">Güncelle</th>
+									<th scope="col">Okundu İşaretle</th>
+									<th scope="col">Okunmadı İşaretle</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -38,6 +40,8 @@
 										<td>@item.NotificationDate</td>
 										<td><a href="/Notification/DeleteNotification/@item.NotificationId" class="btn btn-outline-danger btn-border btn-round">Sil</a></td>
 										<td><a href="/Notification/UpdateNotification/@item.NotificationId" class="btn btn-outline-secondary btn-border btn-round">Güncelle</a></td>
+										<td><a href="/Notification/UpdateNotificationStatusChangeToTrue/@item.NotificationId" class="btn btn-outline-warning btn-border btn-round">Okundu</a></td>
+										<td><a href="/Notification/UpdateNotificationStatusChangeToFalse/@item.NotificationId" class="btn btn-outline-info btn-border btn-round">Okunmadı</a></td>
 									</tr>
 								}
 							</tbody>
