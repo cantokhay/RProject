@@ -12,7 +12,6 @@
 
     @await Component.InvokeAsync("_MenuNavbarPartialComponent")
 
-    <!-- food section -->
     <section class="food_section layout_padding">
         <div class="container">
             <div class="heading_container heading_center">
@@ -114,27 +113,11 @@
             </div>
         </div>
     </section>
-    <!-- end food section -->
 
     @await Component.InvokeAsync("_UILayoutFooterPartialComponent")
     @await Component.InvokeAsync("_UILayoutScriptPartialComponent")
 
     <script>
-        // function showProductId(productId) {
-        //     var id = productId;
-        //     $.ajax({
-        //         type: "POST",
-        //         data: { item: id },
-        //         contentType: 'json',
-        //         success: function () {
-        //             Swal.fire({
-        //                 title: "Seçilen Ürün No : " + id,
-        //                 text: "Başarıyla Seçildi!",
-        //                 icon: "success"
-        //             });
-        //         }
-        //     });
-        // }
         function showProductId(productId) {
             var id = productId;
             $.ajax({
