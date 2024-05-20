@@ -109,5 +109,10 @@ namespace ProjectAPI.Hubs
             var customerStatus = _customerService.TGetAll();
             await Clients.All.SendAsync("ReceiveCustomerStatus", customerStatus);
         }
+
+        public async Task SendMessage(string user, string message)
+        {
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
     }
 }
