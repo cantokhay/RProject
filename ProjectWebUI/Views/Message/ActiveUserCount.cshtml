@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = null;
+}
+
+<script src="~/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@* SignalR Scripts *@
+
+<!DOCTYPE html>
+<html>
+
+@await Component.InvokeAsync("_UILayoutHeadPartialComponent")
+
+<body class="sub_page">
+
+    @await Component.InvokeAsync("_MenuNavbarPartialComponent")
+
+    <section class="food_section layout_padding">
+        <div class="container">
+            <div class="content">
+                <div class="container-fluid">
+
+                    <script type="text/javascript">
+
+                        $(document).ready(() => {
+
+                            var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7271/SignalRHub").build();
+                            $("#connstatus").text(connection.state);
+                            connection.start().then(() => {
+                                $("#connstatus").text(connection.state);
+                            }).catch((err) => { console.error(err) });
+
+                            connection.on("ReceiveClientCount", (activeClientCount) => {
+                                $("#activeClientCount").text(activeClientCount);
+                            });
+
+                        });
+                    </script>
+
+                    <h4 class="page-title">Anlık Aktif Kullanıcı Sayfası: <strong id="activeClientCount"></strong></h4>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @await Component.InvokeAsync("_UILayoutFooterPartialComponent")
+    @await Component.InvokeAsync("_UILayoutScriptPartialComponent")
+
+</body>
+
+</html>

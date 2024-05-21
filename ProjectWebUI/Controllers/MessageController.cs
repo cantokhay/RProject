@@ -8,5 +8,10 @@ namespace ProjectWebUI.Controllers
         {
             return View();
         }
+
+        public IActionResult ActiveUserCount()
+        {
+            return View();
+        }
     }
 }
