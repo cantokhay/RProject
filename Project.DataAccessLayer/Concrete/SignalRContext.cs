@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Project.Data.Entities;
 
 namespace Project.DataAccess.Concrete
 {
-    public class SignalRContext : DbContext
+    public class SignalRContext : IdentityDbContext<AppUser, Roles, int>
     {
         override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
