@@ -1,6 +1,10 @@
+using Project.Data.Entities;
+using Project.DataAccess.Concrete;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<SignalRContext>();
+builder.Services.AddIdentity<AppUser, Roles>().AddEntityFrameworkStores<SignalRContext>();
 builder.Services.AddHttpClient();
 builder.Services.AddControllersWithViews();
 
