@@ -39,11 +39,11 @@ namespace ProjectAPI.Hubs
             var passiveCategoryCount = _categoryService.TPassiveCategoryCount();
             await Clients.All.SendAsync("ReceivePassiveCategoryCount", passiveCategoryCount);
 
-            var productCountByHamburger = _productService.TGetProductCountByCategoryNameHamburger();
-            await Clients.All.SendAsync("ReceiveProductCountByHamburger", productCountByHamburger);
+            //var productCountByHamburger = _productService.TGetProductCountByCategoryNameHamburger();
+            //await Clients.All.SendAsync("ReceiveProductCountByHamburger", productCountByHamburger);
 
-            var productCountByDesert = _productService.TGetProductCountByCategoryNameDesert();
-            await Clients.All.SendAsync("ReceiveProductCountByDesert", productCountByDesert);
+            //var productCountByDesert = _productService.TGetProductCountByCategoryNameDesert();
+            //await Clients.All.SendAsync("ReceiveProductCountByDesert", productCountByDesert);
 
             var avgPrice = _productService.TProductPriceAvg();
             await Clients.All.SendAsync("ReceiveProductPriceAvg", avgPrice.ToString("0.00") + "₺");
@@ -54,8 +54,8 @@ namespace ProjectAPI.Hubs
             var minPricedProduct = _productService.TProductNameByMinPrice();
             await Clients.All.SendAsync("ReceiveProductNameByMinPrice", minPricedProduct);
 
-            var avgHamburgerPrice = _productService.TProductAvgPriceByHamburger();
-            await Clients.All.SendAsync("ReceiveProductAvgPriceByHamburger", avgHamburgerPrice.ToString("0.00") + "₺");
+            //var avgHamburgerPrice = _productService.TProductAvgPriceByHamburger();
+            //await Clients.All.SendAsync("ReceiveProductAvgPriceByHamburger", avgHamburgerPrice.ToString("0.00") + "₺");
 
             var totalOrderCount = _orderService.TTotalOrderCount();
             await Clients.All.SendAsync("ReceiveTotalOrderCount", totalOrderCount);

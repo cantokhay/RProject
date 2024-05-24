@@ -41,13 +41,13 @@
                     $("#passiveCategoryCount").text(passiveCategoryCount);
                 });
 
-                connection.on("ReceiveProductCountByHamburger", (productCountByHamburger) => {
-                    $("#productCountByHamburger").text(productCountByHamburger);
-                });
+                // connection.on("ReceiveProductCountByHamburger", (productCountByHamburger) => {
+                //     $("#productCountByHamburger").text(productCountByHamburger);
+                // });
 
-                connection.on("ReceiveProductCountByDesert", (productCountByDesert) => {
-                    $("#productCountByDesert").text(productCountByDesert);
-                });
+                // connection.on("ReceiveProductCountByDesert", (productCountByDesert) => {
+                //     $("#productCountByDesert").text(productCountByDesert);
+                // });
 
                 connection.on("ReceiveProductPriceAvg", (productPriceAvg) => {
                     $("#productPriceAvg").text(productPriceAvg);
@@ -61,9 +61,9 @@
                     $("#minPricedProduct").text(minPricedProduct);
                 });
 
-                connection.on("ReceiveProductAvgPriceByHamburger", (avgHamburgerPrice) => {
-                    $("#avgHamburgerPrice").text(avgHamburgerPrice);
-                });
+                // connection.on("ReceiveProductAvgPriceByHamburger", (avgHamburgerPrice) => {
+                //     $("#avgHamburgerPrice").text(avgHamburgerPrice);
+                // });
 
                 connection.on("ReceiveTotalOrderCount", (totalOrderCount) => {
                     $("#totalOrderCount").text(totalOrderCount);

@@ -36,7 +36,8 @@ namespace ProjectAPI.Controllers
                 BookingName = createBookingDTO.BookingName,
                 BookingEmail = createBookingDTO.BookingEmail,
                 BookingPhone = createBookingDTO.BookingPhone,
-                PersonCount = createBookingDTO.PersonCount
+                PersonCount = createBookingDTO.PersonCount,
+                BookingStatus = createBookingDTO.BookingStatus
             });
             return Ok("Rezervasyon Eklendi!");
         }
@@ -59,7 +60,8 @@ namespace ProjectAPI.Controllers
                 BookingName = updateBookingDTO.BookingName,
                 BookingEmail = updateBookingDTO.BookingEmail,
                 BookingPhone = updateBookingDTO.BookingPhone,
-                PersonCount = updateBookingDTO.PersonCount
+                PersonCount = updateBookingDTO.PersonCount,
+                BookingStatus = updateBookingDTO.BookingStatus
             });
             return Ok("Rezervasyon Güncellendi!");
         }
@@ -69,6 +71,20 @@ namespace ProjectAPI.Controllers
         {
             var booking = _bookingService.TGetById(id);
             return Ok(booking);
+        }
+
+        [HttpGet("STATUS_APRROVE/{id}")]
+        public IActionResult BookingStatusChangeAprooved(int id)
+        {
+            _bookingService.TBookingStatusChangeAprooved(id);
+            return Ok("Rezervasyon Onaylandı!");
+        }
+
+        [HttpGet("STATUS_CANCEL/{id}")]
+        public IActionResult BookingStatusChangeCancelled(int id)
+        {
+            _bookingService.TBookingStatusChangeCancelled(id);
+            return Ok("Rezervasyon İptal Edildi!");
         }
     }
 }

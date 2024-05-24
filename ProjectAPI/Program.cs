@@ -44,9 +44,6 @@ builder.Services.AddScoped<ICustomerDal, EFCustomerDal>();
 builder.Services.AddScoped<IDiscountService, DiscountManager>();
 builder.Services.AddScoped<IDiscountDal, EFDiscountDal>();
 
-builder.Services.AddScoped<IFeatureService, FeatureManager>();
-builder.Services.AddScoped<IFeatureDal, EFFeatureDal>();
-
 builder.Services.AddScoped<INotificationService, NotificationManager>();
 builder.Services.AddScoped<INotificationDal, EFNotificationDal>();
 

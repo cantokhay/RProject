@@ -23,7 +23,7 @@ namespace ProjectAPI.Controllers
         [HttpGet]
         public IActionResult DiscountList()
         {
-            var discountList =_discountService.TGetAll();
+            var discountList = _discountService.TGetAll();
             return Ok(discountList);
         }
 
@@ -35,7 +35,8 @@ namespace ProjectAPI.Controllers
                 Title = createDiscountDTO.Title,
                 Description = createDiscountDTO.Description,
                 DiscountAmount = createDiscountDTO.DiscountAmount,
-                ImageURL = createDiscountDTO.ImageURL
+                ImageURL = createDiscountDTO.ImageURL,
+                DiscountStatus = false
             });
             return Ok("İndirim Eklendi!");
         }
@@ -57,7 +58,8 @@ namespace ProjectAPI.Controllers
                 Title = updateDiscountDTO.Title,
                 Description = updateDiscountDTO.Description,
                 DiscountAmount = updateDiscountDTO.DiscountAmount,
-                ImageURL = updateDiscountDTO.ImageURL
+                ImageURL = updateDiscountDTO.ImageURL,
+                DiscountStatus = false
             });
             return Ok("İndirim Güncellendi!");
         }
@@ -67,6 +69,27 @@ namespace ProjectAPI.Controllers
         {
             var discount = _discountService.TGetById(id);
             return Ok(discount);
+        }
+
+        [HttpGet("ACTIVATE_DISCOUNT/{id}")]
+        public IActionResult ActivateDiscount(int id)
+        {
+            _discountService.TChangeStatusTrue(id);
+            return Ok("İndirim Aktif Edildi!");
+        }
+
+        [HttpGet("PASSIVATE_DISCOUNT/{id}")]
+        public IActionResult PassivateDiscount(int id)
+        {
+            _discountService.TChangeStatusFalse(id);
+            return Ok("İndirim Pasif Edildi!");
+        }
+
+        [HttpGet("ACTIVE_DISCOUNTS")]
+        public IActionResult GetActiveDiscounts()
+        {
+            var discountList = _discountService.TGetActiveDiscounts();
+            return Ok(discountList);
         }
     }
 }

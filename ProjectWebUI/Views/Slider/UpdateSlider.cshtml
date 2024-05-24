@@ -1,0 +1,53 @@
+﻿@model UpdateSliderVM
+@{
+    ViewData["Title"] = "UpdateSlider";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Öne Çıkanlar İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Öne Çıkanlar Güncelle</div>
+                        </div>
+                        <div class="card-body">
+                            <input type="hidden" asp-for="SliderId" />
+                            <div class="form-group">
+                                <label for="SliderTitle1">Başlık 1</label>
+                                <input type="text" class="form-control" asp-for="SliderTitle1" id="SliderTitle1">
+                            </div>
+                            <div class="form-group">
+                                <label for="SliderTitle2">Başlık 2</label>
+                                <input type="text" class="form-control" asp-for="SliderTitle2" id="SliderTitle2">
+                            </div>
+                            <div class="form-group">
+                                <label for="SliderTitle3">Başlık 3</label>
+                                <input type="text" class="form-control" asp-for="SliderTitle3" id="SliderTitle3">
+                            </div>
+                            <div class="form-group">
+                                <label for="SliderDescription1">Detay 1</label>
+                                <textarea rows="2" class="form-control" asp-for="SliderDescription1" id="SliderDescription1"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="SliderDescription2">Detay 2</label>
+                                <textarea rows="2" class="form-control" asp-for="SliderDescription2" id="SliderDescription2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="SliderDescription3">Detay 3</label>
+                                <textarea rows="2" class="form-control" asp-for="SliderDescription3" id="SliderDescription3"></textarea>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button class="btn btn-success">Öne Çıkan Güncelle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
