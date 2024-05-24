@@ -47,6 +47,9 @@ builder.Services.AddScoped<IDiscountDal, EFDiscountDal>();
 builder.Services.AddScoped<INotificationService, NotificationManager>();
 builder.Services.AddScoped<INotificationDal, EFNotificationDal>();
 
+builder.Services.AddScoped<IMessageService, MessageManager>();
+builder.Services.AddScoped<IMessageDal, EFMessageDal>();
+
 builder.Services.AddScoped<IMoneyCaseService, MoneyCaseManager>();
 builder.Services.AddScoped<IMoneyCaseDal, EFMoneyCaseDal>();
 
