@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Project.Data.Entities;
 using ProjectWebUI.VMs.IdentityVM;
 
 namespace ProjectWebUI.Controllers
 {
+	[AllowAnonymous]
 	public class LoginController : Controller
 	{
 		private readonly SignInManager<AppUser> _signInManager;
@@ -30,5 +32,10 @@ namespace ProjectWebUI.Controllers
 			}
 			return View();
 		}
-	}
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Login");
+        }
+    }
 }
