@@ -18,7 +18,7 @@ namespace ProjectWebUI.ViewComponents.DefaultComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:7271/api/Sliders");
+            var response = await client.GetAsync("https://localhost:7271/api/Slider");
 
             var jsonData = await response.Content.ReadAsStringAsync();
             var sliderList = JsonConvert.DeserializeObject<List<ResultSliderVM>>(jsonData);

@@ -28,63 +28,63 @@ namespace ProjectWebUI.Controllers
             return View();
         }
 
-        //[HttpGet]
-        //public IActionResult CreateSlider()
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        public IActionResult CreateSlider()
+        {
+            return View();
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> CreateSlider(CreateSliderVM createSliderVM)
-        //{
-        //    var client = _httpClientFactory.CreateClient();
-        //    var jsonData = JsonConvert.SerializeObject(createSliderVM);
-        //    var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-        //    var response = await client.PostAsync("https://localhost:7271/api/Slider", content);
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> CreateSlider(CreateSliderVM createSliderVM)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(createSliderVM);
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://localhost:7271/api/Slider", content);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
 
-        //public async Task<IActionResult> DeleteSlider(int id)
-        //{
-        //    var client = _httpClientFactory.CreateClient();
-        //    var response = await client.DeleteAsync($"https://localhost:7271/api/Slider/{id}");
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View();
-        //}
+        public async Task<IActionResult> DeleteSlider(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.DeleteAsync($"https://localhost:7271/api/Slider/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
 
-        //[HttpGet]
-        //public async Task<IActionResult> UpdateSlider(int id)
-        //{
-        //    var client = _httpClientFactory.CreateClient();
-        //    var response = await client.GetAsync($"https://localhost:7271/api/Slider/{id}");
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        var jsonData = await response.Content.ReadAsStringAsync();
-        //        var slider = JsonConvert.DeserializeObject<UpdateSliderVM>(jsonData);
-        //        return View(slider);
-        //    }
-        //    return View();
-        //}
+        [HttpGet]
+        public async Task<IActionResult> UpdateSlider(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetAsync($"https://localhost:7271/api/Slider/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonData = await response.Content.ReadAsStringAsync();
+                var slider = JsonConvert.DeserializeObject<UpdateSliderVM>(jsonData);
+                return View(slider);
+            }
+            return View();
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> UpdateSlider(UpdateSliderVM updateSliderVM)
-        //{
-        //    var client = _httpClientFactory.CreateClient();
-        //    var jsonData = JsonConvert.SerializeObject(updateSliderVM);
-        //    var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-        //    var response = await client.PutAsync("https://localhost:7271/api/Slider", content);
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> UpdateSlider(UpdateSliderVM updateSliderVM)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(updateSliderVM);
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var response = await client.PutAsync("https://localhost:7271/api/Slider", content);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

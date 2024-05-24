@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+	int i = 1;
 }
 
 <div class="content">
@@ -25,24 +26,29 @@
 									<th scope="col">ImageURL</th>
 									<th scope="col">İndirim Miktarı</th>
 									<th scope="col">Detay</th>
-									<th scope="col">Durum</th>
+									<th scope="col">Durumu</th>
 									<th scope="col">Sil</th>
 									<th scope="col">Güncelle</th>
+									<th scope="col">Aktif Yap</th>
+									<th scope="col">Pasif Yap</th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach (var item in Model)
 								{
 									<tr>
-										<td>@item.DiscountId</td>
+										<td>@i</td>
 										<td>@item.Title</td>
 										<td>@item.ImageURL</td>
 										<td>@item.DiscountAmount</td>
 										<td>@item.Description</td>
-										<td><a href="/Discount/DeleteDiscount/@item.DiscountId" class="btn btn-outline-warning btn-border btn-round">Durumu</a></td>
+										<td>@item.DiscountStatus</td>
 										<td><a href="/Discount/DeleteDiscount/@item.DiscountId" class="btn btn-outline-danger btn-border btn-round">Sil</a></td>
 										<td><a href="/Discount/UpdateDiscount/@item.DiscountId" class="btn btn-outline-secondary btn-border btn-round">Güncelle</a></td>
+										<td><a href="/Discount/ActivateDiscount/@item.DiscountId" class="btn btn-outline-success btn-border btn-round">Aktif Yap</a></td>
+										<td><a href="/Discount/PassivateDiscount/@item.DiscountId" class="btn btn-outline-warning btn-border btn-round">Pasif Yap</a></td>
 									</tr>
+									i++;
 								}
 							</tbody>
 						</table>

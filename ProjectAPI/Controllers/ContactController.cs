@@ -35,7 +35,11 @@ namespace ProjectAPI.Controllers
                 ContactLocation = createContactDTO.ContactLocation,
                 ContactPhone = createContactDTO.ContactPhone,
                 ContactEmail = createContactDTO.ContactEmail,
-                FooterDescription = createContactDTO.FooterDescription
+                FooterDescription = createContactDTO.FooterDescription,
+                FooterTitle = createContactDTO.FooterTitle,
+                OpenDays = createContactDTO.OpenDays,
+                OpenDaysDescription = createContactDTO.OpenDaysDescription,
+                OpenHours = createContactDTO.OpenHours
             });
             return Ok("İletişim Bilgisi Eklendi!");
         }
@@ -57,8 +61,12 @@ namespace ProjectAPI.Controllers
                 ContactLocation = updateContactDTO.ContactLocation,
                 ContactPhone = updateContactDTO.ContactPhone,
                 ContactEmail = updateContactDTO.ContactEmail,
-                FooterDescription = updateContactDTO.FooterDescription
-            });
+                FooterDescription = updateContactDTO.FooterDescription,
+				FooterTitle = updateContactDTO.FooterTitle,
+				OpenDays = updateContactDTO.OpenDays,
+				OpenDaysDescription = updateContactDTO.OpenDaysDescription,
+				OpenHours = updateContactDTO.OpenHours
+			});
             return Ok("İletişim Bilgisi Güncellendi!");
         }
 

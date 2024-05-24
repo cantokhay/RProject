@@ -13,6 +13,16 @@ namespace Project.Business.Concrete
             _bookingDal = bookingDal;
         }
 
+        public void TBookingStatusChangeAprooved(int id)
+        {
+            _bookingDal.BookingStatusChangeAprooved(id);
+        }
+
+        public void TBookingStatusChangeCancelled(int id)
+        {
+            _bookingDal.BookingStatusChangeCancelled(id);
+        }
+
         public void TAdd(Booking entity)
         {
             _bookingDal.Add(entity);

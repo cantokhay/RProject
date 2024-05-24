@@ -16,7 +16,7 @@ namespace ProjectWebUI.ViewComponents.DefaultComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:7271/api/Discount");
+            var response = await client.GetAsync("https://localhost:7271/api/Discount/ACTIVE_DISCOUNTS");
 
             var jsonData = await response.Content.ReadAsStringAsync();
             var discountList = JsonConvert.DeserializeObject<List<ResultDiscountVM>>(jsonData);

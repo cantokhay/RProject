@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
-    var count = 0;
 }
 
 <script src="~/microsoft/signalr/dist/browser/signalr.min.js"></script>
@@ -24,7 +23,7 @@
                     $("#connstatus").text(connection.state);
                     setInterval(() => {
                         connection.invoke("GetBookingList");
-                    }, 5000);
+                    }, 2000);
                 }).catch((err) => {
                     console.error(err);
                 });
@@ -41,6 +40,8 @@
                                     <th scope="col">Rezervasyon Durumu</th>
                                     <th scope="col">Sil</th>
                                     <th scope="col">Güncelle</th>
+                                    <th scope="col">Onayla</th>
+                                    <th scope="col">İptal Et</th>
                                 </tr>
                             </thead>
                             <tbody>`;
@@ -52,9 +53,11 @@
                                         <td>${item.bookingPhone}</td>
                                         <td>${new Date(item.bookingDate).toLocaleDateString()}</td>
                                         <td>${item.personCount}</td>
-                                        <td>Rezervasyon Alındı</td>
+                                        <td>${item.bookingStatus}</td>
                                         <td><a href="/Booking/DeleteBooking/${item.bookingId}" class="btn btn-outline-danger btn-border btn-round">Sil</a></td>
                                         <td><a href="/Booking/UpdateBooking/${item.bookingId}" class="btn btn-outline-secondary btn-border btn-round">Güncelle</a></td>
+                                        <td><a href="/Booking/BookingStatusChangeAprooved/${item.bookingId}" class="btn btn-outline-success btn-border btn-round">Onayla</a></td>
+                                        <td><a href="/Booking/BookingStatusChangeCancelled/${item.bookingId}" class="btn btn-outline-warning btn-border btn-round">İptal Et</a></td>
                                     </tr>`;
                     });
 

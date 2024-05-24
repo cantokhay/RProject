@@ -100,6 +100,7 @@ namespace ProjectWebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateProduct(UpdateProductVM updateProductVM)
         {
+            updateProductVM.ProductStatus = true;
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateProductVM);
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");

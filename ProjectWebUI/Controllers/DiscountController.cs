@@ -85,5 +85,19 @@ namespace ProjectWebUI.Controllers
             }
             return View();
         }
+
+        public async Task<IActionResult> ActivateDiscount(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            await client.GetAsync($"https://localhost:7271/api/Discount/ACTIVATE_DISCOUNT/{id}");
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> PassivateDiscount(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            await client.GetAsync($"https://localhost:7271/api/Discount/PASSIVATE_DISCOUNT/{id}");
+            return RedirectToAction("Index");
+        }
     }
 }

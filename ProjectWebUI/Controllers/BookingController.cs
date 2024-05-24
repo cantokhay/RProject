@@ -36,6 +36,7 @@ namespace ProjectWebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateBooking(CreateBookingVM createBookingVM)
         {
+            createBookingVM.BookingStatus = "Rezervasyon Alındı";
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBookingVM);
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -84,6 +85,20 @@ namespace ProjectWebUI.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        public async Task<IActionResult> BookingStatusChangeAprooved(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            await client.GetAsync($"https://localhost:7271/api/Booking/STATUS_APRROVE/{id}");
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> BookingStatusChangeCancelled(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            await client.GetAsync($"https://localhost:7271/api/Booking/STATUS_CANCEL/{id}");
+            return RedirectToAction("Index");
         }
     }
 }
