@@ -20,7 +20,6 @@ namespace Project.DataAccess.Repositories
 
         public void Delete(T entity)
         {
-            _context.Remove(entity);
             _context.SaveChanges();
         }
 

@@ -9,5 +9,6 @@
         public string BookingStatus { get; set; }
         public DateTime BookingDate { get; set; }
         public int PersonCount { get; set; }
-    }
+		public DateTime CreatedDate { get; set; }
+	}
 }

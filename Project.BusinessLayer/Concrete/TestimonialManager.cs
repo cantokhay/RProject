@@ -1,5 +1,6 @@
 ﻿using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DataAccess.Abstract;
 
 namespace Project.Business.Concrete
@@ -20,18 +21,20 @@ namespace Project.Business.Concrete
 
         public void TDelete(Testimonial entity)
         {
-            _testimonialDal.Delete(entity);
+            entity.DeletedDate = DateTime.Now;
+			entity.DataStatus = DataStatus.Deleted;
+			_testimonialDal.Delete(entity);
         }
 
         public List<Testimonial> TGetAll()
         {
-            return _testimonialDal.GetAll();
-        }
+            return _testimonialDal.GetAll().Where(x => x.DataStatus != DataStatus.Deleted).ToList();
+		}
 
         public Testimonial TGetById(int id)
         {
             return _testimonialDal.GetById(id);
-        }
+		}
 
         public void TUpdate(Testimonial entity)
         {

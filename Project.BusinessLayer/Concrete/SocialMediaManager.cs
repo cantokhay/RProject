@@ -1,5 +1,6 @@
 ﻿using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DataAccess.Abstract;
 
 namespace Project.Business.Concrete
@@ -20,13 +21,15 @@ namespace Project.Business.Concrete
 
         public void TDelete(SocialMedia entity)
         {
-            _socialMediaDal.Delete(entity);
+            entity.DeletedDate = DateTime.Now;
+			entity.DataStatus = DataStatus.Deleted;
+			_socialMediaDal.Delete(entity);
         }
 
         public List<SocialMedia> TGetAll()
         {
-            return _socialMediaDal.GetAll();
-        }
+            return _socialMediaDal.GetAll().Where(x => x.DataStatus != DataStatus.Deleted).ToList();
+		}
 
         public SocialMedia TGetById(int id)
         {

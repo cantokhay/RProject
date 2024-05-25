@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DTO.DiscountDTO;
 
 namespace ProjectAPI.Controllers
@@ -36,8 +37,10 @@ namespace ProjectAPI.Controllers
                 Description = createDiscountDTO.Description,
                 DiscountAmount = createDiscountDTO.DiscountAmount,
                 ImageURL = createDiscountDTO.ImageURL,
-                DiscountStatus = false
-            });
+                DiscountStatus = false,
+				CreatedDate = DateTime.Now,
+				DataStatus = DataStatus.Active
+			});
             return Ok("İndirim Eklendi!");
         }
 
@@ -59,8 +62,11 @@ namespace ProjectAPI.Controllers
                 Description = updateDiscountDTO.Description,
                 DiscountAmount = updateDiscountDTO.DiscountAmount,
                 ImageURL = updateDiscountDTO.ImageURL,
-                DiscountStatus = false
-            });
+                DiscountStatus = false,
+				CreatedDate = updateDiscountDTO.CreatedDate,
+				DataStatus = DataStatus.Modified,
+				ModifiedDate = DateTime.Now
+			});
             return Ok("İndirim Güncellendi!");
         }
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DTO.Customer;
 
 namespace ProjectAPI.Controllers
@@ -37,7 +38,9 @@ namespace ProjectAPI.Controllers
 			_customerService.TAdd(new Customer()
 			{
 				CustomerName = createCustomertDTO.CustomerName,
-				CustomerStatus = false
+				CustomerStatus = false,
+				CreatedDate = DateTime.Now,
+				DataStatus = DataStatus.Active
 			});
 			return Ok("Müşteri Eklendi!");
 		}
@@ -57,7 +60,10 @@ namespace ProjectAPI.Controllers
 			{
 				CustomerId = updateCustomerDTO.CustomerId,
 				CustomerName = updateCustomerDTO.CustomerName,
-				CustomerStatus = false
+				CustomerStatus = false,
+				CreatedDate = updateCustomerDTO.CreatedDate,
+				DataStatus = DataStatus.Modified,
+				ModifiedDate = DateTime.Now
 			});
 			return Ok("Müşteri Güncellendi!");
 		}

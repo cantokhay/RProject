@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DTO.MessageDTO;
 
 namespace ProjectAPI.Controllers
@@ -35,8 +36,10 @@ namespace ProjectAPI.Controllers
                 MessageContent = createMessageDTO.MessageContent,
                 MessagePhone = createMessageDTO.MessagePhone,
                 MessageDate = DateTime.Now,
-                MessageStatus = false
-            });
+                MessageStatus = false,
+				CreatedDate = DateTime.Now,
+				DataStatus = DataStatus.Active
+			});
             return Ok("Mesaj Eklendi!");
         }
 
@@ -60,8 +63,11 @@ namespace ProjectAPI.Controllers
                 MessageContent = updateMessageDTO.MessageContent,
                 MessagePhone = updateMessageDTO.MessagePhone,
                 MessageDate = updateMessageDTO.MessageDate,
-                MessageStatus = false
-            });
+                MessageStatus = false,
+				CreatedDate = updateMessageDTO.CreatedDate,
+				DataStatus = DataStatus.Modified,
+				ModifiedDate = DateTime.Now
+			});
             return Ok("Mesaj Güncellendi!");
         }
 

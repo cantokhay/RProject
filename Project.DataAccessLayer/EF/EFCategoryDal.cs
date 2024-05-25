@@ -14,19 +14,19 @@ namespace Project.DataAccess.EF
 		public int ActiveCategoryCount()
 		{
 			using var context = new SignalRContext();
-			return context.Categories.Where(c => c.CategoryStatus == true).Count();
+			return context.Categories.Where(c => c.CategoryStatus == true && c.DataStatus != Data.Enums.DataStatus.Deleted).Count();
 		}
 
 		public int GetCategoryCount()
 		{
 			using var context = new SignalRContext();
-			return context.Categories.Count();
+			return context.Categories.Where(c => c.DataStatus != Data.Enums.DataStatus.Deleted).Count();
 		}
 
 		public int PassiveCategoryCount()
 		{
 			using var context = new SignalRContext();
-			return context.Categories.Where(c => c.CategoryStatus == false).Count();
+			return context.Categories.Where(c => c.CategoryStatus == false && c.DataStatus != Data.Enums.DataStatus.Deleted).Count();
 		}
 	}
 }

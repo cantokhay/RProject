@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DataAccess.Concrete;
 using Project.DTO.BasketDTO;
 
@@ -57,8 +58,10 @@ namespace ProjectAPI.Controllers
                 CustomerId = 4,
                 ProductId = createBasketDTO.ProductId,
                 Price = price,
-                TotalProductPrice = price * count
-            });
+                TotalProductPrice = price * count,
+				CreatedDate = DateTime.Now,
+				DataStatus = DataStatus.Active
+			});
             return Ok("Ürün Sepetinize Eklendi!");
         }
 

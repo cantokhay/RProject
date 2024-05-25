@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DTO.CategoryDTO;
 
 namespace ProjectAPI.Controllers
@@ -54,8 +55,10 @@ namespace ProjectAPI.Controllers
             _categoryService.TAdd(new Category
             {
                 CategoryName = createCategoryDTO.CategoryName,
-                CategoryStatus = true
-            });
+                CategoryStatus = true,
+				CreatedDate = DateTime.Now,
+				DataStatus = DataStatus.Active
+			});
             return Ok("Kategori Eklendi!");
         }
 
@@ -81,8 +84,11 @@ namespace ProjectAPI.Controllers
             {
                 CategoryId = updateCategoryDTO.CategoryId,
                 CategoryName = updateCategoryDTO.CategoryName,
-                CategoryStatus = updateCategoryDTO.CategoryStatus
-            });
+                CategoryStatus = updateCategoryDTO.CategoryStatus,
+				CreatedDate = updateCategoryDTO.CreatedDate,
+				DataStatus = DataStatus.Modified,
+				ModifiedDate = DateTime.Now
+			});
             return Ok("Kategori Güncellendi!");
         }
     }

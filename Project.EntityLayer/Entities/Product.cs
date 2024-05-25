@@ -1,6 +1,9 @@
-﻿namespace Project.Data.Entities
+﻿using Project.Data.Entities.Abstract;
+using Project.Data.Enums;
+
+namespace Project.Data.Entities
 {
-    public class Product
+    public class Product : IGenericEntity
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
@@ -14,5 +17,10 @@
         public List<OrderDetail> OrderDetails { get; set; }
 
         public List<Basket> Baskets { get; set; }
-    }
+
+		public DateTime CreatedDate { get; set; }
+		public DateTime? ModifiedDate { get; set; }
+		public DateTime? DeletedDate { get; set; }
+		public DataStatus DataStatus { get; set; } = DataStatus.Active;
+	}
 }
