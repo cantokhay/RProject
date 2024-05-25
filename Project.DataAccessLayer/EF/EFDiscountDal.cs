@@ -1,4 +1,5 @@
 ﻿using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DataAccess.Abstract;
 using Project.DataAccess.Concrete;
 using Project.DataAccess.Repositories;
@@ -30,7 +31,7 @@ namespace Project.DataAccess.EF
         public List<Discount> GetActiveDiscounts()
         {
             using var context = new SignalRContext();
-            var discountList = context.Discounts.Where(x => x.DiscountStatus == true).ToList();
+            var discountList = context.Discounts.Where(x => x.DiscountStatus == true && x.DataStatus != DataStatus.Deleted).ToList();
             return discountList;
         }
     }

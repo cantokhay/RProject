@@ -1,5 +1,6 @@
 ﻿using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DataAccess.Abstract;
 
 namespace Project.Business.Concrete
@@ -20,13 +21,15 @@ namespace Project.Business.Concrete
 
         public void TDelete(Message entity)
         {
-            _messageDal.Delete(entity);
+            entity.DeletedDate = DateTime.Now;
+			entity.DataStatus = DataStatus.Deleted;
+			_messageDal.Delete(entity);
         }
 
         public List<Message> TGetAll()
         {
-            return _messageDal.GetAll();
-        }
+            return _messageDal.GetAll().Where(x => x.DataStatus != DataStatus.Deleted).ToList();
+		}
 
         public Message TGetById(int id)
         {

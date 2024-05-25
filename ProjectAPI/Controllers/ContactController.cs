@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DTO.ContactDTO;
 
 namespace ProjectAPI.Controllers
@@ -39,8 +40,10 @@ namespace ProjectAPI.Controllers
                 FooterTitle = createContactDTO.FooterTitle,
                 OpenDays = createContactDTO.OpenDays,
                 OpenDaysDescription = createContactDTO.OpenDaysDescription,
-                OpenHours = createContactDTO.OpenHours
-            });
+                OpenHours = createContactDTO.OpenHours,
+				CreatedDate = DateTime.Now,
+				DataStatus = DataStatus.Active
+			});
             return Ok("İletişim Bilgisi Eklendi!");
         }
 
@@ -65,7 +68,10 @@ namespace ProjectAPI.Controllers
 				FooterTitle = updateContactDTO.FooterTitle,
 				OpenDays = updateContactDTO.OpenDays,
 				OpenDaysDescription = updateContactDTO.OpenDaysDescription,
-				OpenHours = updateContactDTO.OpenHours
+				OpenHours = updateContactDTO.OpenHours,
+				CreatedDate = updateContactDTO.CreatedDate,
+				DataStatus = DataStatus.Modified,
+				ModifiedDate = DateTime.Now
 			});
             return Ok("İletişim Bilgisi Güncellendi!");
         }

@@ -1,5 +1,6 @@
 ﻿using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DataAccess.Abstract;
 
 namespace Project.Business.Concrete
@@ -25,12 +26,14 @@ namespace Project.Business.Concrete
 
         public void TDelete(Category entity)
         {
-            _categoryDal.Delete(entity);
+            entity.DeletedDate = DateTime.Now;
+			entity.DataStatus = DataStatus.Deleted;
+			_categoryDal.Delete(entity);
         }
 
         public List<Category> TGetAll()
         {
-            return _categoryDal.GetAll();
+            return _categoryDal.GetAll().Where(c => c.DataStatus != DataStatus.Deleted).ToList();
         }
 
         public Category TGetById(int id)

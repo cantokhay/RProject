@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DTO.AboutDTO;
 
 namespace ProjectAPI.Controllers
@@ -34,8 +35,10 @@ namespace ProjectAPI.Controllers
             {
                 AboutTitle = createAboutDTO.AboutTitle,
                 AboutDescription = createAboutDTO.AboutDescription,
-                AboutImageURL = createAboutDTO.AboutImageURL
-            });
+                AboutImageURL = createAboutDTO.AboutImageURL,
+				DataStatus = DataStatus.Active,
+				CreatedDate = DateTime.Now
+			});
             return Ok("Hakkında Kısmı Eklendi!");
         }
 
@@ -55,8 +58,11 @@ namespace ProjectAPI.Controllers
                 AboutId = updateAboutDTO.AboutId,
                 AboutTitle = updateAboutDTO.AboutTitle,
                 AboutDescription = updateAboutDTO.AboutDescription,
-                AboutImageURL = updateAboutDTO.AboutImageURL
-            });
+                AboutImageURL = updateAboutDTO.AboutImageURL,
+				CreatedDate = updateAboutDTO.CreatedDate,
+				DataStatus = DataStatus.Modified,
+				ModifiedDate = DateTime.Now
+			});
             return Ok("Hakkında Alanı Güncellendi!");
         }
 

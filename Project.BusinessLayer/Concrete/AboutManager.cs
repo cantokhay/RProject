@@ -1,5 +1,6 @@
 ﻿using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DataAccess.Abstract;
 
 namespace Project.Business.Concrete
@@ -15,17 +16,19 @@ namespace Project.Business.Concrete
 
         public void TAdd(About entity)
         {
-            _aboutDal.Add(entity);
+			_aboutDal.Add(entity);
         }
 
         public void TDelete(About entity)
         {
-            _aboutDal.Delete(entity);
+            entity.DeletedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Deleted;
+			_aboutDal.Delete(entity);
         }
 
         public List<About> TGetAll()
         {
-            return _aboutDal.GetAll();
+            return _aboutDal.GetAll().Where(x => x.DataStatus != DataStatus.Deleted).ToList();
         }
 
         public About TGetById(int id)
@@ -35,7 +38,7 @@ namespace Project.Business.Concrete
 
         public void TUpdate(About entity)
         {
-            _aboutDal.Update(entity);
+			_aboutDal.Update(entity);
         }
     }
 }

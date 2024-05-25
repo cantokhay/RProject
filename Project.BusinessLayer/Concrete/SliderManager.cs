@@ -1,5 +1,6 @@
 ﻿using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DataAccess.Abstract;
 
 namespace Project.Business.Concrete
@@ -20,13 +21,15 @@ namespace Project.Business.Concrete
 
         public void TDelete(Slider entity)
         {
-            _sliderDal.Delete(entity);
+            entity.DeletedDate = DateTime.Now;
+			entity.DataStatus = DataStatus.Deleted;
+			_sliderDal.Delete(entity);
         }
 
         public List<Slider> TGetAll()
         {
-            return _sliderDal.GetAll();
-        }
+            return _sliderDal.GetAll().Where(x => x.DataStatus != DataStatus.Deleted).ToList();
+		}
 
         public Slider TGetById(int id)
         {

@@ -1,5 +1,6 @@
 ﻿using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DataAccess.Abstract;
 
 namespace Project.Business.Concrete
@@ -15,22 +16,24 @@ namespace Project.Business.Concrete
 
 		public void TAdd(MoneyCase entity)
 		{
-			throw new NotImplementedException();
+			_moneyCaseDal.Add(entity);
 		}
 
 		public void TDelete(MoneyCase entity)
 		{
-			throw new NotImplementedException();
+			entity.DeletedDate = DateTime.Now;
+			entity.DataStatus = DataStatus.Deleted;
+			_moneyCaseDal.Delete(entity);
 		}
 
 		public List<MoneyCase> TGetAll()
 		{
-			throw new NotImplementedException();
+			return _moneyCaseDal.GetAll().Where(x => x.DataStatus != DataStatus.Deleted).ToList();
 		}
 
 		public MoneyCase TGetById(int id)
 		{
-			throw new NotImplementedException();
+			return _moneyCaseDal.GetById(id);
 		}
 
 		public decimal TGetTotalMoneyInCase()
@@ -40,7 +43,7 @@ namespace Project.Business.Concrete
 
 		public void TUpdate(MoneyCase entity)
 		{
-			throw new NotImplementedException();
+			_moneyCaseDal.Update(entity);
 		}
 	}
 }

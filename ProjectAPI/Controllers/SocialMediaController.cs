@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DTO.SocialMediaDTO;
 
 namespace ProjectAPI.Controllers
@@ -34,8 +35,10 @@ namespace ProjectAPI.Controllers
             {
                 SocialMediaTitle = createSocialMediaDTO.SocialMediaTitle,
                 SocialMediaURL = createSocialMediaDTO.SocialMediaURL,
-                SocialMediaIcon = createSocialMediaDTO.SocialMediaIcon
-            });
+                SocialMediaIcon = createSocialMediaDTO.SocialMediaIcon,
+                CreatedDate = DateTime.Now,
+				DataStatus = DataStatus.Active
+			});
             return Ok("Sosyal Medya Hesabı Eklendi!");
         }
 
@@ -55,8 +58,11 @@ namespace ProjectAPI.Controllers
                 SocialMediaId = updateSocialMediaDTO.SocialMediaId,
                 SocialMediaTitle = updateSocialMediaDTO.SocialMediaTitle,
                 SocialMediaURL = updateSocialMediaDTO.SocialMediaURL,
-                SocialMediaIcon = updateSocialMediaDTO.SocialMediaIcon
-            });
+                SocialMediaIcon = updateSocialMediaDTO.SocialMediaIcon,
+				CreatedDate = updateSocialMediaDTO.CreatedDate,
+				DataStatus = DataStatus.Modified,
+				ModifiedDate = DateTime.Now
+			});
             return Ok("Sosyal Medya Hesabı Güncellendi!");
         }
 

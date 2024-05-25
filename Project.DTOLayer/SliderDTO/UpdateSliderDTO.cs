@@ -9,5 +9,6 @@
 		public string SliderDescription2 { get; set; }
 		public string SliderTitle3 { get; set; }
 		public string SliderDescription3 { get; set; }
+		public DateTime CreatedDate { get; set; }
 	}
 }

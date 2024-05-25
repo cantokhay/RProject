@@ -11,6 +11,6 @@
         public string OpenDays { get; set; }
         public string OpenDaysDescription { get; set; }
         public string OpenHours { get; set; }
-
-    }
+		public DateTime CreatedDate { get; set; }
+	}
 }

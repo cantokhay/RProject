@@ -10,7 +10,8 @@
         public string FooterTitle { get; set; }
         public string OpenDays { get; set; }
         public string OpenDaysDescription { get; set; }
+        public DateTime CreatedDate { get; set; }
         public string OpenHours { get; set; }
 
-    }
+	}
 }

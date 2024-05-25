@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DTO.NotificationDTO;
 
 namespace ProjectAPI.Controllers
@@ -48,8 +49,11 @@ namespace ProjectAPI.Controllers
                 NotificationStatus = updateNotificationDTO.NotificationStatus,
                 Type = updateNotificationDTO.Type,
                 Icon = updateNotificationDTO.Icon,
-                NotificationDate = updateNotificationDTO.NotificationDate
-            };
+                NotificationDate = updateNotificationDTO.NotificationDate,
+				CreatedDate = updateNotificationDTO.CreatedDate,
+				DataStatus = DataStatus.Modified,
+                ModifiedDate = DateTime.Now
+			};
 
             _notificationService.TUpdate(notification);
             return Ok("Bildirim Güncellendi!");
@@ -64,8 +68,10 @@ namespace ProjectAPI.Controllers
                 Icon = createNotificationDto.Icon,
                 NotificationStatus = false,
                 Type = createNotificationDto.Type,
-                NotificationDate = Convert.ToDateTime(DateTime.Now.ToShortDateString())
-            };
+                NotificationDate = Convert.ToDateTime(DateTime.Now.ToShortDateString()),
+				CreatedDate = DateTime.Now,
+				DataStatus = DataStatus.Active
+			};
             _notificationService.TAdd(notification);
             return Ok("Ekleme işlemi başarıyla yapıldı");
         }

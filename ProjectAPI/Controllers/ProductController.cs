@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DataAccess.Concrete;
 using Project.DTO.ProductDTO;
 
@@ -64,8 +65,10 @@ namespace ProjectAPI.Controllers
                     ProductPrice = c.ProductPrice,
                     ProductImageURL = c.ProductImageURL,
                     ProductStatus = c.ProductStatus,
-                    CategoryName = c.Category.CategoryName
-                }).ToList();
+                    CategoryName = c.Category.CategoryName,
+                    CreatedDate = c.CreatedDate,
+					DataStatus = c.DataStatus
+				}).ToList();
 
             return Ok(productListByCategory.ToList());
         }
@@ -108,8 +111,10 @@ namespace ProjectAPI.Controllers
                 ProductPrice = createProductDTO.ProductPrice,
                 ProductImageURL = createProductDTO.ProductImageURL,
                 CategoryId = createProductDTO.CategoryId,
-                ProductStatus = createProductDTO.ProductStatus
-            });
+                ProductStatus = createProductDTO.ProductStatus,
+				CreatedDate = DateTime.Now,
+				DataStatus = DataStatus.Active
+			});
             return Ok("Ürün Eklendi!");
         }
 
@@ -132,8 +137,11 @@ namespace ProjectAPI.Controllers
                 ProductPrice = updateProductDTO.ProductPrice,
                 ProductImageURL = updateProductDTO.ProductImageURL,
                 CategoryId = updateProductDTO.CategoryId,
-                ProductStatus = updateProductDTO.ProductStatus
-            });
+                ProductStatus = updateProductDTO.ProductStatus,
+				CreatedDate = updateProductDTO.CreatedDate,
+				DataStatus = DataStatus.Modified,
+				ModifiedDate = DateTime.Now
+			});
             return Ok("Ürün Güncellendi!");
         }
 

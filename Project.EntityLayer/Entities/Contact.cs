@@ -1,6 +1,9 @@
-﻿namespace Project.Data.Entities
+﻿using Project.Data.Entities.Abstract;
+using Project.Data.Enums;
+
+namespace Project.Data.Entities
 {
-    public class Contact
+    public class Contact : IGenericEntity
     {
         public int ContactId { get; set; }
         public string ContactLocation { get; set; }
@@ -12,5 +15,9 @@
         public string OpenDaysDescription { get; set; }
         public string OpenHours { get; set; }
 
-    }
+		public DateTime CreatedDate { get; set; }
+		public DateTime? ModifiedDate { get; set; }
+		public DateTime? DeletedDate { get; set; }
+		public DataStatus DataStatus { get; set; } = DataStatus.Active;
+	}
 }

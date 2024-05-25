@@ -1,5 +1,6 @@
 ﻿using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DataAccess.Abstract;
 
 namespace Project.Business.Concrete
@@ -21,22 +22,24 @@ namespace Project.Business.Concrete
 
 		public void TAdd(Order entity)
 		{
-			throw new NotImplementedException();
+			_orderDal.Add(entity);
 		}
 
 		public void TDelete(Order entity)
 		{
-			throw new NotImplementedException();
+			entity.DataStatus = DataStatus.Deleted;
+			entity.DeletedDate = DateTime.Now;
+			_orderDal.Delete(entity);
 		}
 
 		public List<Order> TGetAll()
 		{
-			throw new NotImplementedException();
+			return _orderDal.GetAll().Where(x => x.DataStatus != DataStatus.Deleted).ToList();
 		}
 
 		public Order TGetById(int id)
 		{
-			throw new NotImplementedException();
+			return _orderDal.GetById(id);
 		}
 
 		public decimal TGetTodayTotalPrice()
@@ -56,7 +59,7 @@ namespace Project.Business.Concrete
 
 		public void TUpdate(Order entity)
 		{
-			throw new NotImplementedException();
+			_orderDal.Update(entity);
 		}
 	}
 }

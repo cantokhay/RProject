@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DTO.SliderDTO;
 
 namespace ProjectAPI.Controllers
@@ -37,7 +38,9 @@ namespace ProjectAPI.Controllers
 				SliderTitle2 = createSliderDTO.SliderTitle2,
 				SliderDescription2 = createSliderDTO.SliderDescription2,
 				SliderTitle3 = createSliderDTO.SliderTitle3,
-				SliderDescription3 = createSliderDTO.SliderDescription3
+				SliderDescription3 = createSliderDTO.SliderDescription3,
+				CreatedDate = DateTime.Now,
+				DataStatus = DataStatus.Active
 			});
 			return Ok("Özellik Eklendi!");
 		}
@@ -61,7 +64,10 @@ namespace ProjectAPI.Controllers
 				SliderTitle2 = updateSliderDTO.SliderTitle2,
 				SliderDescription2 = updateSliderDTO.SliderDescription2,
 				SliderTitle3 = updateSliderDTO.SliderTitle3,
-				SliderDescription3 = updateSliderDTO.SliderDescription3
+				SliderDescription3 = updateSliderDTO.SliderDescription3,
+				CreatedDate = updateSliderDTO.CreatedDate,
+				DataStatus = DataStatus.Modified,
+				ModifiedDate = DateTime.Now
 			});
 			return Ok("Özellik Güncellendi!");
 		}

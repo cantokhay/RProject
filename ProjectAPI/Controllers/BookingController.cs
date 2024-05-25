@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DTO.BookingDTO;
 
 namespace ProjectAPI.Controllers
@@ -37,8 +38,10 @@ namespace ProjectAPI.Controllers
                 BookingEmail = createBookingDTO.BookingEmail,
                 BookingPhone = createBookingDTO.BookingPhone,
                 PersonCount = createBookingDTO.PersonCount,
-                BookingStatus = createBookingDTO.BookingStatus
-            });
+                BookingStatus = createBookingDTO.BookingStatus,
+				CreatedDate = DateTime.Now,
+				DataStatus = DataStatus.Active
+			});
             return Ok("Rezervasyon Eklendi!");
         }
 
@@ -61,8 +64,11 @@ namespace ProjectAPI.Controllers
                 BookingEmail = updateBookingDTO.BookingEmail,
                 BookingPhone = updateBookingDTO.BookingPhone,
                 PersonCount = updateBookingDTO.PersonCount,
-                BookingStatus = updateBookingDTO.BookingStatus
-            });
+                BookingStatus = updateBookingDTO.BookingStatus,
+				CreatedDate = updateBookingDTO.CreatedDate,
+				DataStatus = DataStatus.Modified,
+				ModifiedDate = DateTime.Now
+			});
             return Ok("Rezervasyon Güncellendi!");
         }
 

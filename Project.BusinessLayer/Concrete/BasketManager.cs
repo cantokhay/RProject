@@ -1,5 +1,6 @@
 ﻿using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DataAccess.Abstract;
 
 namespace Project.Business.Concrete
@@ -15,7 +16,7 @@ namespace Project.Business.Concrete
 
         public List<Basket> TGetBasketByCustomerId(int id)
         {
-            return _basketDal.GetBasketByCustomerId(id);
+            return _basketDal.GetBasketByCustomerId(id).Where(x => x.DataStatus != DataStatus.Deleted).ToList();
         }
 
         public void TAdd(Basket entity)
@@ -25,13 +26,15 @@ namespace Project.Business.Concrete
 
         public void TDelete(Basket entity)
         {
-            _basketDal.Delete(entity);
+			entity.DeletedDate = DateTime.Now;
+			entity.DataStatus = DataStatus.Deleted;
+			_basketDal.Delete(entity);
         }
 
         public List<Basket> TGetAll()
         {
-            throw new NotImplementedException();
-        }
+            return _basketDal.GetAll().Where(x => x.DataStatus != DataStatus.Deleted).ToList();
+		}
 
         public Basket TGetById(int id)
         {
@@ -40,8 +43,8 @@ namespace Project.Business.Concrete
 
         public void TUpdate(Basket entity)
         {
-            throw new NotImplementedException();
-        }
+			_basketDal.Update(entity);
+		}
 
     }
 }

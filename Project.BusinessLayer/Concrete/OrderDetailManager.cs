@@ -1,5 +1,6 @@
 ﻿using Project.Business.Abstract;
 using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DataAccess.Abstract;
 
 namespace Project.Business.Concrete
@@ -10,27 +11,29 @@ namespace Project.Business.Concrete
 
 		public void TAdd(OrderDetail entity)
 		{
-			throw new NotImplementedException();
+			_orderDetailDal.Add(entity);
 		}
 
 		public void TDelete(OrderDetail entity)
 		{
-			throw new NotImplementedException();
+			entity.DataStatus = DataStatus.Deleted;
+			entity.DeletedDate = DateTime.Now;
+			_orderDetailDal.Delete(entity);
 		}
 
 		public List<OrderDetail> TGetAll()
 		{
-			throw new NotImplementedException();
+			return _orderDetailDal.GetAll().Where(x => x.DataStatus != DataStatus.Deleted).ToList();
 		}
 
 		public OrderDetail TGetById(int id)
 		{
-			throw new NotImplementedException();
+			return _orderDetailDal.GetById(id);
 		}
 
 		public void TUpdate(OrderDetail entity)
 		{
-			throw new NotImplementedException();
+			_orderDetailDal.Update(entity);
 		}
 	}
 }
