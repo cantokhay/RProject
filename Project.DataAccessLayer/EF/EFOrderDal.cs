@@ -21,13 +21,13 @@ namespace Project.DataAccess.EF
 		public decimal LastOrderPrice()
 		{
 			using var context = new SignalRContext();
-			return context.Orders.OrderByDescending(o => o.OrderId).Take(1).Select(o => o.TotalPrice).FirstOrDefault();
+			return context.Orders.Where(x => x.DataStatus != DataStatus.Deleted).ToList().OrderByDescending(o => o.OrderId).Take(1).Select(o => o.TotalPrice).FirstOrDefault();
 		}
 
 		public decimal GetTodayTotalPrice()
 		{
 			using var context = new SignalRContext();
-			return context.Orders.Where(o => o.OrderDate == DateTime.Parse(DateTime.Today.ToShortDateString()) && o.DataStatus != DataStatus.Deleted).Sum(o => o.TotalPrice);
+			return context.Orders.Where(o => o.OrderDate.Date == DateTime.Today && o.DataStatus != DataStatus.Deleted).Sum(o => o.TotalPrice);
 		}
 
 		public int TotalOrderCount()

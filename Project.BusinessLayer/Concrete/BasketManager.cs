@@ -2,6 +2,7 @@
 using Project.Data.Entities;
 using Project.Data.Enums;
 using Project.DataAccess.Abstract;
+using Project.DTO.BasketDTO;
 
 namespace Project.Business.Concrete
 {
@@ -14,12 +15,25 @@ namespace Project.Business.Concrete
             _basketDal = basketDal;
         }
 
-        public List<Basket> TGetBasketByCustomerId(int id)
-        {
-            return _basketDal.GetBasketByCustomerId(id).Where(x => x.DataStatus != DataStatus.Deleted).ToList();
-        }
+		public List<ResutBasketWithCustomerNameByIdDTO> TGetBasketByCustomerId(int id)
+		{
+			var baskets = _basketDal.GetBasketByCustomerId(id);
 
-        public void TAdd(Basket entity)
+			return baskets.Select(b => new ResutBasketWithCustomerNameByIdDTO
+			{
+				BasketId = b.BasketId,
+				Price = b.Price,
+				Count = b.Count,
+				TotalProductPrice = b.TotalProductPrice,
+				ProductId = b.ProductId,
+				ProductPrice = b.Product.ProductPrice,
+				ProductName = b.Product.ProductName,
+				CustomerId = b.CustomerId,
+				CustomerName = b.Customer.CustomerName
+			}).ToList();
+		}
+
+		public void TAdd(Basket entity)
         {
             _basketDal.Add(entity);
         }

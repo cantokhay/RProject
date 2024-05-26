@@ -23,30 +23,14 @@ namespace ProjectAPI.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public IActionResult GetBaskeyByCustomerId(int customerId)
-        {
-            var basketList = _basketService.TGetBasketByCustomerId(customerId);
-            return Ok(basketList);
-        }
+        [HttpGet("BASKET_LIST_BY_CUSTOMER_ID")]
+		public ActionResult<List<ResutBasketWithCustomerNameByIdDTO>> GetBasketListWithCustomerNameById(int customerId)
+		{
+			var baskets = _basketService.TGetBasketByCustomerId(customerId);
+			return Ok(baskets);
+		}
 
-        [HttpGet("BASKET_LIST_WITH_CUSTOMER_NAME_BY_ID")]
-        public IActionResult GetBasketListWithCustomerNameById(int customerId)
-        {
-            using var context = new SignalRContext();
-            var customerName = context.Baskets.Include(b => b.Product).Include(b =>b.Customer).Where(b => b.CustomerId == customerId).Select(x => new ResutBasketWithCustomerNameByIdDTO
-            {
-                BasketId = x.BasketId,
-                CustomerName = x.Customer.CustomerName,
-                Price = x.Product.ProductPrice,
-                Count = x.Count,
-                TotalProductPrice = x.TotalProductPrice,
-                ProductName = x.Product.ProductName
-            }).ToList();
-            return Ok(customerName);
-        }
-
-        [HttpPost]
+		[HttpPost]
         public IActionResult CreateBasket(CreateBasketDTO createBasketDTO)
         {
             using var context = new SignalRContext();

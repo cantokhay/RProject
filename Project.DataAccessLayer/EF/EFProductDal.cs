@@ -16,7 +16,7 @@ namespace Project.DataAccess.EF
 		public int GetProductCount()
 		{
 			using var context = new SignalRContext();
-            return context.Products.Count();
+            return context.Products.Where(p => p.DataStatus != DataStatus.Deleted).Count();
 		}
 
 		public int GetProductCountByCategoryNameDesert()
@@ -34,7 +34,7 @@ namespace Project.DataAccess.EF
 		public List<Product> GetProductsByCategory()
         {
             var context = new SignalRContext();
-            var products = context.Products.Include(p => p.Category).Where(p => p.DataStatus != DataStatus.Deleted).ToList();
+            var products = context.Products.Include(p => p.Category).ToList();
             return products;
         }
 
@@ -53,7 +53,7 @@ namespace Project.DataAccess.EF
 		public decimal ProductPriceAvg()
 		{
 			using var context = new SignalRContext();
-			return context.Products.Average(p => p.ProductPrice);
+			return context.Products.Where(p => p.DataStatus != DataStatus.Deleted).Average(p => p.ProductPrice);
 		}
 
 		public decimal ProductAvgPriceByHamburger()
