@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Project.DataAccessLayer\Project.DataAccess.csproj" />
+    <ProjectReference Include="..\Project.DTOLayer\Project.DTO.csproj" />
   </ItemGroup>
 
 </Project>

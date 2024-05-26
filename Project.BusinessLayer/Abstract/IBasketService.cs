@@ -1,9 +1,10 @@
 ﻿using Project.Data.Entities;
+using Project.DTO.BasketDTO;
 
 namespace Project.Business.Abstract
 {
     public interface IBasketService : IGenericService<Basket>
     {
-        public List<Basket> TGetBasketByCustomerId(int id);
+        public List<ResutBasketWithCustomerNameByIdDTO> TGetBasketByCustomerId(int id);
     }
 }
