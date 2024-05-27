@@ -9,7 +9,7 @@ namespace Project.Data.Entities
 	{
         public int OrderId { get; set; }
 		public string CustomerName { get; set; }
-        public string OrderDescription { get; set; }
+        public OrderDescription OrderDescription { get; set; }
 
         [Column(TypeName = "Date")]
         public DateTime OrderDate { get; set; }

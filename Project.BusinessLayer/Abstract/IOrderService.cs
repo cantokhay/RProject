@@ -8,5 +8,8 @@ namespace Project.Business.Abstract
 		int TActiveOrderCount();
 		decimal TLastOrderPrice();
 		decimal TGetTodayTotalPrice();
+		void TOrderPaid(int orderId);
+		void TOrderTaken(int orderId);
+
 	}
 }
