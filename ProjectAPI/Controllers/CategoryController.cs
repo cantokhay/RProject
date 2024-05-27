@@ -55,7 +55,6 @@ namespace ProjectAPI.Controllers
             _categoryService.TAdd(new Category
             {
                 CategoryName = createCategoryDTO.CategoryName,
-                CategoryStatus = true,
 				CreatedDate = DateTime.Now,
 				DataStatus = DataStatus.Active
 			});
@@ -84,7 +83,6 @@ namespace ProjectAPI.Controllers
             {
                 CategoryId = updateCategoryDTO.CategoryId,
                 CategoryName = updateCategoryDTO.CategoryName,
-                CategoryStatus = updateCategoryDTO.CategoryStatus,
 				CreatedDate = updateCategoryDTO.CreatedDate,
 				DataStatus = DataStatus.Modified,
 				ModifiedDate = DateTime.Now

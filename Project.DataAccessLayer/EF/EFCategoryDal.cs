@@ -14,7 +14,7 @@ namespace Project.DataAccess.EF
 		public int ActiveCategoryCount()
 		{
 			using var context = new SignalRContext();
-			return context.Categories.Where(c => c.CategoryStatus == true && c.DataStatus != Data.Enums.DataStatus.Deleted).Count();
+			return context.Categories.Where(c => c.DataStatus != Data.Enums.DataStatus.Deleted).Count();
 		}
 
 		public int GetCategoryCount()
@@ -26,7 +26,7 @@ namespace Project.DataAccess.EF
 		public int PassiveCategoryCount()
 		{
 			using var context = new SignalRContext();
-			return context.Categories.Where(c => c.CategoryStatus == false && c.DataStatus != Data.Enums.DataStatus.Deleted).Count();
+			return context.Categories.Where(c => c.DataStatus == Data.Enums.DataStatus.Deleted).Count();
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Project.Data.Enums;
 using ProjectWebUI.VMs.CategoryVM;
 using System.Text;
 
@@ -36,7 +37,7 @@ namespace ProjectWebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CreateCategoryVM createCategoryVM)
         {
-            createCategoryVM.CategoryStatus = true;
+            createCategoryVM.DataStatus = DataStatus.Active;
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createCategoryVM);
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");

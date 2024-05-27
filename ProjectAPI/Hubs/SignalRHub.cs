@@ -69,8 +69,8 @@ namespace ProjectAPI.Hubs
             var totalMoney = _moneyCaseService.TGetTotalMoneyInCase();
             await Clients.All.SendAsync("ReceiveTotalMoneyInCase", totalMoney.ToString("0.00") + "₺");
 
-            //var todayTotalPrice = _orderService.TGetTodayTotalPrice();
-            //await Clients.All.SendAsync("ReceiveTodayTotalPrice", todayTotalPrice.ToString("0.00")+"₺");
+            var todayTotalPrice = _orderService.TGetTodayTotalPrice();
+            await Clients.All.SendAsync("ReceiveTodayTotalPrice", todayTotalPrice.ToString("0.00") + "₺");
 
             var totalCustomerCount = _customerService.TCustomerCount();
             await Clients.All.SendAsync("ReceiveCustomerCount", totalCustomerCount);

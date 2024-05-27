@@ -38,7 +38,7 @@ namespace ProjectAPI.Controllers
                 BookingEmail = createBookingDTO.BookingEmail,
                 BookingPhone = createBookingDTO.BookingPhone,
                 PersonCount = createBookingDTO.PersonCount,
-                BookingStatus = createBookingDTO.BookingStatus,
+                BookingStatus = BookingStatus.Pending,
 				CreatedDate = DateTime.Now,
 				DataStatus = DataStatus.Active
 			});
