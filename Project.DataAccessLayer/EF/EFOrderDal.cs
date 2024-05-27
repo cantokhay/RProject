@@ -15,7 +15,7 @@ namespace Project.DataAccess.EF
 		public int ActiveOrderCount()
 		{
 			using var context = new SignalRContext();
-			return context.Orders.Where(o => o.OrderDescription == "Sipariş Aktif" && o.DataStatus != DataStatus.Deleted).Count();
+			return context.Orders.Where(o => o.OrderDescription == OrderDescription.OrderTaken && o.DataStatus != DataStatus.Deleted).Count();
 		}
 
 		public decimal LastOrderPrice()
@@ -34,6 +34,22 @@ namespace Project.DataAccess.EF
 		{
 			using var context = new SignalRContext();
 			return context.Orders.Where(x => x.DataStatus != DataStatus.Deleted).Count();
+		}
+
+		public void OrderPaid(int orderId)
+		{
+			using var context = new SignalRContext();
+			var order = context.Orders.Find(orderId);
+			order.OrderDescription = OrderDescription.OrderPaid;
+			context.SaveChanges();
+		}
+
+		public void OrderTaken(int orderId)
+		{
+			using var context = new SignalRContext();
+			var order = context.Orders.Find(orderId);
+			order.OrderDescription = OrderDescription.OrderTaken;
+			context.SaveChanges();
 		}
 	}
 }

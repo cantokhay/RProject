@@ -8,5 +8,7 @@ namespace Project.DataAccess.Abstract
 		int ActiveOrderCount();
 		decimal LastOrderPrice();
 		decimal GetTodayTotalPrice();
+		void OrderPaid(int orderId);
+		void OrderTaken(int orderId);
 	}
 }

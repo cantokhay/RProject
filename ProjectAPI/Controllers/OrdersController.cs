@@ -14,6 +14,13 @@ namespace ProjectAPI.Controllers
 			_orderService = orderService;
 		}
 
+		[HttpGet]
+		public IActionResult GetOrders()
+		{
+			var orders = _orderService.TGetAll();
+			return Ok(orders);
+		}
+
 		[HttpGet("TOTAL_ORDER_COUNT")]
 		public IActionResult TotalOrderCount()
 		{
@@ -40,6 +47,20 @@ namespace ProjectAPI.Controllers
 		{
 			var todayTotalPrice = _orderService.TGetTodayTotalPrice();
 			return Ok(todayTotalPrice);
+		}
+
+		[HttpGet("ORDER_PAID/{id}")]
+		public IActionResult OrderPaid(int id)
+		{
+			_orderService.TOrderPaid(id);
+			return Ok();
+		}
+
+		[HttpGet("ORDER_TAKEN/{id}")]
+		public IActionResult OrderTaken(int id)
+		{
+			_orderService.TOrderTaken(id);
+			return Ok();
 		}
 	}
 }
