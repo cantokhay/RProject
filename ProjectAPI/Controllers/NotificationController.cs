@@ -66,7 +66,7 @@ namespace ProjectAPI.Controllers
             {
                 Message = createNotificationDto.Message,
                 Icon = createNotificationDto.Icon,
-                NotificationStatus = false,
+                NotificationStatus = NotificationStatus.Unread,
                 Type = createNotificationDto.Type,
                 NotificationDate = Convert.ToDateTime(DateTime.Now.ToShortDateString()),
 				CreatedDate = DateTime.Now,

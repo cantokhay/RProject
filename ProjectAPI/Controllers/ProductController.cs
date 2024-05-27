@@ -64,7 +64,7 @@ namespace ProjectAPI.Controllers
                     ProductDescription = c.ProductDescription,
                     ProductPrice = c.ProductPrice,
                     ProductImageURL = c.ProductImageURL,
-                    ProductStatus = c.ProductStatus,
+                    //ProductStatus = c.ProductStatus,
                     CategoryName = c.Category.CategoryName,
                     CreatedDate = c.CreatedDate,
 					DataStatus = c.DataStatus
@@ -111,7 +111,7 @@ namespace ProjectAPI.Controllers
                 ProductPrice = createProductDTO.ProductPrice,
                 ProductImageURL = createProductDTO.ProductImageURL,
                 CategoryId = createProductDTO.CategoryId,
-                ProductStatus = createProductDTO.ProductStatus,
+                //ProductStatus = createProductDTO.ProductStatus,
 				CreatedDate = DateTime.Now,
 				DataStatus = DataStatus.Active
 			});
@@ -137,7 +137,7 @@ namespace ProjectAPI.Controllers
                 ProductPrice = updateProductDTO.ProductPrice,
                 ProductImageURL = updateProductDTO.ProductImageURL,
                 CategoryId = updateProductDTO.CategoryId,
-                ProductStatus = updateProductDTO.ProductStatus,
+                //ProductStatus = updateProductDTO.ProductStatus,
 				CreatedDate = updateProductDTO.CreatedDate,
 				DataStatus = DataStatus.Modified,
 				ModifiedDate = DateTime.Now

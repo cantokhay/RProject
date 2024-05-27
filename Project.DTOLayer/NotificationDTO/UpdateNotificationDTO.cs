@@ -1,4 +1,6 @@
-﻿namespace Project.DTO.NotificationDTO
+﻿using Project.Data.Enums;
+
+namespace Project.DTO.NotificationDTO
 {
     public class UpdateNotificationDTO
     {
@@ -8,6 +10,6 @@
         public string Message { get; set; }
         public DateTime NotificationDate { get; set; }
         public DateTime CreatedDate { get; set; }
-        public bool NotificationStatus { get; set; }
+        public NotificationStatus NotificationStatus { get; set; }
 	}
 }

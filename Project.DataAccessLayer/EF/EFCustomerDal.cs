@@ -15,7 +15,7 @@ namespace Project.DataAccess.EF
 		public int CustomerCount()
 		{
 			using var _context = new SignalRContext();
-			return _context.Customers.Where(c => c.DataStatus != DataStatus.Deleted).Count();
+			return _context.Customers.Where(c => c.DataStatus != DataStatus.Deleted && c.CustomerStatus == CustomerStatus.HasOrder).Count();
 		}
 	}
 }

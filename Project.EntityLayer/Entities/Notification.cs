@@ -10,7 +10,7 @@ namespace Project.Data.Entities
         public string Icon { get; set; }
         public string Message { get; set; }
         public DateTime NotificationDate { get; set; }
-        public bool NotificationStatus { get; set; }
+        public NotificationStatus NotificationStatus { get; set; }
 
 		public DateTime CreatedDate { get; set; }
 		public DateTime? ModifiedDate { get; set; }

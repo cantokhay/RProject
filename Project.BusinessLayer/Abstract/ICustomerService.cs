@@ -4,6 +4,6 @@ namespace Project.Business.Abstract
 {
 	public interface ICustomerService : IGenericService<Customer>
 	{
-		public int TCustomerCount();
+		int TCustomerCount();
 	}
 }

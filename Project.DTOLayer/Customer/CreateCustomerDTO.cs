@@ -1,8 +1,9 @@
-﻿namespace Project.DTO.Customer
+﻿using Project.Data.Enums;
+
+namespace Project.DTO.Customer
 {
 	public class CreateCustomerDTO
 	{
 		public string CustomerName { get; set; }
-		public bool CustomerStatus { get; set; }
 	}
 }

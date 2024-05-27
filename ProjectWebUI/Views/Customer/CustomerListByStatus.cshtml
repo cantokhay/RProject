@@ -33,11 +33,11 @@
                     let tablehtml = `<div class="row">`;
                     var classByStatus, status, icon = "";
                     $.each(customerStatus, (index, item) => {
-                        if (item.customerStatus == true) {
+                        if (item.customerStatus === 1) {
                             classByStatus = "card card-stats card-success";
                             status = "Siparişi Var";
                             icon = "la la-check"
-                        } else if (item.customerStatus == false) {
+                        } else if (item.customerStatus === 2) {
                             classByStatus = "card card-stats card-danger";
                             status = "Siparişi Yok";
                             icon = "la la-close"

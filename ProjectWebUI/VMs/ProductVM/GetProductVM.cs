@@ -1,4 +1,6 @@
-﻿namespace ProjectWebUI.VMs.ProductVM
+﻿using Project.Data.Enums;
+
+namespace ProjectWebUI.VMs.ProductVM
 {
     public class GetProductVM
     {
@@ -7,7 +9,7 @@
         public string ProductDescription { get; set; }
         public decimal ProductPrice { get; set; }
         public string ProductImageURL { get; set; }
-        public bool ProductStatus { get; set; }
+        public DataStatus DataStatus { get; set; }
         public int CategoryId { get; set; }
     }
 }

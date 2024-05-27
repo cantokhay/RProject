@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project.DataAccess.Concrete;
 
@@ -11,9 +12,10 @@ using Project.DataAccess.Concrete;
 namespace Project.DataAccess.Migrations
 {
     [DbContext(typeof(SignalRContext))]
-    partial class SignalRContextModelSnapshot : ModelSnapshot
+    [Migration("20240527135949_seventh-on-laptop")]
+    partial class seventhonlaptop
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -898,6 +900,9 @@ namespace Project.DataAccess.Migrations
                     b.Property<string>("TestimonialName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TestimonialStatus")
+                        .HasColumnType("bit");
 
                     b.Property<string>("TestimonialTitle")
                         .IsRequired()
