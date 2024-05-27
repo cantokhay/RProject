@@ -7,7 +7,7 @@ namespace Project.Data.Entities
 	{
         public int CustomerId { get; set; }
 		public string CustomerName { get; set; }
-		public bool CustomerStatus { get; set; }
+        public CustomerStatus CustomerStatus { get; set; }
 
         public List<Basket> Baskets { get; set; }
 		public DateTime CreatedDate { get; set; }

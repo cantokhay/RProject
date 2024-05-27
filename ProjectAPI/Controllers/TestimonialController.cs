@@ -36,7 +36,7 @@ namespace ProjectAPI.Controllers
                 TestimonialName = createTestimonialDTO.TestimonialName,
                 TestimonialTitle = createTestimonialDTO.TestimonialTitle,
                 TestimonialImageURL = createTestimonialDTO.TestimonialImageURL,
-                TestimonialStatus = createTestimonialDTO.TestimonialStatus,
+                //TestimonialStatus = createTestimonialDTO.TestimonialStatus,
                 CreatedDate = DateTime.Now,
 				DataStatus = DataStatus.Active
 			});
@@ -61,7 +61,7 @@ namespace ProjectAPI.Controllers
                 TestimonialName = updateTestimonialDTO.TestimonialName,
                 TestimonialTitle = updateTestimonialDTO.TestimonialTitle,
                 TestimonialImageURL = updateTestimonialDTO.TestimonialImageURL,
-                TestimonialStatus = updateTestimonialDTO.TestimonialStatus,
+                //TestimonialStatus = updateTestimonialDTO.TestimonialStatus,
 				CreatedDate = updateTestimonialDTO.CreatedDate,
 				DataStatus = DataStatus.Modified,
 				ModifiedDate = DateTime.Now

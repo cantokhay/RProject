@@ -8,6 +8,6 @@
         public string TestimonialTitle { get; set; }
         public string TestimonialImageURL { get; set; }
         public DateTime CreatedDate { get; set; }
-        public bool TestimonialStatus { get; set; }
+        //public bool TestimonialStatus { get; set; }
 	}
 }

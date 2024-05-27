@@ -30,10 +30,23 @@
 							<tbody>
 								@foreach (var item in Model)
 								{
+									var statusToShow = "";
+									if (item.CustomerStatus == Project.Data.Enums.CustomerStatus.HasOrder)
+									{
+										statusToShow = "Siparişi Var";
+									}
+									else if (item.CustomerStatus == Project.Data.Enums.CustomerStatus.HasNotOrder)
+									{
+										statusToShow = "Siparişi Yok";
+									}
+									else
+                                    {
+                                        statusToShow = "Bilinmiyor";
+                                    }
 									<tr>
 										<td>@count</td>
 										<td>@item.CustomerName</td>
-										<td>@item.CustomerStatus</td>
+										<td>@statusToShow</td>
 										<td><a href="/Customer/DeleteCustomer/@item.CustomerId" class="btn btn-outline-danger btn-border btn-round">Sil</a></td>
 										<td><a href="/Customer/UpdateCustomer/@item.CustomerId" class="btn btn-outline-secondary btn-border btn-round">Güncelle</a></td>
 									</tr>

@@ -15,20 +15,20 @@ namespace Project.DataAccess.EF
         public List<Notification> GetAllNotificationByFalse()
         {
             using var context = new SignalRContext();
-            return context.Notifications.Where(x => x.NotificationStatus == false && x.DataStatus != DataStatus.Deleted).ToList();
+            return context.Notifications.Where(x => x.NotificationStatus == NotificationStatus.Unread && x.DataStatus != DataStatus.Deleted).ToList();
         }
 
         public int NotificationCountByStatusFalse()
         {
             using var context = new SignalRContext();
-            return context.Notifications.Where(x => x.NotificationStatus == false && x.DataStatus != DataStatus.Deleted).Count();
+            return context.Notifications.Where(x => x.NotificationStatus == NotificationStatus.Unread && x.DataStatus != DataStatus.Deleted).Count();
         }
 
         public void NotificationStatusChangeToFalse(int id)
         {
             using var context = new SignalRContext();
             var notification = context.Notifications.Find(id);
-            notification.NotificationStatus = false;
+            notification.NotificationStatus = NotificationStatus.Unread;
             context.SaveChanges();
         }
 
@@ -36,7 +36,7 @@ namespace Project.DataAccess.EF
         {
             using var context = new SignalRContext();
             var notification = context.Notifications.Find(id);
-            notification.NotificationStatus = true;
+            notification.NotificationStatus = NotificationStatus.Read;
             context.SaveChanges();
         }
     }

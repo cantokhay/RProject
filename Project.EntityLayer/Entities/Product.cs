@@ -10,7 +10,7 @@ namespace Project.Data.Entities
         public string ProductDescription { get; set; }
         public decimal ProductPrice { get; set; }
         public string ProductImageURL { get; set; }
-        public bool ProductStatus { get; set; }
+        //public bool ProductStatus { get; set; }
 
         public int CategoryId { get; set; }
         public Category Category { get; set; }
@@ -21,6 +21,6 @@ namespace Project.Data.Entities
 		public DateTime CreatedDate { get; set; }
 		public DateTime? ModifiedDate { get; set; }
 		public DateTime? DeletedDate { get; set; }
-		public DataStatus DataStatus { get; set; } = DataStatus.Active;
+		public DataStatus DataStatus { get; set; }
 	}
 }

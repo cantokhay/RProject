@@ -1,4 +1,6 @@
-﻿namespace ProjectWebUI.VMs.NotificationVM
+﻿using Project.Data.Enums;
+
+namespace ProjectWebUI.VMs.NotificationVM
 {
     public class UpdateNotificationVM
     {
@@ -8,6 +10,6 @@
         public string Message { get; set; }
         public DateTime NotificationDate { get; set; }
         public DateTime CreatedDate { get; set; }
-        public bool NotificationStatus { get; set; }
+        public NotificationStatus NotificationStatus { get; set; }
 	}
 }

@@ -9,7 +9,7 @@ namespace Project.DTO.ProductDTO
 		public string ProductDescription { get; set; }
 		public decimal ProductPrice { get; set; }
 		public string ProductImageURL { get; set; }
-		public bool ProductStatus { get; set; }
+		//public bool ProductStatus { get; set; }
 		public string CategoryName { get; set; }
 		public DateTime CreatedDate { get; set; }
         public DataStatus DataStatus { get; set; }

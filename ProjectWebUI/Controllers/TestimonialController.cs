@@ -36,7 +36,6 @@ namespace ProjectWebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTestimonial(CreateTestimonialVM createTestimonialVM)
         {
-            createTestimonialVM.TestimonialStatus = true;
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createTestimonialVM);
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");

@@ -38,7 +38,7 @@ namespace ProjectAPI.Controllers
 			_customerService.TAdd(new Customer()
 			{
 				CustomerName = createCustomertDTO.CustomerName,
-				CustomerStatus = false,
+				CustomerStatus = CustomerStatus.HasNotOrder,
 				CreatedDate = DateTime.Now,
 				DataStatus = DataStatus.Active
 			});
@@ -60,7 +60,7 @@ namespace ProjectAPI.Controllers
 			{
 				CustomerId = updateCustomerDTO.CustomerId,
 				CustomerName = updateCustomerDTO.CustomerName,
-				CustomerStatus = false,
+				CustomerStatus = updateCustomerDTO.CustomerStatus,
 				CreatedDate = updateCustomerDTO.CreatedDate,
 				DataStatus = DataStatus.Modified,
 				ModifiedDate = DateTime.Now
