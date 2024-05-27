@@ -33,7 +33,18 @@
                                     <tr>
                                         <td>@i</td>
                                         <td>@item.CategoryName</td>
-                                        <td>@item.CategoryStatus</td>
+                                        <td>
+                                            @{
+                                                string statusText = item.DataStatus switch
+                                                {
+                                                    Project.Data.Enums.DataStatus.Active => "Aktif",
+                                                    Project.Data.Enums.DataStatus.Modified => "Güncellendi",
+                                                    Project.Data.Enums.DataStatus.Deleted => "Silindi",
+                                                    _ => "Bilinmeyen Durum"
+                                                };
+                                            }
+                                            @statusText
+                                        </td>
                                         <td><a href="/Category/DeleteCategory/@item.CategoryId" class="btn btn-outline-danger btn-border btn-round">Sil</a></td>
                                         <td><a href="/Category/UpdateCategory/@item.CategoryId" class="btn btn-outline-secondary btn-border btn-round">Güncelle</a></td>
                                     </tr>

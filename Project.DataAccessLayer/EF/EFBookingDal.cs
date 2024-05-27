@@ -1,4 +1,5 @@
 ﻿using Project.Data.Entities;
+using Project.Data.Enums;
 using Project.DataAccess.Abstract;
 using Project.DataAccess.Concrete;
 using Project.DataAccess.Repositories;
@@ -15,7 +16,7 @@ namespace Project.DataAccess.EF
         {
             using var context = new SignalRContext();
             var bookingToChange = context.Bookings.Find(id);
-            bookingToChange.BookingStatus = "Rezervasyon Onaylandı";
+            bookingToChange.BookingStatus = BookingStatus.Approved;
             context.SaveChanges();
         }
 
@@ -23,7 +24,7 @@ namespace Project.DataAccess.EF
         {
             using var context = new SignalRContext();
             var bookingToChange = context.Bookings.Find(id);
-            bookingToChange.BookingStatus = "Rezervasyon İptal Edildi";
+            bookingToChange.BookingStatus = BookingStatus.Rejected;
             context.SaveChanges();
         }
     }

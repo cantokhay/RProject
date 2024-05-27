@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Project.Data.Enums;
 using ProjectWebUI.VMs.BookingVM;
 using System.Text;
 
@@ -36,7 +37,7 @@ namespace ProjectWebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateBooking(CreateBookingVM createBookingVM)
         {
-            createBookingVM.BookingStatus = "Rezervasyon Alındı";
+            createBookingVM.BookingStatus = BookingStatus.Pending;
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBookingVM);
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");

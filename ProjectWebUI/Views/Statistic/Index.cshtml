@@ -85,9 +85,9 @@
                     $("#totalCustomerCount").text(totalCustomerCount);
                 });
 
-                // connection.on("ReceiveTodayTotalPrice", (todayTotalPrice) => {
-                //     $("#todayTotalPrice").text(todayTotalPrice);
-                // });
+                connection.on("ReceiveTodayTotalPrice", (todayTotalPrice) => {
+                    $("#todayTotalPrice").text(todayTotalPrice);
+                });
 
             });
         </script>
@@ -381,7 +381,7 @@
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
                                     <p class="card-category">Bugünkü Kazanç</p>
-                                    <h4 class="card-title">???</h4>
+                                    <h4 class="card-title" id="todayTotalPrice"></h4>
                                 </div>
                             </div>
                         </div>
