@@ -61,7 +61,6 @@ namespace ProjectAPI.Controllers
                 TestimonialName = updateTestimonialDTO.TestimonialName,
                 TestimonialTitle = updateTestimonialDTO.TestimonialTitle,
                 TestimonialImageURL = updateTestimonialDTO.TestimonialImageURL,
-                //TestimonialStatus = updateTestimonialDTO.TestimonialStatus,
 				CreatedDate = updateTestimonialDTO.CreatedDate,
 				DataStatus = DataStatus.Modified,
 				ModifiedDate = DateTime.Now
