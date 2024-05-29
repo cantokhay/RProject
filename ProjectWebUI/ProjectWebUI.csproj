@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="QRCoder.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\Ready-Bootstrap-Dashboard-master\.DS_Store" />
   </ItemGroup>
 
@@ -24,6 +28,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Project.DataAccessLayer\Project.DataAccess.csproj" />
     <ProjectReference Include="..\Project.EntityLayer\Project.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="QRCoder">
+      <HintPath>QRCoder.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
