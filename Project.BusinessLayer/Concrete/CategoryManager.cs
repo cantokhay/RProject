@@ -21,6 +21,8 @@ namespace Project.Business.Concrete
 
 		public void TAdd(Category entity)
         {
+            entity.CreatedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Active;
             _categoryDal.Add(entity);
         }
 
@@ -43,6 +45,8 @@ namespace Project.Business.Concrete
 
         public void TUpdate(Category entity)
         {
+            entity.ModifiedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Modified;
             _categoryDal.Update(entity);
         }
 

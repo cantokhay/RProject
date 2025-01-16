@@ -26,6 +26,8 @@ namespace Project.Business.Concrete
 
         public void TAdd(Booking entity)
         {
+            entity.CreatedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Active;
             _bookingDal.Add(entity);
         }
 
@@ -48,6 +50,8 @@ namespace Project.Business.Concrete
 
         public void TUpdate(Booking entity)
         {
+            entity.ModifiedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Modified;
             _bookingDal.Update(entity);
         }
     }

@@ -35,6 +35,8 @@ namespace Project.Business.Concrete
 
 		public void TAdd(Basket entity)
         {
+            entity.CreatedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Active;
             _basketDal.Add(entity);
         }
 
@@ -57,7 +59,9 @@ namespace Project.Business.Concrete
 
         public void TUpdate(Basket entity)
         {
-			_basketDal.Update(entity);
+            entity.ModifiedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Modified;
+            _basketDal.Update(entity);
 		}
 
     }

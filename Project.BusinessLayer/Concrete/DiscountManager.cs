@@ -21,6 +21,8 @@ namespace Project.Business.Concrete
 
         public void TAdd(Discount entity)
         {
+            entity.CreatedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Active;
             _discountDal.Add(entity);
         }
 
@@ -53,6 +55,8 @@ namespace Project.Business.Concrete
 
         public void TUpdate(Discount entity)
         {
+            entity.ModifiedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Modified;
             _discountDal.Update(entity);
         }
     }

@@ -15,8 +15,10 @@ namespace Project.Business.Concrete
 		}
 
 		public void TAdd(Customer entity)
-		{
-			_customerDal.Add(entity);
+        {
+            entity.CreatedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Active;
+            _customerDal.Add(entity);
 		}
 
 		public int TCustomerCount()
@@ -43,8 +45,10 @@ namespace Project.Business.Concrete
 		}
 
 		public void TUpdate(Customer entity)
-		{
-			_customerDal.Update(entity);
+        {
+            entity.ModifiedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Modified;
+            _customerDal.Update(entity);
 		}
 	}
 }
