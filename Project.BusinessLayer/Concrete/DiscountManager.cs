@@ -59,5 +59,10 @@ namespace Project.Business.Concrete
             entity.DataStatus = DataStatus.Modified;
             _discountDal.Update(entity);
         }
+
+        public decimal TAvgDiscountRate()
+        {
+            return _discountDal.AvgDiscountRate();
+        }
     }
 }

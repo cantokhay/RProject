@@ -84,5 +84,10 @@ namespace Project.Business.Concrete
 		{
 			return _productDal.ProductAvgPriceByHamburger();
 		}
-	}
+
+        public decimal TTotalProductPriceSum()
+        {
+            return _productDal.TotalProductPriceSum();
+        }
+    }
 }

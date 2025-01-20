@@ -17,8 +17,10 @@ namespace ProjectWebUI.Controllers
         public IActionResult Index(CreateMailVM createMailVM)
         {
             MimeMessage mimeMessage = new MimeMessage();
-            MailboxAddress from = new MailboxAddress("Rezervasyon Bilgilendirme", "Mail Address");
+
+            MailboxAddress from = new MailboxAddress("Rezervasyon Bilgilendirme", "multimicro14@gmail.com");
             mimeMessage.From.Add(from);
+            
             MailboxAddress to = new MailboxAddress("User", createMailVM.ReceiverMail);
             mimeMessage.To.Add(to);
 
@@ -30,11 +32,10 @@ namespace ProjectWebUI.Controllers
 
             SmtpClient smtpClient = new SmtpClient();
             smtpClient.Connect("smtp.gmail.com", 587, false);
-            smtpClient.Authenticate("Mail Address", "key");
+            smtpClient.Authenticate("multimicro14@gmail.com", "kgxh xizn dbyp ujfs");
 
             smtpClient.Send(mimeMessage);
             smtpClient.Disconnect(true);
-
 
             return RedirectToAction("Index", "Category");
         }

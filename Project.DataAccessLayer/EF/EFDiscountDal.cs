@@ -12,6 +12,13 @@ namespace Project.DataAccess.EF
         {
         }
 
+        public decimal AvgDiscountRate()
+        {
+            using var context = new SignalRContext();
+            var avgDiscountRate = context.Discounts.Where(x => x.DataStatus != DataStatus.Deleted).Average(x => x.DiscountAmount);
+            return avgDiscountRate;
+        }
+
         public void ChangeStatusFalse(int id)
         {
             using var context = new SignalRContext();

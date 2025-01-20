@@ -11,6 +11,7 @@ namespace Project.Business.Abstract
 		decimal TProductPriceAvg();
 		string TProductNameByMinPrice();
 		string TProductNameByMaxPrice();
-		public decimal TProductAvgPriceByHamburger();
-	}
+		decimal TProductAvgPriceByHamburger();
+        decimal TTotalProductPriceSum();
+    }
 }
