@@ -16,6 +16,8 @@ namespace Project.Business.Concrete
 
         public void TAdd(Testimonial entity)
         {
+            entity.CreatedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Active;
             _testimonialDal.Add(entity);
         }
 
@@ -38,6 +40,8 @@ namespace Project.Business.Concrete
 
         public void TUpdate(Testimonial entity)
         {
+            entity.ModifiedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Modified;
             _testimonialDal.Update(entity);
         }
     }

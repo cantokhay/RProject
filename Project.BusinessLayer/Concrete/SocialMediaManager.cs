@@ -16,6 +16,8 @@ namespace Project.Business.Concrete
 
         public void TAdd(SocialMedia entity)
         {
+            entity.CreatedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Active;
             _socialMediaDal.Add(entity);
         }
 
@@ -38,6 +40,8 @@ namespace Project.Business.Concrete
 
         public void TUpdate(SocialMedia entity)
         {
+            entity.ModifiedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Modified;
             _socialMediaDal.Update(entity);
         }
     }

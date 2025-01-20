@@ -24,29 +24,54 @@ namespace ProjectAPI.Controllers
         }
 
         [HttpGet("BASKET_LIST_BY_CUSTOMER_ID")]
-		public ActionResult<List<ResutBasketWithCustomerNameByIdDTO>> GetBasketListWithCustomerNameById(int customerId)
-		{
-			var baskets = _basketService.TGetBasketByCustomerId(customerId);
-			return Ok(baskets);
-		}
+        public ActionResult<List<ResutBasketWithCustomerNameByIdDTO>> GetBasketListWithCustomerNameById(int customerId)
+        {
+            var baskets = _basketService.TGetBasketByCustomerId(customerId);
+            return Ok(baskets);
+        }
 
-		[HttpPost]
+        [HttpPost]
         public IActionResult CreateBasket(CreateBasketDTO createBasketDTO)
         {
             using var context = new SignalRContext();
-            var price = context.Products.Where(x => x.ProductId == createBasketDTO.ProductId).Select(x => x.ProductPrice).FirstOrDefault();
-            var count = createBasketDTO.Count;
-            _basketService.TAdd(new Basket
+
+            var product = context.Products.FirstOrDefault(x => x.ProductId == createBasketDTO.ProductId);
+            if (product == null)
             {
-                Count = count,
-                CustomerId = 4,
-                ProductId = createBasketDTO.ProductId,
-                Price = price,
-                TotalProductPrice = price * count,
-				CreatedDate = DateTime.Now,
-				DataStatus = DataStatus.Active
-			});
-            return Ok("Ürün Sepetinize Eklendi!");
+                return NotFound("Ürün bulunamadı!");
+            }
+
+            var price = product.ProductPrice;
+
+            var existingBasketItem = context.Baskets.FirstOrDefault(b => b.ProductId == createBasketDTO.ProductId && b.CustomerId == 4);
+
+            if (existingBasketItem != null)
+            {
+                // Eğer ürün zaten sepetteyse miktarı güncelle ve toplam fiyatı yeniden hesapla
+                var count = existingBasketItem.Count;
+                count++;
+                existingBasketItem.Count = count;
+                existingBasketItem.TotalProductPrice = existingBasketItem.Price * existingBasketItem.Count;
+                existingBasketItem.ModifiedDate = DateTime.Now;
+                _basketService.TUpdate(existingBasketItem);
+            }
+            else
+            {
+                // Ürün sepette değilse yeni bir ürün ekle
+                var newBasket = new Basket
+                {
+                    Count = 1,
+                    CustomerId = 4,
+                    ProductId = createBasketDTO.ProductId,
+                    Price = price,
+                    TotalProductPrice = price * createBasketDTO.Count,
+                    CreatedDate = DateTime.Now,
+                    DataStatus = DataStatus.Active
+                };
+                _basketService.TAdd(newBasket);
+            }
+
+            return Ok("Ürün Sepetinize başarıyla eklendi!");
         }
 
         [HttpDelete("{id}")]

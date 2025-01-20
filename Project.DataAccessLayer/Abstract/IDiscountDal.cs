@@ -7,5 +7,6 @@ namespace Project.DataAccess.Abstract
         void ChangeStatusFalse(int id);
         void ChangeStatusTrue(int id);
         List<Discount> GetActiveDiscounts();
+        decimal AvgDiscountRate();
     }
 }

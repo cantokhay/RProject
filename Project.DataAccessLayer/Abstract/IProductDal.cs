@@ -12,5 +12,7 @@ namespace Project.DataAccess.Abstract
         string ProductNameByMinPrice();
         string ProductNameByMaxPrice();
         decimal ProductAvgPriceByHamburger();
-	}
+        decimal TotalProductPriceSum();
+
+    }
 }

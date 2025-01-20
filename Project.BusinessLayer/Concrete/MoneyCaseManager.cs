@@ -15,8 +15,10 @@ namespace Project.Business.Concrete
 		}
 
 		public void TAdd(MoneyCase entity)
-		{
-			_moneyCaseDal.Add(entity);
+        {
+            entity.CreatedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Active;
+            _moneyCaseDal.Add(entity);
 		}
 
 		public void TDelete(MoneyCase entity)
@@ -42,8 +44,10 @@ namespace Project.Business.Concrete
 		}
 
 		public void TUpdate(MoneyCase entity)
-		{
-			_moneyCaseDal.Update(entity);
+        {
+            entity.ModifiedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Modified;
+            _moneyCaseDal.Update(entity);
 		}
 	}
 }

@@ -17,8 +17,10 @@ namespace Project.Business.Concrete
 		}
 
 		public void TAdd(OrderDetail entity)
-		{
-			_orderDetailDal.Add(entity);
+        {
+            entity.CreatedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Active;
+            _orderDetailDal.Add(entity);
 
 			var order = _orderDal.GetById(entity.OrderId);
 
@@ -55,8 +57,10 @@ namespace Project.Business.Concrete
 		}
 
 		public void TUpdate(OrderDetail entity)
-		{
-			_orderDetailDal.Update(entity);
+        {
+            entity.ModifiedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Modified;
+            _orderDetailDal.Update(entity);
 		}
 	}
 }

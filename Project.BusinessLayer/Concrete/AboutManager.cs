@@ -16,7 +16,9 @@ namespace Project.Business.Concrete
 
         public void TAdd(About entity)
         {
-			_aboutDal.Add(entity);
+            entity.CreatedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Active;
+            _aboutDal.Add(entity);
         }
 
         public void TDelete(About entity)
@@ -38,7 +40,9 @@ namespace Project.Business.Concrete
 
         public void TUpdate(About entity)
         {
-			_aboutDal.Update(entity);
+            entity.ModifiedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Modified;
+            _aboutDal.Update(entity);
         }
     }
 }

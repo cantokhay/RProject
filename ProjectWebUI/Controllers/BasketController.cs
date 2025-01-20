@@ -19,7 +19,7 @@ namespace ProjectWebUI.Controllers
         {
             customerId = 4;
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync($"https://localhost:7271/api/Basket/BASKET_LIST_WITH_CUSTOMER_NAME_BY_ID?customerId={customerId}");
+            var response = await client.GetAsync($"https://localhost:7271/api/Basket/BASKET_LIST_BY_CUSTOMER_ID?customerId={customerId}");
             if (response.IsSuccessStatusCode)
             {
                 var jsonData = await response.Content.ReadAsStringAsync();

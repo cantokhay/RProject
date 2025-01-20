@@ -13,8 +13,9 @@ namespace ProjectAPI.Hubs
         private readonly ICustomerService _customerService;
         private readonly IBookingService _bookingService;
         private readonly INotificationService _notificationService;
+        private readonly IDiscountService _discountService;
 
-        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, IMoneyCaseService moneyCaseService, ICustomerService customerService, IBookingService bookingService, INotificationService notificationService)
+        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, IMoneyCaseService moneyCaseService, ICustomerService customerService, IBookingService bookingService, INotificationService notificationService, IDiscountService discountService)
         {
             _categoryService = categoryService;
             _productService = productService;
@@ -23,6 +24,7 @@ namespace ProjectAPI.Hubs
             _customerService = customerService;
             _bookingService = bookingService;
             _notificationService = notificationService;
+            _discountService = discountService;
         }
 
         public async Task SendStatistics()
@@ -87,6 +89,30 @@ namespace ProjectAPI.Hubs
 
             var totalCustomerCount = _customerService.TCustomerCount();
             await Clients.All.SendAsync("ReceiveCustomerCount", totalCustomerCount);
+
+            var averageProductPrice = _productService.TProductPriceAvg();
+            await Clients.All.SendAsync("ReceiveAverageProductPrice", averageProductPrice);
+
+            var averageDiscountRate = _discountService.TAvgDiscountRate();
+            await Clients.All.SendAsync("ReceiveAverageDiscountRate", averageDiscountRate);
+
+            var totalOrderCount = _orderService.TTotalOrderCount();
+            await Clients.All.SendAsync("ReceiveTotalOrderCount", totalOrderCount);
+
+            var todayTotalPrice = _orderService.TGetTodayTotalPrice();
+            await Clients.All.SendAsync("ReceiveTodayTotalPrice", todayTotalPrice);
+
+            var unreadNotificationCount = _notificationService.TNotificationCountByStatusFalse();
+            await Clients.All.SendAsync("ReceiveNotificationCountByStatusFalse", unreadNotificationCount);
+
+            var lastOrderPrice = _orderService.TLastOrderPrice();
+            await Clients.All.SendAsync("ReceiveLastOrderPrice", lastOrderPrice);
+
+            var totalProductCount = _productService.TGetProductCount();
+            await Clients.All.SendAsync("ReceiveTotalProductCount", totalProductCount);
+
+            var totalProductPriceSum = _productService.TTotalProductPriceSum();
+            await Clients.All.SendAsync("ReceiveTotalProductPriceSum", totalProductPriceSum.ToString("0.00") + "₺");
         }
 
         public async Task GetBookingList()

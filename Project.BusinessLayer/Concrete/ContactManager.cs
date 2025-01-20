@@ -16,6 +16,8 @@ namespace Project.Business.Concrete
 
         public void TAdd(Contact entity)
         {
+            entity.CreatedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Active;
             _contactDal.Add(entity);
         }
 
@@ -38,6 +40,8 @@ namespace Project.Business.Concrete
 
         public void TUpdate(Contact entity)
         {
+            entity.ModifiedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Modified;
             _contactDal.Update(entity);
         }
     }

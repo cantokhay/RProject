@@ -16,6 +16,8 @@ namespace Project.Business.Concrete
 
         public void TAdd(Slider entity)
         {
+            entity.CreatedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Active;
             _sliderDal.Add(entity);
         }
 
@@ -38,6 +40,8 @@ namespace Project.Business.Concrete
 
         public void TUpdate(Slider entity)
         {
+            entity.ModifiedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Modified;
             _sliderDal.Update(entity);
         }
     }

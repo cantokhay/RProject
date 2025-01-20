@@ -29,8 +29,10 @@ namespace Project.Business.Concrete
 		}
 
 		public void TAdd(Order entity)
-		{
-			_orderDal.Add(entity);
+        {
+            entity.CreatedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Active;
+            _orderDal.Add(entity);
 		}
 
 		public void TDelete(Order entity)
@@ -66,8 +68,10 @@ namespace Project.Business.Concrete
 		}
 
 		public void TUpdate(Order entity)
-		{
-			var existingOrder = _orderDal.GetById(entity.OrderId);
+        {
+            entity.ModifiedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Modified;
+            var existingOrder = _orderDal.GetById(entity.OrderId);
 			if (existingOrder != null && existingOrder.OrderDescription != entity.OrderDescription && entity.OrderDescription == OrderDescription.OrderPaid)
 			{
 				var moneyCase = _moneyCaseDal.GetAll().FirstOrDefault();

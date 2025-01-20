@@ -21,6 +21,8 @@ namespace Project.Business.Concrete
 
 		public void TAdd(Product entity)
         {
+            entity.CreatedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Active;
             _productDal.Add(entity);
         }
 
@@ -48,6 +50,8 @@ namespace Project.Business.Concrete
 
         public void TUpdate(Product entity)
         {
+            entity.ModifiedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Modified;
             _productDal.Update(entity);
         }
 
@@ -80,5 +84,10 @@ namespace Project.Business.Concrete
 		{
 			return _productDal.ProductAvgPriceByHamburger();
 		}
-	}
+
+        public decimal TTotalProductPriceSum()
+        {
+            return _productDal.TotalProductPriceSum();
+        }
+    }
 }

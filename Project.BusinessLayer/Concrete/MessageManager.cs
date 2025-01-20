@@ -16,6 +16,8 @@ namespace Project.Business.Concrete
 
         public void TAdd(Message entity)
         {
+            entity.CreatedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Active;
             _messageDal.Add(entity);
         }
 
@@ -38,6 +40,8 @@ namespace Project.Business.Concrete
 
         public void TUpdate(Message entity)
         {
+            entity.ModifiedDate = DateTime.Now;
+            entity.DataStatus = DataStatus.Modified;
             _messageDal.Update(entity);
         }
     }

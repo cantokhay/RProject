@@ -61,5 +61,11 @@ namespace Project.DataAccess.EF
 			using var context = new SignalRContext();
 			return context.Products.Where(p => p.CategoryId == (context.Categories.Where(c => c.CategoryName == "hamburger" && c.DataStatus != DataStatus.Deleted).Select(x => x.CategoryId).FirstOrDefault()) && p.DataStatus != DataStatus.Deleted).Average(x => x.ProductPrice);
 		}
-	}
+
+        public decimal TotalProductPriceSum()
+        {
+			using var context = new SignalRContext();
+            return context.Products.Where(p => p.DataStatus != DataStatus.Deleted).Sum(p => p.ProductPrice);
+        }
+    }
 }

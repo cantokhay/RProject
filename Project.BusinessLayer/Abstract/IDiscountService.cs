@@ -7,5 +7,6 @@ namespace Project.Business.Abstract
         void TChangeStatusFalse(int id);
         void TChangeStatusTrue(int id);
         List<Discount> TGetActiveDiscounts();
+        decimal TAvgDiscountRate();
     }
 }
