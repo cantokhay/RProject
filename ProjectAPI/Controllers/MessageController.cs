@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Business.Abstract;
 using Project.Data.Entities;
@@ -12,34 +13,26 @@ namespace ProjectAPI.Controllers
     public class MessageController : ControllerBase
     {
         private readonly IMessageService _messageService;
+        private readonly IMapper _mapper;
 
-        public MessageController(IMessageService messageService)
+        public MessageController(IMessageService messageService, IMapper mapper)
         {
             _messageService = messageService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult MessageList()
         {
             var messageList = _messageService.TGetAll();
-            return Ok(messageList);
+            return Ok(_mapper.Map<List<ResultMessageDTO>>(messageList));
         }
 
         [HttpPost]
         public IActionResult CreateMessage(CreateMessageDTO createMessageDTO)
         {
-            _messageService.TAdd(new Message()
-            {
-                MessageFullName = createMessageDTO.MessageFullName,
-                MessageEmail = createMessageDTO.MessageEmail,
-                MessageSubject = createMessageDTO.MessageSubject,
-                MessageContent = createMessageDTO.MessageContent,
-                MessagePhone = createMessageDTO.MessagePhone,
-                MessageDate = DateTime.Now,
-                MessageStatus = false,
-				CreatedDate = DateTime.Now,
-				DataStatus = DataStatus.Active
-			});
+            var message = _mapper.Map<Message>(createMessageDTO);
+            _messageService.TAdd(message);
             return Ok("Mesaj Eklendi!");
         }
 
@@ -54,20 +47,8 @@ namespace ProjectAPI.Controllers
         [HttpPut]
         public IActionResult UpdateMessage(UpdateMessageDTO updateMessageDTO)
         {
-            _messageService.TUpdate(new Message()
-            {
-                MessageId = updateMessageDTO.MessageId,
-                MessageFullName = updateMessageDTO.MessageFullName,
-                MessageEmail = updateMessageDTO.MessageEmail,
-                MessageSubject = updateMessageDTO.MessageSubject,
-                MessageContent = updateMessageDTO.MessageContent,
-                MessagePhone = updateMessageDTO.MessagePhone,
-                MessageDate = updateMessageDTO.MessageDate,
-                MessageStatus = false,
-				CreatedDate = updateMessageDTO.CreatedDate,
-				DataStatus = DataStatus.Modified,
-				ModifiedDate = DateTime.Now
-			});
+            var message = _mapper.Map<Message>(updateMessageDTO);
+            _messageService.TUpdate(message);
             return Ok("Mesaj Güncellendi!");
         }
 
@@ -75,7 +56,7 @@ namespace ProjectAPI.Controllers
         public IActionResult GetMessageById(int id)
         {
             var message = _messageService.TGetById(id);
-            return Ok(message);
+            return Ok(_mapper.Map<GetMessageDTO>(message));
         }
     }
 }

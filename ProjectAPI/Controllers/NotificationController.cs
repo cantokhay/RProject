@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Business.Abstract;
 using Project.Data.Entities;
@@ -12,17 +13,19 @@ namespace ProjectAPI.Controllers
     public class NotificationController : ControllerBase
     {
         private readonly INotificationService _notificationService;
+        private readonly IMapper _mapper;
 
-        public NotificationController(INotificationService notificationService)
+        public NotificationController(INotificationService notificationService, IMapper mapper)
         {
             _notificationService = notificationService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult NotificationList()
         {
             var notificationList = _notificationService.TGetAll();
-            return Ok(notificationList);
+            return Ok(_mapper.Map<List<ResultNotificationDTO>>(notificationList));
         }
 
         [HttpGet("NOTIFICATION_COUNT_BY_STATUS")]
@@ -42,19 +45,7 @@ namespace ProjectAPI.Controllers
         [HttpPut]
         public IActionResult UpdateNotification(UpdateNotificationDTO updateNotificationDTO)
         {
-            Notification notification = new Notification()
-            {
-                NotificationId = updateNotificationDTO.NotificationId,
-                Message = updateNotificationDTO.Message,
-                NotificationStatus = updateNotificationDTO.NotificationStatus,
-                Type = updateNotificationDTO.Type,
-                Icon = updateNotificationDTO.Icon,
-                NotificationDate = updateNotificationDTO.NotificationDate,
-				CreatedDate = updateNotificationDTO.CreatedDate,
-				DataStatus = DataStatus.Modified,
-                ModifiedDate = DateTime.Now
-			};
-
+            var notification = _mapper.Map<Notification>(updateNotificationDTO);
             _notificationService.TUpdate(notification);
             return Ok("Bildirim Güncellendi!");
         }
@@ -62,16 +53,7 @@ namespace ProjectAPI.Controllers
         [HttpPost]
         public IActionResult CreateNotification(CreateNotificationDTO createNotificationDto)
         {
-            Notification notification = new Notification()
-            {
-                Message = createNotificationDto.Message,
-                Icon = createNotificationDto.Icon,
-                NotificationStatus = NotificationStatus.Unread,
-                Type = createNotificationDto.Type,
-                NotificationDate = Convert.ToDateTime(DateTime.Now.ToShortDateString()),
-				CreatedDate = DateTime.Now,
-				DataStatus = DataStatus.Active
-			};
+            Notification notification = _mapper.Map<Notification>(createNotificationDto);
             _notificationService.TAdd(notification);
             return Ok("Ekleme işlemi başarıyla yapıldı");
         }
@@ -79,16 +61,16 @@ namespace ProjectAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteNotification(int id)
         {
-            var value = _notificationService.TGetById(id);
-            _notificationService.TDelete(value);
+            var notification = _notificationService.TGetById(id);
+            _notificationService.TDelete(notification);
             return Ok("Bildirim Silindi");
         }
 
         [HttpGet("{id}")]
         public IActionResult GetNotification(int id)
         {
-            var value = _notificationService.TGetById(id);
-            return Ok(value);
+            var notification = _notificationService.TGetById(id);
+            return Ok(_mapper.Map<GetNotificationDTO>(notification));
         }
 
         [HttpGet("CHANGE_STATUS_FALSE/{id}")]

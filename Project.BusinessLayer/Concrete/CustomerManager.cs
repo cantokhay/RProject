@@ -18,6 +18,7 @@ namespace Project.Business.Concrete
         {
             entity.CreatedDate = DateTime.Now;
             entity.DataStatus = DataStatus.Active;
+			entity.CustomerStatus = CustomerStatus.HasNotOrder;
             _customerDal.Add(entity);
 		}
 

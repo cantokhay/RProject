@@ -1,9 +1,9 @@
 ﻿using Project.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace Project.DTO.Customer
+namespace Project.DTO.CustomerDTO
 {
-	public class UpdateCustomerDTO
+	public class ResultCustomerDTO
 	{
 		public int CustomerId { get; set; }
 
@@ -14,6 +14,5 @@ namespace Project.DTO.Customer
 
 		[Display(Name = "Customer Status")]
 		public CustomerStatus CustomerStatus { get; set; }
-		public DateTime CreatedDate { get; set; }
 	}
 }

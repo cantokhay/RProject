@@ -23,6 +23,7 @@ namespace Project.Business.Concrete
         {
             entity.CreatedDate = DateTime.Now;
             entity.DataStatus = DataStatus.Active;
+            entity.DiscountStatus = false;
             _discountDal.Add(entity);
         }
 

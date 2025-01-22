@@ -18,6 +18,8 @@ namespace Project.Business.Concrete
         {
             entity.CreatedDate = DateTime.Now;
             entity.DataStatus = DataStatus.Active;
+            entity.NotificationStatus = NotificationStatus.Unread;
+            entity.NotificationDate = Convert.ToDateTime(DateTime.Now.ToShortDateString());
             _notificationDal.Add(entity);
         }
 

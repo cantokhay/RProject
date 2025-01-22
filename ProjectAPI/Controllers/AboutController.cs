@@ -25,20 +25,14 @@ namespace ProjectAPI.Controllers
         public IActionResult AboutList()
         {
             var aboutList = _aboutService.TGetAll();
-            return Ok(aboutList);
+            return Ok(_mapper.Map<List<ResultAboutDTO>>(aboutList));
         }
 
         [HttpPost]
         public IActionResult CreateAbout(CreateAboutDTO createAboutDTO)
         {
-            _aboutService.TAdd(new About()
-            {
-                AboutTitle = createAboutDTO.AboutTitle,
-                AboutDescription = createAboutDTO.AboutDescription,
-                AboutImageURL = createAboutDTO.AboutImageURL,
-				DataStatus = DataStatus.Active,
-				CreatedDate = DateTime.Now
-			});
+            var about = _mapper.Map<About>(createAboutDTO);
+            _aboutService.TAdd(about);
             return Ok("Hakkında Kısmı Eklendi!");
         }
 
@@ -53,16 +47,8 @@ namespace ProjectAPI.Controllers
         [HttpPut]
         public IActionResult UpdateAbout(UpdateAboutDTO updateAboutDTO)
         {
-            _aboutService.TUpdate(new About()
-            {
-                AboutId = updateAboutDTO.AboutId,
-                AboutTitle = updateAboutDTO.AboutTitle,
-                AboutDescription = updateAboutDTO.AboutDescription,
-                AboutImageURL = updateAboutDTO.AboutImageURL,
-				CreatedDate = updateAboutDTO.CreatedDate,
-				DataStatus = DataStatus.Modified,
-				ModifiedDate = DateTime.Now
-			});
+            var about = _mapper.Map<About>(updateAboutDTO);
+            _aboutService.TUpdate(about);
             return Ok("Hakkında Alanı Güncellendi!");
         }
 
@@ -70,7 +56,7 @@ namespace ProjectAPI.Controllers
         public IActionResult GetAboutById(int id)
         {
             var about = _aboutService.TGetById(id);
-            return Ok(about);
+            return Ok(_mapper.Map<GetAboutDTO>(about));
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Project.Business.Concrete
         {
             entity.CreatedDate = DateTime.Now;
             entity.DataStatus = DataStatus.Active;
+            entity.MessageStatus = false;
             _messageDal.Add(entity);
         }
 

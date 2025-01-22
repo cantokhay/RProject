@@ -52,12 +52,8 @@ namespace ProjectAPI.Controllers
 		[HttpPost]
         public IActionResult CreateCategory(CreateCategoryDTO createCategoryDTO)
         {
-            _categoryService.TAdd(new Category
-            {
-                CategoryName = createCategoryDTO.CategoryName,
-				CreatedDate = DateTime.Now,
-				DataStatus = DataStatus.Active
-			});
+            var category = _mapper.Map<Category>(createCategoryDTO);
+            _categoryService.TAdd(category);
             return Ok("Kategori Eklendi!");
         }
 
@@ -73,20 +69,14 @@ namespace ProjectAPI.Controllers
         public IActionResult GetCategoryById(int id)
         {
             var category = _categoryService.TGetById(id);
-            return Ok(category);
+            return Ok(_mapper.Map<GetCategoryDTO>(category));
         }
 
         [HttpPut]
         public IActionResult UpdateCategory(UpdateCategoryDTO updateCategoryDTO)
         {
-            _categoryService.TUpdate(new Category
-            {
-                CategoryId = updateCategoryDTO.CategoryId,
-                CategoryName = updateCategoryDTO.CategoryName,
-				CreatedDate = updateCategoryDTO.CreatedDate,
-				DataStatus = DataStatus.Modified,
-				ModifiedDate = DateTime.Now
-			});
+            var category = _mapper.Map<Category>(updateCategoryDTO);
+            _categoryService.TUpdate(category);
             return Ok("Kategori Güncellendi!");
         }
     }

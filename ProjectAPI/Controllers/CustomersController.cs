@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Business.Abstract;
 using Project.Data.Entities;
 using Project.Data.Enums;
-using Project.DTO.Customer;
+using Project.DTO.CustomerDTO;
 
 namespace ProjectAPI.Controllers
 {
@@ -12,13 +13,15 @@ namespace ProjectAPI.Controllers
 	public class CustomersController : ControllerBase
 	{
 		private readonly ICustomerService _customerService;
+		private readonly IMapper _mapper;
 
-		public CustomersController(ICustomerService customerService)
-		{
-			_customerService = customerService;
-		}
+        public CustomersController(ICustomerService customerService, IMapper mapper)
+        {
+            _customerService = customerService;
+            _mapper = mapper;
+        }
 
-		[HttpGet("CUSTOMER_COUNT")]
+        [HttpGet("CUSTOMER_COUNT")]
 		public IActionResult CustomerCount()
 		{
 			var customerCount = _customerService.TCustomerCount();
@@ -29,19 +32,14 @@ namespace ProjectAPI.Controllers
 		public IActionResult CustomerList()
 		{
 			var customerList = _customerService.TGetAll();
-			return Ok(customerList);
+			return Ok(_mapper.Map<List<ResultCustomerDTO>>(customerList));
 		}
 
 		[HttpPost]
 		public IActionResult CreateCustomer(CreateCustomerDTO createCustomertDTO)
 		{
-			_customerService.TAdd(new Customer()
-			{
-				CustomerName = createCustomertDTO.CustomerName,
-				CustomerStatus = CustomerStatus.HasNotOrder,
-				CreatedDate = DateTime.Now,
-				DataStatus = DataStatus.Active
-			});
+			var customer = _mapper.Map<Customer>(createCustomertDTO);
+            _customerService.TAdd(customer);
 			return Ok("Müşteri Eklendi!");
 		}
 
@@ -56,15 +54,8 @@ namespace ProjectAPI.Controllers
 		[HttpPut]
 		public IActionResult UpdateCustomer(UpdateCustomerDTO updateCustomerDTO)
 		{
-			_customerService.TUpdate(new Customer()
-			{
-				CustomerId = updateCustomerDTO.CustomerId,
-				CustomerName = updateCustomerDTO.CustomerName,
-				CustomerStatus = updateCustomerDTO.CustomerStatus,
-				CreatedDate = updateCustomerDTO.CreatedDate,
-				DataStatus = DataStatus.Modified,
-				ModifiedDate = DateTime.Now
-			});
+			var customer = _mapper.Map<Customer>(updateCustomerDTO);
+            _customerService.TUpdate(customer);
 			return Ok("Müşteri Güncellendi!");
 		}
 
@@ -72,7 +63,7 @@ namespace ProjectAPI.Controllers
 		public IActionResult GetCustomerById(int id)
 		{
 			var customer = _customerService.TGetById(id);
-			return Ok(customer);
+			return Ok(_mapper.Map<GetCustomerDTO>(customer));
 		}
 	}
 }

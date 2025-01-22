@@ -25,23 +25,14 @@ namespace ProjectAPI.Controllers
         public IActionResult BookingList()
         {
             var bookingList = _bookingService.TGetAll();
-            return Ok(bookingList);
+            return Ok(_mapper.Map<List<ResultBookingDTO>>(bookingList));
         }
 
         [HttpPost]
         public IActionResult CreateBooking(CreateBookingDTO createBookingDTO)
         {
-            _bookingService.TAdd(new Booking()
-            {
-                BookingDate = createBookingDTO.BookingDate,
-                BookingName = createBookingDTO.BookingName,
-                BookingEmail = createBookingDTO.BookingEmail,
-                BookingPhone = createBookingDTO.BookingPhone,
-                PersonCount = createBookingDTO.PersonCount,
-                BookingStatus = BookingStatus.Pending,
-				CreatedDate = DateTime.Now,
-				DataStatus = DataStatus.Active
-			});
+            var booking = _mapper.Map<Booking>(createBookingDTO);
+            _bookingService.TAdd(booking);
             return Ok("Rezervasyon Eklendi!");
         }
 
@@ -56,19 +47,8 @@ namespace ProjectAPI.Controllers
         [HttpPut]
         public IActionResult UpdateBooking(UpdateBookingDTO updateBookingDTO)
         {
-            _bookingService.TUpdate(new Booking()
-            {
-                BookingId = updateBookingDTO.BookingId,
-                BookingDate = updateBookingDTO.BookingDate,
-                BookingName = updateBookingDTO.BookingName,
-                BookingEmail = updateBookingDTO.BookingEmail,
-                BookingPhone = updateBookingDTO.BookingPhone,
-                PersonCount = updateBookingDTO.PersonCount,
-                BookingStatus = updateBookingDTO.BookingStatus,
-				CreatedDate = updateBookingDTO.CreatedDate,
-				DataStatus = DataStatus.Modified,
-				ModifiedDate = DateTime.Now
-			});
+            var booking = _mapper.Map<Booking>(updateBookingDTO);
+            _bookingService.TUpdate(booking);
             return Ok("Rezervasyon Güncellendi!");
         }
 
@@ -76,7 +56,7 @@ namespace ProjectAPI.Controllers
         public IActionResult GetBookingById(int id)
         {
             var booking = _bookingService.TGetById(id);
-            return Ok(booking);
+            return Ok(_mapper.Map<GetBookingDTO>(booking));
         }
 
         [HttpGet("STATUS_APRROVE/{id}")]

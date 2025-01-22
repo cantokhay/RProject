@@ -25,22 +25,14 @@ namespace ProjectAPI.Controllers
         public IActionResult DiscountList()
         {
             var discountList = _discountService.TGetAll();
-            return Ok(discountList);
+            return Ok(_mapper.Map<List<ResultDiscountDTO>>(discountList));
         }
 
         [HttpPost]
         public IActionResult CreateDiscount(CreateDiscountDTO createDiscountDTO)
         {
-            _discountService.TAdd(new Discount()
-            {
-                Title = createDiscountDTO.Title,
-                Description = createDiscountDTO.Description,
-                DiscountAmount = createDiscountDTO.DiscountAmount,
-                ImageURL = createDiscountDTO.ImageURL,
-                DiscountStatus = false,
-				CreatedDate = DateTime.Now,
-				DataStatus = DataStatus.Active
-			});
+            var discount = _mapper.Map<Discount>(createDiscountDTO);
+            _discountService.TAdd(discount);
             return Ok("İndirim Eklendi!");
         }
 
@@ -55,18 +47,8 @@ namespace ProjectAPI.Controllers
         [HttpPut]
         public IActionResult UpdateDiscount(UpdateDiscountDTO updateDiscountDTO)
         {
-            _discountService.TUpdate(new Discount()
-            {
-                DiscountId = updateDiscountDTO.DiscountId,
-                Title = updateDiscountDTO.Title,
-                Description = updateDiscountDTO.Description,
-                DiscountAmount = updateDiscountDTO.DiscountAmount,
-                ImageURL = updateDiscountDTO.ImageURL,
-                DiscountStatus = false,
-				CreatedDate = updateDiscountDTO.CreatedDate,
-				DataStatus = DataStatus.Modified,
-				ModifiedDate = DateTime.Now
-			});
+            var discount = _mapper.Map<Discount>(updateDiscountDTO);
+            _discountService.TUpdate(discount);
             return Ok("İndirim Güncellendi!");
         }
 
@@ -74,7 +56,7 @@ namespace ProjectAPI.Controllers
         public IActionResult GetDiscountById(int id)
         {
             var discount = _discountService.TGetById(id);
-            return Ok(discount);
+            return Ok(_mapper.Map<GetDiscountDTO>(discount));
         }
 
         [HttpGet("ACTIVATE_DISCOUNT/{id}")]

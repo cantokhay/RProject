@@ -24,24 +24,15 @@ namespace ProjectAPI.Controllers
 		[HttpGet]
 		public IActionResult SliderList()
 		{
-			var sliderList = _mapper.Map<List<ResultSliderDTO>>(_sliderService.TGetAll());
-			return Ok(sliderList);
+			var sliderList = _sliderService.TGetAll();
+			return Ok(_mapper.Map<List<ResultSliderDTO>>(sliderList));
 		}
 
 		[HttpPost]
 		public IActionResult CreateSlider(CreateSliderDTO createSliderDTO)
 		{
-			_sliderService.TAdd(new Slider()
-			{
-				SliderTitle1 = createSliderDTO.SliderTitle1,
-				SliderDescription1 = createSliderDTO.SliderDescription1,
-				SliderTitle2 = createSliderDTO.SliderTitle2,
-				SliderDescription2 = createSliderDTO.SliderDescription2,
-				SliderTitle3 = createSliderDTO.SliderTitle3,
-				SliderDescription3 = createSliderDTO.SliderDescription3,
-				CreatedDate = DateTime.Now,
-				DataStatus = DataStatus.Active
-			});
+			var slider = _mapper.Map<Slider>(createSliderDTO);
+            _sliderService.TAdd(slider);
 			return Ok("Özellik Eklendi!");
 		}
 
@@ -56,19 +47,8 @@ namespace ProjectAPI.Controllers
 		[HttpPut]
 		public IActionResult UpdateSlider(UpdateSliderDTO updateSliderDTO)
 		{
-			_sliderService.TUpdate(new Slider()
-			{
-				SliderId = updateSliderDTO.SliderId,
-				SliderTitle1 = updateSliderDTO.SliderTitle1,
-				SliderDescription1 = updateSliderDTO.SliderDescription1,
-				SliderTitle2 = updateSliderDTO.SliderTitle2,
-				SliderDescription2 = updateSliderDTO.SliderDescription2,
-				SliderTitle3 = updateSliderDTO.SliderTitle3,
-				SliderDescription3 = updateSliderDTO.SliderDescription3,
-				CreatedDate = updateSliderDTO.CreatedDate,
-				DataStatus = DataStatus.Modified,
-				ModifiedDate = DateTime.Now
-			});
+			var slider = _mapper.Map<Slider>(updateSliderDTO);
+            _sliderService.TUpdate(slider);
 			return Ok("Özellik Güncellendi!");
 		}
 
@@ -76,7 +56,7 @@ namespace ProjectAPI.Controllers
 		public IActionResult GetSliderById(int id)
 		{
 			var slider = _sliderService.TGetById(id);
-			return Ok(slider);
+			return Ok(_mapper.Map<GetSliderDTO>(slider));
 		}
 	}
 }

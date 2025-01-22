@@ -15,31 +15,24 @@ namespace ProjectAPI.Controllers
         private readonly ITestimonialService _testimonialService;
         private readonly IMapper _mapper;
 
-        public TestimonialController(ITestimonialService testimonialService)
+        public TestimonialController(ITestimonialService testimonialService, IMapper mapper)
         {
             _testimonialService = testimonialService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult TestimonialList()
         {
             var testimonialList = _testimonialService.TGetAll();
-            return Ok(testimonialList);
+            return Ok(_mapper.Map<List<ResultTestimonialDTO>>(testimonialList));
         }
 
         [HttpPost]
         public IActionResult CreateTestimonial(CreateTestimonialDTO createTestimonialDTO)
         {
-            _testimonialService.TAdd(new Testimonial()
-            {
-                Comment = createTestimonialDTO.Comment,
-                TestimonialName = createTestimonialDTO.TestimonialName,
-                TestimonialTitle = createTestimonialDTO.TestimonialTitle,
-                TestimonialImageURL = createTestimonialDTO.TestimonialImageURL,
-                //TestimonialStatus = createTestimonialDTO.TestimonialStatus,
-                CreatedDate = DateTime.Now,
-				DataStatus = DataStatus.Active
-			});
+            var testimonial = _mapper.Map<Testimonial>(createTestimonialDTO);
+            _testimonialService.TAdd(testimonial);
             return Ok("Yorum Eklendi!");
         }
 
@@ -54,24 +47,15 @@ namespace ProjectAPI.Controllers
         [HttpPut]
         public IActionResult UpdateTestimonial(UpdateTestimonialDTO updateTestimonialDTO)
         {
-            _testimonialService.TUpdate(new Testimonial()
-            {
-                TestimonialId = updateTestimonialDTO.TestimonialId,
-                Comment = updateTestimonialDTO.Comment,
-                TestimonialName = updateTestimonialDTO.TestimonialName,
-                TestimonialTitle = updateTestimonialDTO.TestimonialTitle,
-                TestimonialImageURL = updateTestimonialDTO.TestimonialImageURL,
-				CreatedDate = updateTestimonialDTO.CreatedDate,
-				DataStatus = DataStatus.Modified,
-				ModifiedDate = DateTime.Now
-			});
+            var testimonial = _mapper.Map<Testimonial>(updateTestimonialDTO);
+            _testimonialService.TUpdate(testimonial);
             return Ok("Yorum Güncellendi!");
         }
         [HttpGet("{id}")]
         public IActionResult GetTestimonialById(int id)
         {
             var testimonial = _testimonialService.TGetById(id);
-            return Ok(testimonial);
+            return Ok(_mapper.Map<GetTestimonialDTO>(testimonial));
         }
     }
 }

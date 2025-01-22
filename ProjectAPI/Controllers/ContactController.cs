@@ -25,25 +25,14 @@ namespace ProjectAPI.Controllers
         public IActionResult ContactList()
         {
             var contactList = _contactService.TGetAll();
-            return Ok(contactList);
+            return Ok(_mapper.Map<List<ResultContactDTO>>(contactList));
         }
 
         [HttpPost]
         public IActionResult CreateContact(CreateContactDTO createContactDTO)
         {
-            _contactService.TAdd(new Contact()
-            {
-                ContactLocation = createContactDTO.ContactLocation,
-                ContactPhone = createContactDTO.ContactPhone,
-                ContactEmail = createContactDTO.ContactEmail,
-                FooterDescription = createContactDTO.FooterDescription,
-                FooterTitle = createContactDTO.FooterTitle,
-                OpenDays = createContactDTO.OpenDays,
-                OpenDaysDescription = createContactDTO.OpenDaysDescription,
-                OpenHours = createContactDTO.OpenHours,
-				CreatedDate = DateTime.Now,
-				DataStatus = DataStatus.Active
-			});
+            var contact = _mapper.Map<Contact>(createContactDTO);
+            _contactService.TAdd(contact);
             return Ok("İletişim Bilgisi Eklendi!");
         }
 
@@ -58,21 +47,8 @@ namespace ProjectAPI.Controllers
         [HttpPut]
         public IActionResult UpdateContact(UpdateContactDTO updateContactDTO)
         {
-            _contactService.TUpdate(new Contact()
-            {
-                ContactId = updateContactDTO.ContactId,
-                ContactLocation = updateContactDTO.ContactLocation,
-                ContactPhone = updateContactDTO.ContactPhone,
-                ContactEmail = updateContactDTO.ContactEmail,
-                FooterDescription = updateContactDTO.FooterDescription,
-				FooterTitle = updateContactDTO.FooterTitle,
-				OpenDays = updateContactDTO.OpenDays,
-				OpenDaysDescription = updateContactDTO.OpenDaysDescription,
-				OpenHours = updateContactDTO.OpenHours,
-				CreatedDate = updateContactDTO.CreatedDate,
-				DataStatus = DataStatus.Modified,
-				ModifiedDate = DateTime.Now
-			});
+            var contact = _mapper.Map<Contact>(updateContactDTO);
+            _contactService.TUpdate(contact);
             return Ok("İletişim Bilgisi Güncellendi!");
         }
 
@@ -80,7 +56,7 @@ namespace ProjectAPI.Controllers
         public IActionResult GetContactById(int id)
         {
             var contact = _contactService.TGetById(id);
-            return Ok(contact);
+            return Ok(_mapper.Map<GetContactDTO>(contact));
         }
     }
 }

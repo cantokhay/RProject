@@ -26,8 +26,8 @@ namespace ProjectAPI.Controllers
         [HttpGet]
         public IActionResult ProductList()
         {
-            var productList = _mapper.Map<List<ResultProductDTO>>(_productService.TGetAll());
-            return Ok(productList);
+            var productList = _productService.TGetAll() ;
+            return Ok(_mapper.Map<List<ResultProductDTO>>(productList));
         }
 
         [HttpGet("GET_PRODUCT_COUNT")]
@@ -104,17 +104,8 @@ namespace ProjectAPI.Controllers
 		[HttpPost]
         public IActionResult CreateProduct(CreateProductDTO createProductDTO)
         {
-            _productService.TAdd(new Product()
-            {
-                ProductName = createProductDTO.ProductName,
-                ProductDescription = createProductDTO.ProductDescription,
-                ProductPrice = createProductDTO.ProductPrice,
-                ProductImageURL = createProductDTO.ProductImageURL,
-                CategoryId = createProductDTO.CategoryId,
-                //ProductStatus = createProductDTO.ProductStatus,
-				CreatedDate = DateTime.Now,
-				DataStatus = DataStatus.Active
-			});
+            var product = _mapper.Map<Product>(createProductDTO);
+            _productService.TAdd(product);
             return Ok("Ürün Eklendi!");
         }
 
@@ -129,19 +120,8 @@ namespace ProjectAPI.Controllers
         [HttpPut]
         public IActionResult UpdateProduct(UpdateProductDTO updateProductDTO)
         {
-            _productService.TUpdate(new Product()
-            {
-                ProductId = updateProductDTO.ProductId,
-                ProductName = updateProductDTO.ProductName,
-                ProductDescription = updateProductDTO.ProductDescription,
-                ProductPrice = updateProductDTO.ProductPrice,
-                ProductImageURL = updateProductDTO.ProductImageURL,
-                CategoryId = updateProductDTO.CategoryId,
-                //ProductStatus = updateProductDTO.ProductStatus,
-				CreatedDate = updateProductDTO.CreatedDate,
-				DataStatus = DataStatus.Modified,
-				ModifiedDate = DateTime.Now
-			});
+            var product = _mapper.Map<Product>(updateProductDTO);
+            _productService.TUpdate(product);
             return Ok("Ürün Güncellendi!");
         }
 
@@ -149,7 +129,7 @@ namespace ProjectAPI.Controllers
         public IActionResult GetProductById(int id)
         {
             var product = _productService.TGetById(id);
-            return Ok(product);
+            return Ok(_mapper.Map<GetProductDTO>(product));
         }
     }
 }

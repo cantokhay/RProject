@@ -28,20 +28,21 @@ namespace Project.Business.Concrete
         {
             entity.CreatedDate = DateTime.Now;
             entity.DataStatus = DataStatus.Active;
+            entity.BookingStatus = BookingStatus.Pending;
             _bookingDal.Add(entity);
         }
 
         public void TDelete(Booking entity)
         {
             entity.DeletedDate = DateTime.Now;
-			entity.DataStatus = DataStatus.Deleted;
-			_bookingDal.Delete(entity);
+            entity.DataStatus = DataStatus.Deleted;
+            _bookingDal.Delete(entity);
         }
 
         public List<Booking> TGetAll()
         {
             return _bookingDal.GetAll().Where(x => x.DataStatus != DataStatus.Deleted).ToList();
-		}
+        }
 
         public Booking TGetById(int id)
         {

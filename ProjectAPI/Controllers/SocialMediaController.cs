@@ -25,20 +25,14 @@ namespace ProjectAPI.Controllers
         public IActionResult SocialMediaList()
         {
             var socialMediaList = _socialMediaService.TGetAll();
-            return Ok(socialMediaList);
+            return Ok(_mapper.Map<List<ResultSocialMediaDTO>>(socialMediaList));
         }
 
         [HttpPost]
         public IActionResult CreateSocialMedia(CreateSocialMediaDTO createSocialMediaDTO)
         {
-            _socialMediaService.TAdd(new SocialMedia()
-            {
-                SocialMediaTitle = createSocialMediaDTO.SocialMediaTitle,
-                SocialMediaURL = createSocialMediaDTO.SocialMediaURL,
-                SocialMediaIcon = createSocialMediaDTO.SocialMediaIcon,
-                CreatedDate = DateTime.Now,
-				DataStatus = DataStatus.Active
-			});
+            var socialMedia = _mapper.Map<SocialMedia>(createSocialMediaDTO);
+            _socialMediaService.TAdd(socialMedia);
             return Ok("Sosyal Medya Hesabı Eklendi!");
         }
 
@@ -53,16 +47,8 @@ namespace ProjectAPI.Controllers
         [HttpPut]
         public IActionResult UpdateSocialMedia(UpdateSocialMediaDTO updateSocialMediaDTO)
         {
-            _socialMediaService.TUpdate(new SocialMedia()
-            {
-                SocialMediaId = updateSocialMediaDTO.SocialMediaId,
-                SocialMediaTitle = updateSocialMediaDTO.SocialMediaTitle,
-                SocialMediaURL = updateSocialMediaDTO.SocialMediaURL,
-                SocialMediaIcon = updateSocialMediaDTO.SocialMediaIcon,
-				CreatedDate = updateSocialMediaDTO.CreatedDate,
-				DataStatus = DataStatus.Modified,
-				ModifiedDate = DateTime.Now
-			});
+            var socialMedia = _mapper.Map<SocialMedia>(updateSocialMediaDTO);
+            _socialMediaService.TUpdate(socialMedia);
             return Ok("Sosyal Medya Hesabı Güncellendi!");
         }
 
@@ -70,7 +56,7 @@ namespace ProjectAPI.Controllers
         public IActionResult GetSocialMediaById(int id)
         {
             var socialMedia = _socialMediaService.TGetById(id);
-            return Ok(socialMedia);
+            return Ok(_mapper.Map<GetSocialMediaDTO>(socialMedia));
         }
     }
 }

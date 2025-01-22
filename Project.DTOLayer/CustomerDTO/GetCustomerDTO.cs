@@ -1,12 +1,11 @@
 ﻿using Project.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace Project.DTO.Customer
+namespace Project.DTO.CustomerDTO
 {
-	public class ResultCustomerDTO
+	public class GetCustomerDTO
 	{
 		public int CustomerId { get; set; }
-
 		[Required(ErrorMessage = "Müşteri adı alanı zorunludur")]
 		[StringLength(100, ErrorMessage = "Müşteri adı en fazla 100 karakter uzunluğunda olmalıdır")]
 		[Display(Name = "Name")]
