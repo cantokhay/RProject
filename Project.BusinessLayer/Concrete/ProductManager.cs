@@ -89,5 +89,10 @@ namespace Project.Business.Concrete
         {
             return _productDal.TotalProductPriceSum();
         }
+
+        public List<Product> TGetLast9Products()
+        {
+            return _productDal.GetLast9Products();
+        }
     }
 }

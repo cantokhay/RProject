@@ -131,5 +131,12 @@ namespace ProjectAPI.Controllers
             var product = _productService.TGetById(id);
             return Ok(_mapper.Map<GetProductDTO>(product));
         }
+
+        [HttpGet("GET_LAST_9_PRODUCTS")]
+        public IActionResult GetLast9Products()
+        {
+            var last9Products = _productService.TGetLast9Products();
+            return Ok(_mapper.Map<List<ResultProductDTO>>(last9Products));
+        }
     }
 }

@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using ProjectWebUI.VMs.AboutVM;
+using Newtonsoft.Json.Linq;
+using ProjectWebUI.VMs.ContactVM;
 using ProjectWebUI.VMs.MessageVM;
 using System.Text;
 
 namespace ProjectWebUI.Controllers
 {
+    [AllowAnonymous]
     public class DefaultController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -14,8 +17,15 @@ namespace ProjectWebUI.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetAsync("https://localhost:7271/api/Contact");
+            response.EnsureSuccessStatusCode();
+            var jsonData = await response.Content.ReadAsStringAsync();
+            var location = JsonConvert.DeserializeObject<List<ResultContactVM>>(jsonData);
+            //listenin içinden 0.index'in ContactLocation'ı alınacak.
+            ViewBag.Location = location[0].ContactLocation;
             return View();
         }
 
@@ -34,7 +44,7 @@ namespace ProjectWebUI.Controllers
             var response = await client.PostAsync("https://localhost:7271/api/Message", content);
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Default");
             }
             return View();
         }

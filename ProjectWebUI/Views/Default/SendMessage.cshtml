@@ -11,7 +11,7 @@
                 <div class="form_container">
                     <form method="post" asp-action="SendMessage" asp-controller="Default">
                         <div>
-                            <input type="text" class="form-control" placeholder="Adınız Soyadınız" asp-for="MessageFullName"/>
+                            <input type="text" class="form-control" placeholder="Adınız Soyadınız" asp-for="MessageFullName" />
                         </div>
                         <div>
                             <input type="text" class="form-control" placeholder="Telefon Numaranız" asp-for="MessagePhone" />
@@ -35,7 +35,7 @@
             </div>
             <div class="col-md-6">
                 <div class="map_container ">
-                    <div id="googleMap"></div>
+                    <iframe src="@ViewBag.Location" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>

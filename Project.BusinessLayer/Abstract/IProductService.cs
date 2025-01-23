@@ -13,5 +13,6 @@ namespace Project.Business.Abstract
 		string TProductNameByMaxPrice();
 		decimal TProductAvgPriceByHamburger();
         decimal TTotalProductPriceSum();
+		List<Product> TGetLast9Products();
     }
 }

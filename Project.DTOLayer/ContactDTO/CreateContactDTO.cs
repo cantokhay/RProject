@@ -5,7 +5,7 @@ namespace Project.DTO.ContactDTO
     public class CreateContactDTO
     {
 		[Required(ErrorMessage = "Konum alanı zorunludur")]
-		[StringLength(250, ErrorMessage = "Konum en fazla 250 karakter uzunluğunda olmalıdır")]
+		[StringLength(500, ErrorMessage = "Konum en fazla 500 karakter uzunluğunda olmalıdır")]
 		[Display(Name = "Location")]
 		public string ContactLocation { get; set; }
 

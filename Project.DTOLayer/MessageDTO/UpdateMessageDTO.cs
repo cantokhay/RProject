@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Project.Data.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Project.DTO.MessageDTO
 {
@@ -38,6 +39,5 @@ namespace Project.DTO.MessageDTO
 		[Display(Name = "Message Status")]
 		public bool MessageStatus { get; set; }
 
-        public DateTime CreatedDate { get; set; }
     }
 }

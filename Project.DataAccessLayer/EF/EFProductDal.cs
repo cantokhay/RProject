@@ -67,5 +67,12 @@ namespace Project.DataAccess.EF
 			using var context = new SignalRContext();
             return context.Products.Where(p => p.DataStatus != DataStatus.Deleted).Sum(p => p.ProductPrice);
         }
+
+        public List<Product> GetLast9Products()
+        {
+            var context = new SignalRContext();
+            var products = context.Products.OrderByDescending(p => p.ProductId).Take(9).ToList();
+			return products;
+        }
     }
 }

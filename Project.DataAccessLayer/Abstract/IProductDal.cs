@@ -13,6 +13,7 @@ namespace Project.DataAccess.Abstract
         string ProductNameByMaxPrice();
         decimal ProductAvgPriceByHamburger();
         decimal TotalProductPriceSum();
+        List<Product> GetLast9Products();
 
     }
 }

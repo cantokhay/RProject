@@ -17,11 +17,8 @@
 
         <div class="filters-content">
             <div class="row grid">
-                @{
-                    var itemsToFilter = 9;
-                    var takenItems = Model.Take(itemsToFilter).ToList();
-                }
-                @foreach (var item in takenItems)
+                
+                @foreach (var item in Model)
                 {
                     <div class="col-sm-6 col-lg-4 all @item.CategoryName">
                         <div class="box">

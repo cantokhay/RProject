@@ -17,6 +17,7 @@ namespace Project.DataAccess.SeedData
         {
             {
                 #region Helper Data
+
                 var restaurantMenuCategories = new Dictionary<string, string[]>
                 {
                     { "Main Courses", new[] { "Lamb Stew", "Grilled Chicken", "Beef Steak", "Vegetarian Lasagna", "Salmon Fillet", "Stuffed Peppers" } },
@@ -57,7 +58,7 @@ namespace Project.DataAccess.SeedData
                 byte maxCategoryCount = 10;
                 byte maxCustomerCount = 20;
                 byte maxContactCount = 1;
-                byte maxDiscountCount = 3;
+                byte maxDiscountCount = 2;
                 byte maxMessageCount = 25;
                 byte maxMoneyCaseCount = 1;
                 byte maxNotificationCount = 15;
@@ -99,7 +100,7 @@ namespace Project.DataAccess.SeedData
                     GenerateSliders(sliderCountToGenerate);
                     GenerateSocialMedia(socialMediaCountToGenerate);
                     GenerateTestimonials(testimonialCountToGenerate);
-                    
+
                     await db.SaveChangesAsync();
 
                 }
@@ -123,7 +124,6 @@ namespace Project.DataAccess.SeedData
                             DataStatus = DataStatus.Active
                         };
 
-                        AssignEntityDatesAndDataStatus(about);
                         db.Abouts.Add(about);
                     }
                     db.SaveChanges();
@@ -134,7 +134,7 @@ namespace Project.DataAccess.SeedData
                     var faker = new Faker();
 
                     var productIds = db.Products.Select(p => p.ProductId).ToList();
-                    var customerIds = db.Customers.Select(c => c.CustomerId).ToList();
+                    var customerIds = 4;
 
                     byte missingBaskets = Math.Max(maxCount, (byte)0);
 
@@ -151,7 +151,7 @@ namespace Project.DataAccess.SeedData
                             Count = basketCount,
                             TotalProductPrice = basketPrice * basketCount,
                             ProductId = selectedProductId,
-                            CustomerId = faker.PickRandom(customerIds),
+                            CustomerId = 4,
                         };
 
                         AssignEntityDatesAndDataStatus(basket);
@@ -178,6 +178,7 @@ namespace Project.DataAccess.SeedData
                             BookingDate = faker.Date.Soon(faker.Random.Int(3, 12)),
                             PersonCount = faker.Random.Int(2, 12),
                         };
+
                         AssignEntityDatesAndDataStatus(booking);
                         db.Bookings.Add(booking);
                     }
@@ -198,8 +199,9 @@ namespace Project.DataAccess.SeedData
                         Category category = new Category
                         {
                             CategoryName = EnsureMaxLength(categoryName, 50),
+                            CreatedDate = DateTime.Now,
+                            DataStatus = DataStatus.Active
                         };
-                        AssignEntityDatesAndDataStatus(category);
                         db.Categories.Add(category);
                         db.SaveChanges();
 
@@ -214,16 +216,19 @@ namespace Project.DataAccess.SeedData
                                 var product = new Product
                                 {
                                     ProductName = EnsureMaxLength(productsForCategory[i], 50),
-                                    ProductDescription = EnsureMaxLength(faker.Lorem.Sentence(), 100),
+                                    ProductDescription = EnsureMaxLength(faker.Lorem.Sentence(7), 75),
                                     ProductPrice = decimal.Parse(faker.Commerce.Price()),
                                     ProductImageURL = faker.PickRandom(productImageURLList),
-                                    CategoryId = category.CategoryId
+                                    CategoryId = category.CategoryId,
+                                    CreatedDate = DateTime.Now,
+                                    DataStatus = DataStatus.Active
                                 };
-                                AssignEntityDatesAndDataStatus(product);
+
                                 db.Products.Add(product);
                             }
                         }
                     }
+
                     db.SaveChanges();
                 }
 
@@ -262,12 +267,14 @@ namespace Project.DataAccess.SeedData
                             FooterDescription = EnsureMaxLength(faker.Lorem.Sentence(), 250),
                             OpenDays = "Monday - Friday",
                             OpenDaysDescription = "Open all weekdays",
-                            OpenHours = "9:00 AM - 5:00 PM"
+                            OpenHours = "9:00 AM - 5:00 PM",
+                            CreatedDate = DateTime.Now,
+                            DataStatus = DataStatus.Active
                         };
 
-                        AssignEntityDatesAndDataStatus(contact);
                         db.Contacts.Add(contact);
                     }
+
                     db.SaveChanges();
                 }
 
@@ -289,6 +296,7 @@ namespace Project.DataAccess.SeedData
                         AssignEntityDatesAndDataStatus(notification);
                         db.Notifications.Add(notification);
                     }
+
                     db.SaveChanges();
                 }
 
@@ -311,6 +319,7 @@ namespace Project.DataAccess.SeedData
                         AssignEntityDatesAndDataStatus(message);
                         db.Messages.Add(message);
                     }
+
                     db.SaveChanges();
                 }
 
@@ -326,12 +335,15 @@ namespace Project.DataAccess.SeedData
                             Title = EnsureMaxLength(faker.Commerce.ProductName(), 100),
                             Description = EnsureMaxLength(faker.Lorem.Paragraph(), 250),
                             DiscountAmount = faker.Random.Decimal(5, 50),
-                            ImageURL = faker.PickRandom(discountImageURLList)
+                            ImageURL = faker.PickRandom(discountImageURLList),
+                            CreatedDate = DateTime.Now,
+                            DataStatus = DataStatus.Active,
+                            DiscountStatus = true
                         };
 
-                        AssignEntityDatesAndDataStatus(discount);
                         db.Discounts.Add(discount);
                     }
+
                     db.SaveChanges();
                 }
 
@@ -344,12 +356,14 @@ namespace Project.DataAccess.SeedData
                     {
                         var moneyCase = new MoneyCase
                         {
-                            TotalMoneyInCase = faker.Random.Decimal(1000, 50000)
+                            TotalMoneyInCase = faker.Random.Decimal(1000, 50000),
+                            CreatedDate = DateTime.Now,
+                            DataStatus = DataStatus.Active
                         };
 
-                        AssignEntityDatesAndDataStatus(moneyCase);
                         db.MoneyCases.Add(moneyCase);
                     }
+
                     db.SaveChanges();
                 }
 
@@ -417,12 +431,14 @@ namespace Project.DataAccess.SeedData
                             SliderTitle2 = EnsureMaxLength(faker.Commerce.ProductName(), 30),
                             SliderDescription2 = EnsureMaxLength(faker.Lorem.Sentence(), 100),
                             SliderTitle3 = EnsureMaxLength(faker.Commerce.ProductName(), 30),
-                            SliderDescription3 = EnsureMaxLength(faker.Lorem.Sentence(), 100)
+                            SliderDescription3 = EnsureMaxLength(faker.Lorem.Sentence(), 100),
+                            CreatedDate = DateTime.Now,
+                            DataStatus = DataStatus.Active
                         };
 
-                        AssignEntityDatesAndDataStatus(slider);
                         db.Sliders.Add(slider);
                     }
+
                     db.SaveChanges();
                 }
 
@@ -445,10 +461,11 @@ namespace Project.DataAccess.SeedData
                             {
                                 SocialMediaTitle = EnsureMaxLength(socialMediaTitle, 50),
                                 SocialMediaURL = socialMediaData.URL,
-                                SocialMediaIcon = socialMediaData.Icon
+                                SocialMediaIcon = socialMediaData.Icon,
+                                CreatedDate = DateTime.Now,
+                                DataStatus = DataStatus.Active
                             };
 
-                            AssignEntityDatesAndDataStatus(socialMedia);
                             db.SocialMedias.Add(socialMedia);
                         }
                     }
@@ -468,13 +485,13 @@ namespace Project.DataAccess.SeedData
                             Comment = EnsureMaxLength(faker.Lorem.Sentence(), 50),
                             TestimonialName = EnsureMaxLength(faker.Name.FullName(), 50),
                             TestimonialTitle = EnsureMaxLength(faker.Lorem.Word(), 50),
-                            //TestimonialImageURL = faker.PickRandom(testimonialImageURLList)
                             TestimonialImageURL = GenerateAvatarUrl()
                         };
 
                         AssignEntityDatesAndDataStatus(testimonial);
                         db.Testimonials.Add(testimonial);
                     }
+
                     db.SaveChanges();
                 }
 

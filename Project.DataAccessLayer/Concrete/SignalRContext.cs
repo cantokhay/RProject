@@ -97,7 +97,7 @@ namespace Project.DataAccess.Concrete
             modelBuilder.Entity<Contact>(entity =>
             {
                 entity.HasKey(e => e.ContactId);
-                entity.Property(e => e.ContactLocation).HasMaxLength(250).IsRequired();
+                entity.Property(e => e.ContactLocation).HasMaxLength(500).IsRequired();
                 entity.Property(e => e.ContactPhone).IsRequired();
                 entity.Property(e => e.ContactEmail).IsRequired();
                 entity.Property(e => e.FooterTitle).HasMaxLength(50).IsRequired();

@@ -389,8 +389,8 @@ namespace Project.DataAccess.Migrations
 
                     b.Property<string>("ContactLocation")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("ContactPhone")
                         .IsRequired()
