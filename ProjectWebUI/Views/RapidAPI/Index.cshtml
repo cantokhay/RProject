@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+<html>
+
+@await Component.InvokeAsync("_UILayoutHeadPartialComponent")
+
+<body class="sub_page">
+
+    @await Component.InvokeAsync("_MenuNavbarPartialComponent")
+    <br />
+    <br />
+
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-dark mb-30">
+                    <a class="breadcrumb-item text-white" href="/Default/Index/">AnaSayfa</a>
+                    <a class="breadcrumb-item text-white" href="/Menu/Index/">Menü</a>
+                    <span class="breadcrumb-item">Sepetiniz</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-lg-8 table-responsive mb-5">
+                <h1>rapid api</h1>
+            </div>
+        </div>
+    </div>
+
+    @await Component.InvokeAsync("_UILayoutFooterPartialComponent")
+    @await Component.InvokeAsync("_UILayoutScriptPartialComponent")
+
+</body>
+
+</html>

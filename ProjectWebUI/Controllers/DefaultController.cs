@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using ProjectWebUI.VMs.ContactVM;
 using ProjectWebUI.VMs.MessageVM;
 using System.Text;
@@ -24,7 +23,6 @@ namespace ProjectWebUI.Controllers
             response.EnsureSuccessStatusCode();
             var jsonData = await response.Content.ReadAsStringAsync();
             var location = JsonConvert.DeserializeObject<List<ResultContactVM>>(jsonData);
-            //listenin içinden 0.index'in ContactLocation'ı alınacak.
             ViewBag.Location = location[0].ContactLocation;
             return View();
         }

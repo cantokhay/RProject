@@ -20,7 +20,7 @@ namespace ProjectWebUI.Controllers
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:7271/api/Product");
+            var response = await client.GetAsync("https://localhost:7271/api/Product/PRODUCT_LIST_WITH_CATEGORY");
 
             var jsonData = await response.Content.ReadAsStringAsync();
             var productList = JsonConvert.DeserializeObject<List<ResultProductVM>>(jsonData);

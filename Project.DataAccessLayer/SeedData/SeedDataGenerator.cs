@@ -20,7 +20,7 @@ namespace Project.DataAccess.SeedData
 
                 var restaurantMenuCategories = new Dictionary<string, string[]>
                 {
-                    { "Main Courses", new[] { "Lamb Stew", "Grilled Chicken", "Beef Steak", "Vegetarian Lasagna", "Salmon Fillet", "Stuffed Peppers" } },
+                    { "Mains", new[] { "Lamb Stew", "Grilled Chicken", "Beef Steak", "Vegetarian Lasagna", "Salmon Fillet", "Stuffed Peppers" } },
                     { "Appetizers", new[] { "Bruschetta", "Mozzarella Sticks", "Chicken Wings", "Hummus", "Spring Rolls", "Garlic Bread" } },
                     { "Soups", new[] { "Tomato Soup", "Chicken Noodle Soup", "Mushroom Soup", "Lentil Soup", "Seafood Chowder", "Pumpkin Soup" } },
                     { "Salads", new[] { "Caesar Salad", "Greek Salad", "Cobb Salad", "Caprese Salad", "Quinoa Salad", "Spinach Salad" } },
@@ -28,8 +28,7 @@ namespace Project.DataAccess.SeedData
                     { "Desserts", new[] { "Cheesecake", "Brownie", "Tiramisu", "Panna Cotta", "Ice Cream Sundae", "Creme Brulee" } },
                     { "Pizza", new[] { "Margherita", "Pepperoni", "BBQ Chicken", "Veggie Supreme", "Four Cheese", "Hawaiian" } },
                     { "Pasta", new[] { "Spaghetti Bolognese", "Fettuccine Alfredo", "Penne Arrabbiata", "Ravioli", "Carbonara", "Pesto Pasta" } },
-                    { "Grills", new[] { "Mixed Grill Platter", "Lamb Chops", "Grilled Shrimp", "BBQ Ribs", "Tandoori Chicken", "Grilled Vegetables" } },
-                    { "Seafood Specials", new[] { "Grilled Lobster", "Fried Calamari", "Fish Tacos", "Garlic Butter Shrimp", "Seafood Paella", "Crab Cakes" } }
+                    { "Grills", new[] { "Mixed Grill Platter", "Lamb Chops", "Grilled Shrimp", "BBQ Ribs", "Tandoori Chicken", "Grilled Vegetables" } }
                 };
 
                 var productImageURLList = new[] { "/feane-1.0.0/images/f1.png", "/feane-1.0.0/images/f2.png", "/feane-1.0.0/images/f3.png", };

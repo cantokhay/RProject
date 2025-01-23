@@ -56,7 +56,6 @@ namespace ProjectAPI.Controllers
         {
             var context = new SignalRContext();
             var productListByCategory =
-                //_mapper.Map<List<ResultProductWithCategoryDTO>>(_productService.TGetProductsByCategory());
                 context.Products.Include(p => p.Category).Where(p => p.DataStatus != DataStatus.Deleted).Select(c => new ResultProductWithCategoryDTO
                 {
                     ProductId = c.ProductId,
@@ -64,7 +63,6 @@ namespace ProjectAPI.Controllers
                     ProductDescription = c.ProductDescription,
                     ProductPrice = c.ProductPrice,
                     ProductImageURL = c.ProductImageURL,
-                    //ProductStatus = c.ProductStatus,
                     CategoryName = c.Category.CategoryName,
                     CreatedDate = c.CreatedDate,
 					DataStatus = c.DataStatus
