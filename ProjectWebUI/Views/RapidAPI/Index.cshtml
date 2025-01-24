@@ -1,7 +1,9 @@
-﻿
+﻿@model List<ResultTastyVM>
+
 @{
     ViewData["Title"] = "Index";
     Layout = null;
+    var i = 0;
 }
 
 <html>
@@ -19,8 +21,8 @@
             <div class="col-12">
                 <nav class="breadcrumb bg-dark mb-30">
                     <a class="breadcrumb-item text-white" href="/Default/Index/">AnaSayfa</a>
-                    <a class="breadcrumb-item text-white" href="/Menu/Index/">Menü</a>
-                    <span class="breadcrumb-item">Sepetiniz</span>
+                    <a class="breadcrumb-item text-white" href="/RapidAPI/Index/">Dış Hizmetler</a>
+                    <span class="breadcrumb-item">Tasty</span>
                 </nav>
             </div>
         </div>
@@ -28,8 +30,29 @@
 
     <div class="container-fluid">
         <div class="row px-xl-5">
-            <div class="col-lg-8 table-responsive mb-5">
-                <h1>rapid api</h1>
+            <div class="col-lg-12 table-responsive mb-5">
+                <table class="table table-light table-borderless table-hover text-center mb-0">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Ürün Adı</th>
+                            <th>Hazırlanma Süresi</th>
+                            <th>Videoyu Gör</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        @foreach (var item in Model)
+                        {
+                            i++;
+                            <tr>
+                                <td>@i</td>
+                                <td>@item.Name</td>
+                                <td><img src="@item.thumbnail_url" alt="Thumbnail Url" style="width:50px;height:50px" /></td>
+                                <td><a href="@item.original_video_url" class="btn btn-warning">Tarifi İzle</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
