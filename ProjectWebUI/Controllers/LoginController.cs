@@ -28,7 +28,7 @@ namespace ProjectWebUI.Controllers
 			var result = await _signInManager.PasswordSignInAsync(loginVM.UserName, loginVM.Password, false, false);
 			if (result.Succeeded)
 			{
-				return RedirectToAction("Index", "Category");
+				return RedirectToAction("Index", "Default");
 			}
 			return View();
 		}
@@ -36,7 +36,7 @@ namespace ProjectWebUI.Controllers
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "Default");
         }
     }
 }

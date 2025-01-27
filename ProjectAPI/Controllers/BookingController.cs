@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Project.Business.Abstract;
@@ -14,11 +15,13 @@ namespace ProjectAPI.Controllers
     {
         private readonly IBookingService _bookingService;
         private readonly IMapper _mapper;
+        private readonly IValidator<CreateBookingDTO> _validator;
 
-        public BookingController(IBookingService bookingService, IMapper mapper)
+        public BookingController(IBookingService bookingService, IMapper mapper, IValidator<CreateBookingDTO> validator)
         {
             _bookingService = bookingService;
             _mapper = mapper;
+            _validator = validator;
         }
 
         [HttpGet]
@@ -31,6 +34,11 @@ namespace ProjectAPI.Controllers
         [HttpPost]
         public IActionResult CreateBooking(CreateBookingDTO createBookingDTO)
         {
+            var result = _validator.Validate(createBookingDTO);
+            if (!result.IsValid)
+            {
+                return BadRequest(result.Errors);
+            }
             var booking = _mapper.Map<Booking>(createBookingDTO);
             _bookingService.TAdd(booking);
             return Ok("Rezervasyon Eklendi!");

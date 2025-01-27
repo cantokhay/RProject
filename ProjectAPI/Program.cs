@@ -1,5 +1,7 @@
+using FluentValidation;
 using Project.Business.Abstract;
 using Project.Business.Concrete;
+using Project.Business.ValidationRules.Booking;
 using Project.DataAccess.Abstract;
 using Project.DataAccess.Concrete;
 using Project.DataAccess.EF;
@@ -70,6 +72,8 @@ builder.Services.AddScoped<ISocialMediaDal, EFSocialMediaDal>();
 
 builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
 builder.Services.AddScoped<ITestimonialDal, EFTestimonialDal>();
+
+builder.Services.AddValidatorsFromAssemblyContaining<CreateBookingValidation>();
 
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
