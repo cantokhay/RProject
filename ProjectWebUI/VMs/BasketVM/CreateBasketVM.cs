@@ -9,5 +9,6 @@ namespace ProjectWebUI.VMs.BasketVM
 		[Display(Name = "Count")]
 		public int Count { get; set; }
 		public int ProductId { get; set; }
+        public int CustomerId { get; set; }
     }
 }

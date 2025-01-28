@@ -9,7 +9,6 @@ namespace Project.Data.Entities
         public int ContactId { get; set; }
 
 		[Required(ErrorMessage = "Konum alanı zorunludur")]
-		[StringLength(250, ErrorMessage = "Konum en fazla 250 karakter uzunluğunda olmalıdır")]
 		[Display(Name = "Location")]
 		public string ContactLocation { get; set; }
 

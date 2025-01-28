@@ -1,0 +1,157 @@
+﻿@model List<ResultCustomerVM>
+
+@{
+    Layout = null;
+    string color = "";
+    string status = "";
+    string icon = "";
+}
+
+<!DOCTYPE html>
+
+<style>
+    .widgetgreen {
+        width: 200px;
+        height: 100px;
+        background-color: #2ecc71;
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        color: white;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .widgetred {
+        width: 200px;
+        height: 100px;
+        background-color: palevioletred;
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        color: white;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .widget-icongreen {
+        width: 40px;
+        height: 40px;
+        background-color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 10px;
+    }
+
+        .widget-icongreen i {
+            font-size: 24px;
+            color: #2ecc71;
+        }
+
+    .widget-iconred {
+        width: 40px;
+        height: 40px;
+        background-color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 10px;
+    }
+
+        .widget-iconred i {
+            font-size: 24px;
+            color: palevioletred;
+        }
+
+    .widget-text {
+        margin-left: 20px;
+    }
+
+        .widget-text h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .widget-text p {
+            margin: 0;
+            font-size: 14px;
+        }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<html>
+
+@await Component.InvokeAsync("_UILayoutHeadPartialComponent")
+
+<body class="sub_page">
+
+    @await Component.InvokeAsync("_MenuNavbarPartialComponent")
+    <br />
+    <br />
+
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-dark mb-30">
+                    <a class="breadcrumb-item text-white" href="/Default/Index/">Ana Sayfa</a>
+                    <a class="breadcrumb-item text-white" href="/CustomerLabel/CustomerLabelsList/">Müşteri Durumları</a>
+                    <span class="breadcrumb-item">Etiketler</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row px-xl-5 py-3">
+
+            @foreach (var item in Model)
+            {
+                if (item.CustomerStatus == Project.Data.Enums.CustomerStatus.HasOrder)
+                {
+                    color = "widgetgreen";
+                    status = "Siparişi Var";
+                    icon = "widget-icongreen";
+                }
+                else if (item.CustomerStatus == Project.Data.Enums.CustomerStatus.HasNotOrder)
+                {
+                    color = "widgetred";
+                    status = "Siparişi Yok";
+                    icon = "widget-iconred";
+                }
+                <div class="col-md-3 mb-3 align-content-around">
+                    <div class="@color">
+                        @if (item.CustomerStatus == Project.Data.Enums.CustomerStatus.HasNotOrder)
+                        {
+                            <div class="@icon">
+                                <a href="/Menu/Index/@item.CustomerId">
+                                    <i class="fas fa-chair"></i>
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="@icon">
+                                <i class="fas fa-chair"></i>
+                            </div>
+                        }
+                        <div class="widget-text">
+                            <h3>@item.CustomerName</h3>
+                            <p>@status</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+    @await Component.InvokeAsync("_UILayoutFooterPartialComponent")
+    @await Component.InvokeAsync("_UILayoutScriptPartialComponent")
+
+</body>
+
+</html>

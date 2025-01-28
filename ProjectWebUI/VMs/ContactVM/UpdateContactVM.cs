@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Project.Data.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjectWebUI.VMs.ContactVM
 {
@@ -7,7 +8,6 @@ namespace ProjectWebUI.VMs.ContactVM
         public int ContactId { get; set; }
 
 		[Required(ErrorMessage = "Konum alanı zorunludur")]
-		[StringLength(500, ErrorMessage = "Konum en fazla 500 karakter uzunluğunda olmalıdır")]
 		[Display(Name = "Location")]
 		public string ContactLocation { get; set; }
 
@@ -21,7 +21,7 @@ namespace ProjectWebUI.VMs.ContactVM
 		[EmailAddress(ErrorMessage = "Geçersiz E-posta adresi")]
 		public string ContactEmail { get; set; }
 
-		[Required(ErrorMessage = "Alt Başlıl alanı zorunludur")]
+		[Required(ErrorMessage = "Alt Başlık alanı zorunludur")]
 		[StringLength(50, ErrorMessage = "Alt Başlık en fazla 50 karakter uzunluğunda olmalıdır")]
 		[Display(Name = "Footer Title")]
 		public string FooterTitle { get; set; }
@@ -46,6 +46,5 @@ namespace ProjectWebUI.VMs.ContactVM
 		[Display(Name = "Open Hours")]
 		public string OpenHours { get; set; }
 		public DateTime CreatedDate { get; set; }
-
-	}
+    }
 }

@@ -8,7 +8,7 @@ namespace Project.DTO.BasketDTO
 		[RegularExpression(@"^\d+$", ErrorMessage = "Geçersiz miktar formatı")]
 		[Display(Name = "Count")]
 		public int Count { get; set; }
-
 		public int ProductId { get; set; }
+		public int CustomerId { get; set; }
     }
 }
