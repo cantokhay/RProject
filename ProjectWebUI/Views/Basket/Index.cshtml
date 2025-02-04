@@ -19,6 +19,7 @@
     <br />
 
     <div class="container-fluid">
+        <input type="hidden" id="customerId" value="@TempData["customerId"]" />
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-dark mb-30">
@@ -98,7 +99,6 @@
             </div>
         </div>
     </div>
-
 
     @await Component.InvokeAsync("_UILayoutFooterPartialComponent")
     @await Component.InvokeAsync("_UILayoutScriptPartialComponent")

@@ -12,7 +12,23 @@ namespace Project.DataAccess.EF
 		{
 		}
 
-		public int CustomerCount()
+        public void ChangeCustomerStatusToHasNotOrder(int customerId)
+        {
+            using var _context = new SignalRContext();
+			var customer = _context.Customers.Where(c => c.CustomerId == customerId).FirstOrDefault();
+			customer.CustomerStatus = CustomerStatus.HasNotOrder;
+            _context.SaveChanges();
+        }
+
+        public void ChangeCustomerStatusToHasOrder(int customerId)
+        {
+            using var _context = new SignalRContext();
+            var customer = _context.Customers.Where(c => c.CustomerId == customerId).FirstOrDefault();
+            customer.CustomerStatus = CustomerStatus.HasOrder;
+            _context.SaveChanges();
+        }
+
+        public int CustomerCount()
 		{
 			using var _context = new SignalRContext();
 			return _context.Customers.Where(c => c.DataStatus != DataStatus.Deleted && c.CustomerStatus == CustomerStatus.HasOrder).Count();

@@ -28,52 +28,6 @@ namespace ProjectAPI.Controllers
             return Ok(baskets);
         }
 
-        //[HttpPost]
-        //public IActionResult CreateBasket(CreateBasketDTO createBasketDTO)
-        //{
-        //    using var context = new SignalRContext();
-
-        //    var product = context.Products.FirstOrDefault(x => x.ProductId == createBasketDTO.ProductId);
-        //    if (product == null)
-        //    {
-        //        return NotFound("Ürün bulunamadı!");
-        //    }
-
-        //    var price = product.ProductPrice;
-
-        //    var existingBasketItem = context.Baskets.FirstOrDefault(b =>
-        //                         b.ProductId == createBasketDTO.ProductId &&
-        //                         b.CustomerId == createBasketDTO.CustomerId);
-
-        //    if (existingBasketItem != null)
-        //    {
-        //        // Eğer ürün zaten sepetteyse miktarı güncelle ve toplam fiyatı yeniden hesapla
-        //        var count = existingBasketItem.Count;
-        //        count++;
-        //        existingBasketItem.Count = count;
-        //        existingBasketItem.TotalProductPrice = existingBasketItem.Price * existingBasketItem.Count;
-        //        existingBasketItem.ModifiedDate = DateTime.Now;
-        //        _basketService.TUpdate(existingBasketItem);
-        //    }
-        //    else
-        //    {
-        //        // Ürün sepette değilse yeni bir ürün ekle
-        //        var newBasket = new Basket
-        //        {
-        //            Count = 1,
-        //            CustomerId = createBasketDTO.CustomerId,
-        //            ProductId = createBasketDTO.ProductId,
-        //            Price = price,
-        //            TotalProductPrice = price,
-        //            CreatedDate = DateTime.Now,
-        //            DataStatus = DataStatus.Active
-        //        };
-        //        _basketService.TAdd(newBasket);
-        //    }
-
-        //    return Ok("Ürün Sepetinize başarıyla eklendi!");
-        //}
-
         [HttpPost]
         public IActionResult CreateBasket(CreateBasketDTO createBasketDTO)
         {

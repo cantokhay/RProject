@@ -112,15 +112,15 @@
             {
                 if (item.CustomerStatus == Project.Data.Enums.CustomerStatus.HasOrder)
                 {
-                    color = "widgetgreen";
+                    color = "widgetred";
                     status = "Siparişi Var";
-                    icon = "widget-icongreen";
+                    icon = "widget-iconred";
                 }
                 else if (item.CustomerStatus == Project.Data.Enums.CustomerStatus.HasNotOrder)
                 {
-                    color = "widgetred";
+                    color = "widgetgreen";
                     status = "Siparişi Yok";
-                    icon = "widget-iconred";
+                    icon = "widget-icongreen";
                 }
                 <div class="col-md-3 mb-3 align-content-around">
                     <div class="@color">
@@ -135,7 +135,9 @@
                         else
                         {
                             <div class="@icon">
-                                <i class="fas fa-chair"></i>
+                                <a href="/Basket/Index/@item.CustomerId">
+                                    <i class="fa-solid fa-cash-register"></i>
+                                </a>
                             </div>
                         }
                         <div class="widget-text">

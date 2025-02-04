@@ -58,4 +58,11 @@ app.UseEndpoints(endpoints =>
         pattern: "{controller=Menu}/{action=Index}/{customerId?}");
 });
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Basket}/{action=Index}/{customerId?}");
+});
+
 app.Run();

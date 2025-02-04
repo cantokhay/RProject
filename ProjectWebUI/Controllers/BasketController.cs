@@ -15,9 +15,11 @@ namespace ProjectWebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
+        [Route("Basket/Index/{customerId?}")]
         public async Task<IActionResult> Index(int customerId)
         {
-            customerId = 4;
+            TempData["customerId"] = customerId;
+            TempData.Keep("customerId");
             var client = _httpClientFactory.CreateClient();
             var response = await client.GetAsync($"https://localhost:7271/api/Basket/BASKET_LIST_BY_CUSTOMER_ID?customerId={customerId}");
             if (response.IsSuccessStatusCode)

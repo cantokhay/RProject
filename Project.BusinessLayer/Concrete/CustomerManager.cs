@@ -22,7 +22,17 @@ namespace Project.Business.Concrete
             _customerDal.Add(entity);
 		}
 
-		public int TCustomerCount()
+        public void TChangeCustomerStatusToHasNotOrder(int customerId)
+        {
+			_customerDal.ChangeCustomerStatusToHasNotOrder(customerId);
+        }
+
+        public void TChangeCustomerStatusToHasOrder(int customerId)
+        {
+            _customerDal.ChangeCustomerStatusToHasOrder(customerId);
+        }
+
+        public int TCustomerCount()
 		{
 			var customerCount = _customerDal.CustomerCount();
 			return customerCount;

@@ -1,6 +1,7 @@
 using FluentValidation;
 using Project.Business.Abstract;
 using Project.Business.Concrete;
+using Project.Business.Container;
 using Project.Business.ValidationRules.Booking;
 using Project.DataAccess.Abstract;
 using Project.DataAccess.Concrete;
@@ -22,56 +23,10 @@ builder.Services.AddCors(opt =>
 builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<SignalRContext>();
+
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-
-builder.Services.AddScoped<IAboutService, AboutManager>();
-builder.Services.AddScoped<IAboutDal, EFAboutDal>();
-
-builder.Services.AddScoped<IBookingService, BookingManager>();
-builder.Services.AddScoped<IBookingDal, EFBookingDal>();
-
-builder.Services.AddScoped<IBasketService, BasketManager>();
-builder.Services.AddScoped<IBasketDal, EFBasketDal>();
-
-builder.Services.AddScoped<ICategoryService, CategoryManager>();
-builder.Services.AddScoped<ICategoryDal, EFCategoryDal>();
-
-builder.Services.AddScoped<IContactService, ContactManager>();
-builder.Services.AddScoped<IContactDal, EFContactDal>();
-
-builder.Services.AddScoped<ICustomerService, CustomerManager>();
-builder.Services.AddScoped<ICustomerDal, EFCustomerDal>();
-
-builder.Services.AddScoped<IDiscountService, DiscountManager>();
-builder.Services.AddScoped<IDiscountDal, EFDiscountDal>();
-
-builder.Services.AddScoped<INotificationService, NotificationManager>();
-builder.Services.AddScoped<INotificationDal, EFNotificationDal>();
-
-builder.Services.AddScoped<IMessageService, MessageManager>();
-builder.Services.AddScoped<IMessageDal, EFMessageDal>();
-
-builder.Services.AddScoped<IMoneyCaseService, MoneyCaseManager>();
-builder.Services.AddScoped<IMoneyCaseDal, EFMoneyCaseDal>();
-
-builder.Services.AddScoped<IOrderService, OrderManager>();
-builder.Services.AddScoped<IOrderDal, EFOrderDal>();
-
-builder.Services.AddScoped<IOrderDetailService, OrderDetailManager>();
-builder.Services.AddScoped<IOrderDetailDal, EFOrderDetailDal>();
-
-builder.Services.AddScoped<IProductService, ProductManager>();
-builder.Services.AddScoped<IProductDal, EFProductDal>();
-
-builder.Services.AddScoped<ISliderService, SliderManager>();
-builder.Services.AddScoped<ISliderDal, EFSliderDal>();
-
-builder.Services.AddScoped<ISocialMediaService, SocialMediaManager>();
-builder.Services.AddScoped<ISocialMediaDal, EFSocialMediaDal>();
-
-builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
-builder.Services.AddScoped<ITestimonialDal, EFTestimonialDal>();
+builder.Services.ContainerDependencies();
 
 builder.Services.AddValidatorsFromAssemblyContaining<CreateBookingValidation>();
 

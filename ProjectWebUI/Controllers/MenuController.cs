@@ -20,11 +20,6 @@ namespace ProjectWebUI.Controllers
         [Route("Menu/Index/{customerId?}")]
         public async Task<IActionResult> Index(int customerId)
         {
-            //if (customerId == 0)
-            //{
-            //    return BadRequest("CustomerId bulunamadı!");
-            //}
-
             TempData["customerId"] = customerId;
             TempData.Keep("customerId");
 
@@ -36,31 +31,6 @@ namespace ProjectWebUI.Controllers
             return View(productList);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddBasket(int id)
-        //{
-        //    if (TempData["customerId"] == null)
-        //        return BadRequest("CustomerId bulunamadı!");
-
-        //    int customerId = int.Parse(TempData["customerId"].ToString());
-        //    TempData.Keep("customerId");
-
-        //    CreateBasketVM createBasketVM = new CreateBasketVM
-        //    {
-        //        ProductId = id,
-        //        CustomerId = customerId
-        //    };
-        //    var client = _httpClientFactory.CreateClient();
-        //    var jsonData = JsonConvert.SerializeObject(createBasketVM);
-        //    var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-        //    var response = await client.PostAsync("https://localhost:7271/api/Basket", content);
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-        //    return Json(createBasketVM);
-        //}
-
         [HttpPost]
         public async Task<IActionResult> AddBasket([FromBody] CreateBasketVM createBasketVM)
         {
@@ -68,10 +38,12 @@ namespace ProjectWebUI.Controllers
             TempData.Keep("customerId");
 
             var client = _httpClientFactory.CreateClient();
+            var clientStatus = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBasketVM);
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
             var response = await client.PostAsync("https://localhost:7271/api/Basket", content);
+            await clientStatus.GetAsync("https://localhost:7271/api/Customers/CHANGE_CUSTOMER_STATUS_TO_HASORDER?customerId=" + customerId);
 
             if (response.IsSuccessStatusCode)
             {

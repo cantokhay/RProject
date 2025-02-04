@@ -65,5 +65,19 @@ namespace ProjectAPI.Controllers
 			var customer = _customerService.TGetById(id);
 			return Ok(_mapper.Map<GetCustomerDTO>(customer));
 		}
-	}
+
+		[HttpGet("CHANGE_CUSTOMER_STATUS_TO_HASORDER")]
+		public IActionResult ChangeCustomerStatusToHasOrder(int customerId)
+        {
+            _customerService.TChangeCustomerStatusToHasOrder(customerId);
+            return Ok("Müşteri Durumu Siparişi Var Olarak Güncellendi!");
+        }
+
+        [HttpGet("CHANGE_CUSTOMER_STATUS_TO_HASNOTORDER")]
+        public IActionResult ChangeCustomerStatusToHasNotOrder(int customerId)
+        {
+            _customerService.TChangeCustomerStatusToHasNotOrder(customerId);
+            return Ok("Müşteri Durumu Siparişi Yok Olarak Güncellendi!");
+        }
+    }
 }
